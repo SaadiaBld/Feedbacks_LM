@@ -1,10 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime
 import csv
 import time
 import random
 import os
 
+scrape_date = datetime.utcnow().date().isoformat()  # Date du jour au format ISO
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -36,7 +38,7 @@ with open('avis_boutique.csv', mode='a', newline='', encoding='utf-8') as file:
 
     # Si le fichier est vide, ajouter les en-têtes (sinon, ne pas les ajouter)
     if file.tell() == 0:
-        writer.writerow(['Note', 'Commentaire', 'Date de publication'])
+        writer.writerow(['rating', 'content', 'author', 'publication_date', 'scrape_date'])
 
     current_url = read_last_page()  # Commencer à partir de la dernière page enregistrée ou page 11
 
@@ -57,12 +59,26 @@ with open('avis_boutique.csv', mode='a', newline='', encoding='utf-8') as file:
             comment_tag = review.find('p', attrs={"data-service-review-text-typography": "true"})
             comment = comment_tag.get_text(separator="\n").strip() if comment_tag else "?"
 
+            # 4. Auteur 
+            author = "Auteur inconnu"
+            aside = review.find("aside", class_="styles_consumerInfoWrapper_6HM50")
+            if aside:
+                name_tag = aside.find("span", class_="typography_heading-xs__OsR6")
+                if name_tag:
+                    author = name_tag.get_text(strip=True)
+
+
             # 3. Date de publication
             date_tag = review.find('time')
             date = date_tag['datetime'] if date_tag else "?"
 
             # 4. Sauvegarder en CSV
-            writer.writerow([rating, comment, date])
+            writer.writerow([
+                rating,
+                comment,
+                date,
+                scrape_date
+            ])
 
         # --- Trouver le lien de la page suivante ---
         next_page_tag = soup.find('a', attrs={"aria-label": "Page suivante"})
