@@ -225,3 +225,4 @@ pyrightconfig.json
 last_page.txt
 /brouillons
 # End of https://www.toptal.com/developers/gitignore/api/macos,python,linux
+.vscode/
