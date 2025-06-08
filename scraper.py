@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 import csv
 import time
+import uuid
 import random
 import os
 
@@ -29,12 +30,12 @@ def scrape_reviews():
     os.makedirs("data", exist_ok=True)
 
     # Préparer le CSV
-    with open('data/avis_boutique.csv', mode='a', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
+    with open('data/avis_boutique.csv', mode='w', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file, quoting=csv.QUOTE_ALL)
 
         # Écrire l'en-tête si le fichier est vide
         if file.tell() == 0:
-            writer.writerow(['rating', 'content', 'author', 'publication_date', 'scrape_date'])
+            writer.writerow(['review_id', 'rating', 'content', 'author', 'publication_date', 'scrape_date'])
 
         current_url = START_URL
 
@@ -107,8 +108,11 @@ def scrape_reviews():
                     stop_scraping = True
                     break
 
+                review_id = str(uuid.uuid4()) # Générer un ID unique pour chaque avis
+
                 # Écrire dans le fichier
                 writer.writerow([
+                    review_id,
                     rating,
                     comment,
                     author,
