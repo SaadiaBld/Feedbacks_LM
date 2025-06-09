@@ -41,13 +41,8 @@ def clean_csv(input_file, output_file):
     df = df[df['content'].str.strip() != ""]
 
     #supprimer les lignes en double pour les champs 'content' et 'author' similaire
-    df = df.drop_duplicates(subset=['content', 'author'], keep='first')
-
+    df = df.drop_duplicates(subset=['review_id'], keep='first')
+    
     # Sauvegarder le CSV nettoyé
     df.to_csv(output_file, index=False, encoding='utf-8')
     print(f"Fichier nettoyé sauvegardé dans {output_file}")
-
-# if __name__ == "__main__":
-#     input_file = 'data/avis_boutique.csv'
-#     output_file = 'data/avis_nettoyes.csv'
-#     clean_csv(input_file, output_file)
