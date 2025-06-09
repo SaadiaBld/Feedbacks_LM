@@ -1,7 +1,7 @@
 from google.cloud import bigquery
 import pandas as pd
-from scraper import scrape_reviews
-from cleaner import clean_csv
+from scripts_data.scraper import scrape_reviews
+from scripts_data.cleaner import clean_csv
 from datetime import datetime
 
 def upload_to_bigquery(csv_path, target_table_id):

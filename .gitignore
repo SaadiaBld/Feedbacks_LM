@@ -227,6 +227,9 @@ pyrightconfig.json
 #personal files
 last_page.txt
 /brouillons
-# End of https://www.toptal.com/developers/gitignore/api/macos,python,linux
 .vscode/
 data/
+config/*.json
+
+# Fichiers temporaires
+data/*.csv
