@@ -3,8 +3,19 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
-import csv, time, uuid, random, os
+import csv, time, random, os
 import pandas as pd
+import hashlib
+
+
+def generate_review_hash(row):
+    """
+    Génère un hash unique pour chaque avis basé sur l'auteur et le contenu.
+    Utilisé pour éviter les doublons dans la base de données.
+    """
+    key = f"{row['author']}|{row['content']}|{row['publication_date']}"
+    return hashlib.md5(key.encode('utf-8')).hexdigest()
+
 
 def scrape_reviews(mode = "csv"):
     """
@@ -76,7 +87,7 @@ def scrape_reviews(mode = "csv"):
                 break
 
             review_dict = {
-                'review_id': str(uuid.uuid4()),
+                'review_id': generate_review_hash({'author': author, 'content': comment, 'publication_date': publication_date.isoformat()}),
                 'rating': rating,
                 'content': comment,
                 'author': author,
