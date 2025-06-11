@@ -5,5 +5,7 @@ fastapi
 uvicorn
 python-dotenv
 google-cloud-bigquery
-google-cloud-aiplatform
+# google-cloud-aiplatform
+# google-genai
 pyarrow
+anthropic
