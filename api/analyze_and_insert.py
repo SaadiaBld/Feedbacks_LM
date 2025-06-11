@@ -1,5 +1,13 @@
-from bq_connect import get_verbatims_by_date
-from claude_interface import classify_with_claude
+###pour airlow, décommente la ligne suivante :
+import os
+from dotenv import load_dotenv
+
+# Charge les variables d’environnement depuis le .env (monté dans Docker)
+load_dotenv("/opt/airflow/.env")
+
+### fin de la section pour airflow
+from .bq_connect import get_verbatims_by_date
+from .claude_interface import classify_with_claude
 from google.cloud import bigquery
 import uuid
 
@@ -91,5 +99,6 @@ def run_analysis(scrape_date: str):
         else:
             print("❌ Analyse non exploitable (voir claude_errors.log)")
 
+#pour utiliser ce script sans airflow, décommente la ligne suivante :
 if __name__ == "__main__":
     run_analysis("2025-06-09")

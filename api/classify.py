@@ -1,5 +1,5 @@
-from bq_connect import get_verbatims_from_bq
-from claude_interface import classify_with_claude
+from .bq_connect import get_verbatims_from_bq
+from .claude_interface import classify_with_claude
 
 def run():
     verbatims = get_verbatims_from_bq(scrape_date="2025-06-02")

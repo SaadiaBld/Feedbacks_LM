@@ -9,3 +9,4 @@ google-cloud-bigquery
 # google-genai
 pyarrow
 anthropic
+apache-airflow[gcp]==2.9.1
