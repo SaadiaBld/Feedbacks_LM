@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+
+  webserver:
+    image: apache/airflow:2.9.1-python3.11
+    depends_on:
+      - postgres
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "true"
+      PYTHONPATH: /opt/airflow/project
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./airflow/entrypoint.sh:/opt/airflow/entrypoint.sh
+      - .:/opt/airflow/project
+      - ./requirements.txt:/requirements.txt
+      - ./.env:/opt/airflow/.env
+    entrypoint: bash -c "pip install --no-cache-dir -r /requirements.txt && /opt/airflow/entrypoint.sh"
+
+    ports:
+      - "8080:8080"
+    entrypoint: /opt/airflow/entrypoint.sh
+
+  scheduler:
+    image: apache/airflow:2.9.1-python3.11
+    depends_on:
+      - webserver
+      - postgres
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      PYTHONPATH: /opt/airflow/project
+
+    command: scheduler
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - .:/opt/airflow/project
+      - ./requirements.txt:/requirements.txt
+      - ./.env:/opt/airflow/.env
+    entrypoint: bash -c "pip install --no-cache-dir -r /requirements.txt && /opt/airflow/entrypoint.sh"
+
+volumes:
+  postgres-db-volume:

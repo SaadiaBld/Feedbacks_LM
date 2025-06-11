@@ -4,11 +4,12 @@ import json
 import logging
 from dotenv import load_dotenv
 from pathlib import Path
-from prompt_utils import build_prompt, THEMES
+from .prompt_utils import build_prompt, THEMES
 
 # Load .env
 env_path = Path(__file__).resolve().parents[1] / ".env"
-load_dotenv(dotenv_path=env_path)
+#load_dotenv(dotenv_path=env_path)
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
 api_key = os.getenv("ANTHROPIC_API_KEY")
 
 client = anthropic.Anthropic(api_key=api_key)
