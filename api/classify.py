@@ -1,8 +1,8 @@
 from .bq_connect import get_verbatims_from_bq
 from .claude_interface import classify_with_claude
 
-def run():
-    verbatims = get_verbatims_from_bq(scrape_date="2025-06-02")
+def run(scrape_date: str):
+    verbatims = get_verbatims_from_bq(scrape_date=scrape_date)
     for i, v in enumerate(verbatims):
         print(f"\n🟦 Verbatim {i+1} :\n{v}")
         result = classify_with_claude(v)

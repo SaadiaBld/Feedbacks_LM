@@ -1,18 +1,30 @@
 ###pour airlow, décommente la ligne suivante :
 import os
 from dotenv import load_dotenv
-
-# Charge les variables d’environnement depuis le .env (monté dans Docker)
-load_dotenv("/opt/airflow/.env")
-
-### fin de la section pour airflow
-from .bq_connect import get_verbatims_by_date
-from .claude_interface import classify_with_claude
+from api.bq_connect import get_verbatims_by_date
+from api.claude_interface import classify_with_claude
 from google.cloud import bigquery
+from datetime import datetime
 import uuid
 
+
+# Choix auto du fichier .env selon environnement
+dotenv_path = "/opt/airflow/.env" if os.getenv("AIRFLOW_HOME") else ".env"
+load_dotenv(dotenv_path=dotenv_path)
+
+# Vérifier que les variables importantes sont bien présentes
+project_id = os.getenv("PROJECT_ID")
+if not project_id:
+    raise ValueError("❌ La variable PROJECT_ID est absente de l'environnement.")
+
+gcp_credentials = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+if not gcp_credentials or not os.path.isfile(gcp_credentials):
+    raise FileNotFoundError(f"❌ Fichier de credentials GCP introuvable : {gcp_credentials}")
+
+
 def load_topic_ids():
-    client = bigquery.Client()
+    client = bigquery.Client(project=project_id)
+
     query = """
         SELECT topic_label, topic_id
         FROM `trustpilot-satisfaction.reviews_dataset.topics`
@@ -22,7 +34,7 @@ def load_topic_ids():
 
 
 def insert_topic_analysis(review_id: str, theme_scores: list[dict], label_to_id: dict):
-    client = bigquery.Client()
+    client = bigquery.Client(project=project_id)
     rows_to_insert = []
 
     if len(theme_scores) == 0:
@@ -87,7 +99,7 @@ def run_analysis(scrape_date: str):
         theme_scores = classify_with_claude(v["content"])
 
         # Afficher la réponse brute de Claude pour debug
-        print("\n📥 Réponse brute de Claude :")
+        print("\n Réponse brute de Claude :")
         print(theme_scores)
 
         if theme_scores:
@@ -99,6 +111,9 @@ def run_analysis(scrape_date: str):
         else:
             print("❌ Analyse non exploitable (voir claude_errors.log)")
 
-#pour utiliser ce script sans airflow, décommente la ligne suivante :
-if __name__ == "__main__":
-    run_analysis("2025-06-09")
+def process_and_insert_all(scrape_date: str = None):
+    """Fonction appelée dans le DAG Airflow."""
+    if not scrape_date:
+        scrape_date = datetime.utcnow().date().isoformat()
+    print(f"Lancement du traitement pour la date : {scrape_date}")
+    run_analysis(scrape_date=scrape_date)
