@@ -8,18 +8,22 @@ from datetime import datetime
 import uuid
 
 
-# Choix auto du fichier .env selon environnement
-dotenv_path = "/opt/airflow/.env" if os.getenv("AIRFLOW_HOME") else ".env"
+# Charger .env avec conditions: Si on est dans un test, utilise toujours le .env local
+if "PYTEST_CURRENT_TEST" in os.environ:
+    dotenv_path = ".env"
+else:
+    dotenv_path = "/opt/airflow/.env" if os.getenv("AIRFLOW_HOME") else ".env"
+
 load_dotenv(dotenv_path=dotenv_path)
 
 # Vérifier que les variables importantes sont bien présentes
 project_id = os.getenv("PROJECT_ID")
 if not project_id:
-    raise ValueError("❌ La variable PROJECT_ID est absente de l'environnement.")
+    raise ValueError("La variable PROJECT_ID est absente de l'environnement.")
 
 gcp_credentials = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 if not gcp_credentials or not os.path.isfile(gcp_credentials):
-    raise FileNotFoundError(f"❌ Fichier de credentials GCP introuvable : {gcp_credentials}")
+    raise FileNotFoundError(f"Fichier de credentials GCP introuvable : {gcp_credentials}")
 
 
 def load_topic_ids():
@@ -38,7 +42,7 @@ def insert_topic_analysis(review_id: str, theme_scores: list[dict], label_to_id:
     rows_to_insert = []
 
     if len(theme_scores) == 0:
-        print("⚠️ Aucun thème détecté")
+        print("Aucun thème détecté")
         return
 
     for item in theme_scores:
@@ -46,8 +50,14 @@ def insert_topic_analysis(review_id: str, theme_scores: list[dict], label_to_id:
         note = item["note"]
         topic_id = label_to_id.get(theme)
 
+        #verification de la présence du thème dans la table topics
         if not topic_id:
-            print(f"⚠️ Thème inconnu dans la table topics : {theme}")
+            print(f"Thème inconnu dans la table topics : {theme}")
+            continue
+
+        # Vérification de la validité de la note
+        if not isinstance(note, (int, float)) or not (1 <= note <= 5):
+            print(f"Note invalide pour {theme} : {note}")
             continue
 
         # Score de satisfaction normalisé (1 = très insatisfait, 0 = très satisfait)
@@ -80,10 +90,10 @@ def insert_topic_analysis(review_id: str, theme_scores: list[dict], label_to_id:
     errors = client.insert_rows_json("trustpilot-satisfaction.reviews_dataset.topic_analysis", rows_to_insert)
 
     if errors:
-        print(f"❌ Erreurs d'insertion : {errors}")
+        print(f"Erreurs d'insertion : {errors}")
     else:
-        print(f"✅ {len(rows_to_insert)} lignes insérées pour review {review_id}")
-        print("📊 Thèmes détectés :")
+        print(f"{len(rows_to_insert)} lignes insérées pour review {review_id}")
+        print("Thèmes détectés :")
         for r in rows_to_insert:
             print(f" - {r['topic_id']} (note : {r['score_sentiment']})")
 

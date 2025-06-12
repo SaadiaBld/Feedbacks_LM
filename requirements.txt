@@ -5,9 +5,12 @@ fastapi
 uvicorn
 python-dotenv
 google-cloud-bigquery
-# google-cloud-aiplatform
-# google-genai
 pyarrow
 anthropic
 apache-airflow[gcp]==2.9.1
 pendulum
+pytest
+pytest-mock
+pytest-asyncio
+pytest-airflow
+pytest-cov

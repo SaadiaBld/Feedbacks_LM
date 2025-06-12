@@ -1,5 +1,4 @@
 """
-Test de base pour valider C12 - À placer dans tests/test_basic_validation.py
 """
 import pytest
 import os
@@ -132,5 +131,4 @@ class TestAirflowBasic:
         assert test_dag.schedule_interval == '@weekly'
 
 if __name__ == "__main__":
-    # Permet d'exécuter directement le fichier
     pytest.main([__file__, '-v'])
