@@ -229,7 +229,10 @@ last_page.txt
 /brouillons
 .vscode/
 data/
-config/*.json
+config/
+
+#sdk gcloud
+google-cloud-sdk/
 
 # Fichiers temporaires
 data/*.csv
