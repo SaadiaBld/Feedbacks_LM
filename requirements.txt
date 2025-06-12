@@ -12,5 +12,4 @@ pendulum
 pytest
 pytest-mock
 pytest-asyncio
-pytest-airflow
 pytest-cov
