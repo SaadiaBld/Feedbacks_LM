@@ -10,3 +10,4 @@ google-cloud-bigquery
 pyarrow
 anthropic
 apache-airflow[gcp]==2.9.1
+pendulum

@@ -1,5 +1,6 @@
 import pandas as pd
 import re
+import os
 from datetime import datetime
 
 def clean_emojis(text):
@@ -46,3 +47,12 @@ def clean_csv(input_file, output_file):
     # Sauvegarder le CSV nettoyé
     df.to_csv(output_file, index=False, encoding='utf-8')
     print(f"Fichier nettoyé sauvegardé dans {output_file}")
+
+
+def clean_data():
+    input_file = "data/avis_boutique.csv"
+    output_file = "data/avis_boutique_clean.csv"
+    if not os.path.exists(input_file):
+        raise FileNotFoundError(f"{input_file} introuvable. Lance d'abord le scraper.")
+    clean_csv(input_file, output_file)
+

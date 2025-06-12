@@ -27,7 +27,7 @@ def scrape_reviews(mode = "csv"):
     """
     # Date d’aujourd’hui et seuil de 7 jours
     scrape_date = datetime.utcnow().date().isoformat()
-    seven_days_ago = datetime.utcnow().date() - timedelta(days=7)
+    cutoff_date = datetime.utcnow().date() - timedelta(days=7)
 
     HEADERS = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -82,7 +82,7 @@ def scrape_reviews(mode = "csv"):
 
             if not rating or not comment or not publication_date:
                 continue
-            if publication_date < seven_days_ago:
+            if publication_date < cutoff_date:
                 stop_scraping = True
                 break
 
@@ -107,6 +107,7 @@ def scrape_reviews(mode = "csv"):
         time.sleep(random.uniform(2, 5))
 
     print("Scraping terminé.")
+    print(f"{len(reviews_list)} avis collectés.")
 
     # === Sortie selon le mode ===
     if mode == "json":
@@ -119,3 +120,12 @@ def scrape_reviews(mode = "csv"):
             writer.writeheader()
             for review in reviews_list:
                 writer.writerow(review)
+
+# temporairement desactivée pour tester le dag 
+     
+def run_scraper(scrape_date=None):
+    if scrape_date is None:
+        scrape_date = datetime.utcnow().date().isoformat()
+    scrape_reviews(mode="csv", scrape_date=scrape_date)
+    # ensuite passe `scrape_date` à `scrape_reviews(scrape_date=...)`
+

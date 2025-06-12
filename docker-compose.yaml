@@ -28,11 +28,11 @@ services:
       - .:/opt/airflow/project
       - ./requirements.txt:/requirements.txt
       - ./.env:/opt/airflow/.env
-    entrypoint: bash -c "pip install --no-cache-dir -r /requirements.txt && /opt/airflow/entrypoint.sh"
-
     ports:
       - "8080:8080"
-    entrypoint: /opt/airflow/entrypoint.sh
+    entrypoint: bash -c "pip install --no-cache-dir -r /requirements.txt && /opt/airflow/entrypoint.sh"
+    env_file:
+      - .env
 
   scheduler:
     image: apache/airflow:2.9.1-python3.11
@@ -43,8 +43,7 @@ services:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
       PYTHONPATH: /opt/airflow/project
-
-    command: scheduler
+    command: bash -c "pip install --no-cache-dir -r /requirements.txt && airflow scheduler"
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
@@ -52,7 +51,8 @@ services:
       - .:/opt/airflow/project
       - ./requirements.txt:/requirements.txt
       - ./.env:/opt/airflow/.env
-    entrypoint: bash -c "pip install --no-cache-dir -r /requirements.txt && /opt/airflow/entrypoint.sh"
+    env_file:
+      - .env
 
 volumes:
   postgres-db-volume:

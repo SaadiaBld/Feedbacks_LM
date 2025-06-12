@@ -25,28 +25,6 @@ if not logger.hasHandlers():
     handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
     logger.addHandler(handler)
 
-# def classify_with_claude(verbatim: str) -> dict | None:
-#     prompt = build_prompt(verbatim)
-#     try:
-#         response = client.messages.create(
-#             model="claude-3-haiku-20240307",
-#             max_tokens=500,
-#             temperature=0,
-#             system="Tu es un assistant d’analyse de satisfaction client.",
-#             messages=[{"role": "user", "content": prompt}]
-#         )
-#         content = response.content[0].text.strip()
-#         validated = validate_claude_response(content)
-
-#         if not validated:
-#             logger.warning(f"Réponse non valide : {content}")
-#         return validated
-
-#     except Exception as e:
-#         logger.error(f"Erreur API Claude : {e}")
-#         return None
-
-
 def classify_with_claude(verbatim: str) -> list[dict] | None:
     prompt = build_prompt(verbatim)
     try:
