@@ -48,7 +48,7 @@ def classify_with_claude(verbatim: str) -> list[dict] | None:
 
     except Exception as e:
         logger.error(f"Erreur API Claude : {e}")
-        return None
+        raise
 
 
 
@@ -84,5 +84,6 @@ def validate_claude_response(response_text: str) -> list[dict] | None:
 
     except json.JSONDecodeError as e:
         logger.error(f"Erreur JSON : {e} dans : {response_text}")
-        return None
+        raise ValueError("Réponse Claude invalide")
+
 

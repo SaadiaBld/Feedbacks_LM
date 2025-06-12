@@ -1,7 +1,5 @@
 from google.cloud import bigquery
 from google.auth.exceptions import DefaultCredentialsError
-# This file contains functions to connect to BigQuery and retrieve verbatim reviews.
-## on va tester sur 1 verbatim pour commencer
 from dotenv import load_dotenv
 load_dotenv(dotenv_path="/opt/airflow/.env")
 
