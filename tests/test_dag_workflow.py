@@ -1,18 +1,57 @@
+import pytest
+from unittest.mock import patch
 from airflow.models import DagBag
 
-#lancer le daemon Airflow pour que le DAG soit chargé + lancer docker compose up -d à la racine du projet où se trouve le fichier docker-compose.yaml
-#pour tester, executer pytest dans le container airflow-scheduler depuis le terminal: docker compose exec airflow-scheduler pytest /opt/airflow/tests/test_dag_workflow.py -v
+
+@pytest.fixture(scope="module")
+def dagbag():
+    with patch("os.path.isfile", return_value=True), \
+         patch("os.getenv", side_effect=lambda k, d=None: "dummy" if k in {"GOOGLE_APPLICATION_CREDENTIALS", "PROJECT_ID"} else d), \
+         patch("api.analyze_and_insert.load_dotenv", return_value=True), \
+         patch("api.analyze_and_insert.process_and_insert_all"):
+        
+        import dags.trustpilot_dag  # Force import pour charger le DAG
+        return DagBag(dag_folder="/opt/airflow/dags", include_examples=False)
 
 
-# Vérifie que le DAG est bien chargé
-def test_dag_loaded():
-    dag_bag = DagBag()
-    assert dag_bag.import_errors == {}, f"Erreur(s) lors du chargement des DAGs : {dag_bag.import_errors}"
-    assert "trustpilot_analyze_pipeline" in dag_bag.dags, "Le DAG 'trustpilot_analyze_pipeline' est introuvable."
+# verifier que le dag existe et peut être importé
+def test_dag_import(dagbag):
+    dag = dagbag.get_dag("trustpilot_pipeline")
+    assert dag is not None, "Le DAG 'trustpilot_pipeline' n'a pas été trouvé."
 
-# Vérifie que les tâches attendues existent
-def test_dag_has_expected_tasks():
-    dag = DagBag().dags["trustpilot_analyze_pipeline"]
-    expected_tasks = {"extract_raw_reviews", "analyze_and_insert"}
-    dag_task_ids = set(dag.task_ids)
-    assert expected_tasks.issubset(dag_task_ids), f"Tâches manquantes : {expected_tasks - dag_task_ids}"
+
+# verifier que le dag a les taches attendues
+def test_task_ids(dagbag):
+    dag = dagbag.get_dag("trustpilot_pipeline")
+    expected_tasks = {"scrape_trustpilot_reviews", "analyze_and_insert"}
+    for task_id in expected_tasks:
+        assert task_id in dag.task_ids, f"Le task_id '{task_id}' est manquant"
+
+# tester l'ordre des taches
+def test_dependencies(dagbag):
+    dag = dagbag.get_dag("trustpilot_pipeline")
+    assert dag is not None
+
+    # Exemple concret : scrape → clean → analyze
+    assert dag.get_task("clean_reviews").upstream_task_ids == {"scrape_trustpilot_reviews"}
+    assert dag.get_task("analyze_and_insert").upstream_task_ids == {"clean_reviews"}
+
+# tester que le dag est acyclique
+def test_dag_is_acyclic():
+    from airflow.models.dagbag import DagBag
+
+    dagbag = DagBag(dag_folder="/opt/airflow/dags", include_examples=False)
+    dag = dagbag.get_dag("trustpilot_pipeline")
+
+    # Cette méthode interne recharge tous les DAGs et détecte les cycles
+    assert dagbag.import_errors == {}, f"Import errors: {dagbag.import_errors}"
+    assert dag is not None, "DAG trustpilot_pipeline introuvable"
+
+
+# tester que la tache 'analyze_and_insert' est bien un python operator
+def test_operator_type(dagbag):
+    dag = dagbag.get_dag("trustpilot_pipeline")
+    task = dag.get_task("analyze_and_insert")
+    from airflow.operators.python import PythonOperator
+    assert isinstance(task, PythonOperator)
+
