@@ -1,9 +1,11 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from airflow.operators.dummy import DummyOperator
 from datetime import datetime, timedelta
 import pendulum
 import sys
 import os
+import logging
 
 # 📌 Ajout des chemins vers tes modules perso
 sys.path.append("/opt/airflow/project/scripts_data")
@@ -12,24 +14,35 @@ sys.path.append("/opt/airflow/project/api")
 from dotenv import load_dotenv
 load_dotenv(dotenv_path="/opt/airflow/.env")
 
-# 📌 Import des fonctions Python
+# 📌 Import safe
 from scripts_data.scraper import scrape_reviews
 from scripts_data.cleaner import clean_data
-from api.analyze_and_insert import process_and_insert_all
 from scripts_data.main import main as run_full_scraper_pipeline
 
-# Wrapper pour le scraper
-def wrapper_run_scraper(**context):
-    scrape_date = context["ds"]  # date de l'exécution du DAG (au format YYYY-MM-DD)
-    print(f"📆 Wrapper Scraper : scrape_date = {scrape_date}")
-    # Tu peux passer la date à scrape_reviews si besoin, ou la logguer pour audit
-    scrape_reviews(mode="csv")  # Ici, le scraper utilise utc.today() - 15j (exemple)
+try:
+    from api.analyze_and_insert import process_and_insert_all
+    PROCESS_AVAILABLE = True
+except FileNotFoundError as e:
+    logging.error(f"❌ Fichier manquant empêchant l'import : {e}")
+    process_and_insert_all = None
+    PROCESS_AVAILABLE = False
 
-# Wrapper pour analyse & insertion
+
+# Wrappers
+def wrapper_run_scraper(**context):
+    scrape_date = context["ds"]
+    print(f"📆 Wrapper Scraper : scrape_date = {scrape_date}")
+    scrape_reviews(mode="csv")
+
+
 def wrapper_process_and_insert(**context):
     scrape_date = context["ds"]
     print(f"📆 Wrapper Analyse/Insert : scrape_date = {scrape_date}")
-    process_and_insert_all(scrape_date=scrape_date)
+    print("📂 Fichier de credentials GCP : ", os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
+    if process_and_insert_all:
+        process_and_insert_all(scrape_date=scrape_date)
+    else:
+        raise RuntimeError("Fonction d’analyse non disponible. Vérifiez le fichier de credentials.")
 
 
 # Paramètres par défaut
@@ -45,7 +58,7 @@ with DAG(
     dag_id='trustpilot_pipeline',
     default_args=default_args,
     description='Pipeline : Scraper → Nettoyage → Claude → BQ',
-    schedule_interval='0 6 * * 1',  # chaque lundi à 6h (heure de Paris)
+    schedule_interval='0 6 * * 1',
     start_date=datetime(2025, 6, 1, tzinfo=pendulum.timezone("Europe/Paris")),
     catchup=False,
     tags=['trustpilot', 'nlp', 'bq'],
@@ -57,18 +70,21 @@ with DAG(
         python_callable=run_full_scraper_pipeline
     )
 
-    # Nettoyage CSV
+    # Nettoyage
     clean_task = PythonOperator(
         task_id='clean_reviews',
         python_callable=clean_data,
     )
 
-    # Analyse + Insertion
-    analyze_insert_task = PythonOperator(
-        task_id='analyze_and_insert',
-        python_callable=wrapper_process_and_insert,
-        provide_context=True,
-    )
+    # Analyse / Insertion ou Dummy si process indisponible
+    if PROCESS_AVAILABLE:
+        analyze_insert_task = PythonOperator(
+            task_id='analyze_and_insert',
+            python_callable=wrapper_process_and_insert,
+            provide_context=True,
+        )
+    else:
+        analyze_insert_task = DummyOperator(task_id='skip_analyze_insert_due_to_missing_cred')
 
     # Orchestration
     scrape_task >> clean_task >> analyze_insert_task
