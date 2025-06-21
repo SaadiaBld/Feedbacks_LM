@@ -1,0 +1,8 @@
+#fichier de configuration yaml pour prometheus pour aller chercher les metriques à un port precis
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+  - job_name: 'verbatim_exporter'
+    static_configs:
+      - targets: ['exporter:8000']

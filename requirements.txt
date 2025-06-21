@@ -13,3 +13,4 @@ pytest
 pytest-mock
 pytest-asyncio
 pytest-cov
+prometheus_client

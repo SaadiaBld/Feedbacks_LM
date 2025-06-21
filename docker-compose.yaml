@@ -1,4 +1,4 @@
-version: '3.8'
+#version: '3.8'  #Depuis Docker Compose v2.20+, l’attribut version: en haut du fichier docker-compose.yml est obsolète
 
 services:
   postgres:
@@ -28,6 +28,7 @@ services:
       - .:/opt/airflow/project
       - ./requirements.txt:/requirements.txt
       - ./.env:/opt/airflow/.env
+      - ./config/trustpilot-satisfaction-43aac3dd82a9.json:/opt/airflow/project/config/trustpilot-satisfaction-43aac3dd82a9.json
     ports:
       - "8080:8080"
     entrypoint: bash -c "pip install --no-cache-dir -r /requirements.txt && /opt/airflow/entrypoint.sh"
@@ -43,16 +44,51 @@ services:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
       PYTHONPATH: /opt/airflow/project
-    command: bash -c "pip install --no-cache-dir -r /requirements.txt && airflow scheduler"
+    entrypoint: /opt/airflow/entrypoint.sh
+    command: airflow scheduler
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
+      - ./airflow/entrypoint.sh:/opt/airflow/entrypoint.sh
       - .:/opt/airflow/project
       - ./requirements.txt:/requirements.txt
       - ./.env:/opt/airflow/.env
+      - ./config/trustpilot-satisfaction-43aac3dd82a9.json:/opt/airflow/project/config/trustpilot-satisfaction-43aac3dd82a9.json
     env_file:
       - .env
 
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - default
+    depends_on:
+      - webserver
+
+  grafana:
+    image: grafana/grafana
+    # container_name: grafana
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./monitoring/grafana:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - default
+
+  exporter:
+    build:
+      context: ./monitoring
+    ports:
+      - "8000:8000"
+    networks:
+      - default
+  
 volumes:
   postgres-db-volume:
