@@ -230,7 +230,7 @@ last_page.txt
 .vscode/
 data/
 config/
-
+monitoring/grafana
 #sdk gcloud
 google-cloud-sdk/
 

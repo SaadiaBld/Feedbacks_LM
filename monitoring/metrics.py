@@ -1,4 +1,5 @@
 from prometheus_client import Counter, Summary, Gauge, start_http_server
+import socket
 import re
 
 # -------------------------
@@ -40,9 +41,17 @@ CLAUDE_SUCCESS_RATIO = Gauge('claude_call_success_ratio', "Ratio de succès des 
 # -------------------------
 
 def monitor_start(port=8000):
-    """Démarre le serveur d’export Prometheus sur le port indiqué."""
-    start_http_server(port)
-    print(f"✅ Exporter Prometheus lancé sur http://localhost:{port}/metrics")
+    try:
+        # on teste si le port est déjà utilisé
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            if s.connect_ex(("localhost", port)) != 0:
+                start_http_server(port)
+                print(f"✅ Exporter Prometheus lancé sur http://localhost:{port}/metrics")
+            else:
+                print(f"ℹ️ Exporter Prometheus déjà en cours sur le port {port}")
+    except Exception as e:
+        print(f"⚠️ Impossible de démarrer Prometheus : {e}")
+
 
 # -------------------------
 # LOGIQUE DE MISE À JOUR DES MÉTRIQUES

@@ -8,10 +8,6 @@ from datetime import datetime
 import uuid
 from monitoring.metrics import log_analysis_metrics, monitor_start
 
-# Démarrer le serveur Prometheus pour exporter les métriques (prometheus va scruter le port 8000/metrics)
-monitor_start(port=8000)
-
-
 # Charger .env avec conditions: Si on est dans un test, utilise toujours le .env local
 if "PYTEST_CURRENT_TEST" in os.environ:
     dotenv_path = ".env"
