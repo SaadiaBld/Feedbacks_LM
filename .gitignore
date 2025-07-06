@@ -236,3 +236,5 @@ google-cloud-sdk/
 
 # Fichiers temporaires
 data/*.csv
+airflow/logs
+airflow/plugins

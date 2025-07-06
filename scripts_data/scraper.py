@@ -7,6 +7,7 @@ import csv, time, random, os
 import pandas as pd
 import hashlib
 
+SCRAPER_MODE = os.getenv("SCRAPER_MODE", "csv")
 
 def generate_review_hash(row):
     """
@@ -17,7 +18,7 @@ def generate_review_hash(row):
     return hashlib.md5(key.encode('utf-8')).hexdigest()
 
 
-def scrape_reviews(mode = "csv"):
+def scrape_reviews(mode = None, scrape_date=None):
     """
     Scrape les avis Trustpilot de Leroy Merlin datant de moins de 7 jours.
     Modes possibles :
@@ -25,6 +26,24 @@ def scrape_reviews(mode = "csv"):
     - 'json' : retourne une liste de dictionnaires (pour l’API)
     - 'pandas' : retourne un DataFrame (pour un pipeline NLP)
     """
+    mode = mode or SCRAPER_MODE
+    scrape_date = scrape_date or datetime.utcnow().date().isoformat()
+
+    if mode == 'csv':
+        print('✅ Mode CSV local activé : copie du fichier de test')
+
+        src = '/opt/airflow/project/data/verbatims_test.csv'
+        dest = '/opt/airflow/project/data/avis_boutique.csv'
+
+        if os.path.exists(src):
+            import shutil
+            shutil.copy(src, dest)
+            print(f"✅ Fichier de test copié depuis {src} vers {dest}")
+        else:
+            raise FileNotFoundError(f"❌ Fichier de test introuvable à l’emplacement : {src}")
+        return
+
+    
     # Date d’aujourd’hui et seuil de 7 jours
     scrape_date = datetime.utcnow().date().isoformat()
     cutoff_date = datetime.utcnow().date() - timedelta(days=7)
@@ -115,7 +134,8 @@ def scrape_reviews(mode = "csv"):
     elif mode == "pandas":
         return pd.DataFrame(reviews_list)
     else:  # mode == "csv"
-        with open('data/avis_boutique.csv', mode='w', newline='', encoding='utf-8') as file:
+        output_path = '/opt/airflow/project/data/avis_boutique.csv'
+        with open(output_path, mode='w', newline='', encoding='utf-8') as file:
             writer = csv.DictWriter(file, fieldnames=['review_id', 'rating', 'content', 'author', 'publication_date', 'scrape_date'], quoting=csv.QUOTE_ALL)
             writer.writeheader()
             for review in reviews_list:
@@ -126,6 +146,6 @@ def scrape_reviews(mode = "csv"):
 def run_scraper(scrape_date=None):
     if scrape_date is None:
         scrape_date = datetime.utcnow().date().isoformat()
-    scrape_reviews(mode="csv", scrape_date=scrape_date)
+    scrape_reviews(mode=SCRAPER_MODE, scrape_date=scrape_date)
     # ensuite passe `scrape_date` à `scrape_reviews(scrape_date=...)`
 

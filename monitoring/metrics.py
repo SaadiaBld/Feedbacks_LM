@@ -1,4 +1,5 @@
 from prometheus_client import Counter, Summary, Gauge, start_http_server
+from prometheus_client import CollectorRegistry, REGISTRY, push_to_gateway
 import socket
 import re
 
@@ -68,7 +69,7 @@ def log_analysis_metrics(verbatim_text: str, duration: float, error=False, empty
     - new_topics : liste de thèmes non reconnus
     - bq_error : True si insertion BQ échouée
     """
-    VERBATIMS_ANALYZED.inc()
+    #VERBATIMS_ANALYZED.inc()
     ANALYSIS_DURATION.observe(duration)
 
     # Taille du verbatim (en brut)
@@ -95,6 +96,11 @@ def log_analysis_metrics(verbatim_text: str, duration: float, error=False, empty
     if bq_error:
         BQ_INSERT_ERRORS.inc()
 
+    print(f"➡️ VERBATIMS_ANALYZED avant: {VERBATIMS_ANALYZED._value.get()}")
+    VERBATIMS_ANALYZED.inc()
+    print(f"➡️ VERBATIMS_ANALYZED après: {VERBATIMS_ANALYZED._value.get()}")
+
+
 def update_claude_success_ratio(total_calls: int, total_valid: int):
     """
     Met à jour la métrique de ratio succès Claude.
@@ -102,3 +108,15 @@ def update_claude_success_ratio(total_calls: int, total_valid: int):
     if total_calls > 0:
         ratio = (total_valid / total_calls) * 100
         CLAUDE_SUCCESS_RATIO.set(ratio)
+
+
+def push_metrics_to_gateway(job_name="verbatim_pipeline"):
+    """
+    Push toutes les métriques enregistrées vers le PushGateway.
+    """
+    try:
+        push_to_gateway("http://pushgateway:9091", job=job_name, registry=REGISTRY)
+        print(f"📡 Métriques poussées vers le PushGateway pour le job : {job_name}")
+    except Exception as e:
+        print(f"❌ Erreur lors du push Prometheus : {e}")
+

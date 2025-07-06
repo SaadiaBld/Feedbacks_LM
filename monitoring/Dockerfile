@@ -10,5 +10,7 @@ COPY . ./
 # Installer les dépendances (prometheus_client, etc.)
 RUN pip install --no-cache-dir prometheus_client
 
+EXPOSE 8000
+
 # Démarrer le serveur d'export de métriques
-CMD ["python", "exporter.py"]
+CMD ["python", "monitoring/exporter.py"]

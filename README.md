@@ -57,6 +57,7 @@ python scraper.py
 
 python cleaner.py
 
-👩‍💻 Auteure
+## 📈 Monitoring
 
-    Saadia B.
+La documentation complète du monitoring est disponible ici :
+➡️ [monitoring/C11_monitoring_model.md](monitoring/C11_monitoring_model.md)
