@@ -7,12 +7,12 @@ import sys
 import os
 import logging
 
-# 📌 Ajout des chemins vers tes modules perso
+from dotenv import load_dotenv
+load_dotenv("/opt/airflow/project/.env")
+
+# 📌 Ajout des chemins
 sys.path.append("/opt/airflow/project/scripts_data")
 sys.path.append("/opt/airflow/project/api")
-
-from dotenv import load_dotenv
-load_dotenv(dotenv_path="/opt/airflow/.env")
 
 # 📌 Import safe
 from scripts_data.scraper import scrape_reviews
@@ -27,12 +27,16 @@ except FileNotFoundError as e:
     process_and_insert_all = None
     PROCESS_AVAILABLE = False
 
+print("📁 Fichier .env chargé")
+print("👉 Mode scraping :", os.getenv("SCRAPER_MODE"))
+print("👉 Fichier d’entrée :", os.getenv("INPUT_CSV"))
+
 
 # Wrappers
 def wrapper_run_scraper(**context):
     scrape_date = context["ds"]
     print(f"📆 Wrapper Scraper : scrape_date = {scrape_date}")
-    scrape_reviews(mode="csv")
+    scrape_reviews()
 
 
 def wrapper_process_and_insert(**context):
@@ -58,7 +62,7 @@ with DAG(
     dag_id='trustpilot_pipeline',
     default_args=default_args,
     description='Pipeline : Scraper → Nettoyage → Claude → BQ',
-    schedule_interval='0 6 * * 1',
+    schedule_interval= None, #'0 6 * * 1',
     start_date=datetime(2025, 6, 1, tzinfo=pendulum.timezone("Europe/Paris")),
     catchup=False,
     tags=['trustpilot', 'nlp', 'bq'],
@@ -67,7 +71,8 @@ with DAG(
     # Scraping
     scrape_task = PythonOperator(
         task_id='scrape_trustpilot_reviews',
-        python_callable=run_full_scraper_pipeline
+        python_callable=wrapper_run_scraper,
+        provide_context=True,
     )
 
     # Nettoyage

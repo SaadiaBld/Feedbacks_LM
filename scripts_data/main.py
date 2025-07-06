@@ -3,6 +3,12 @@ import pandas as pd
 from scripts_data.scraper import scrape_reviews
 from scripts_data.cleaner import clean_csv
 from datetime import datetime
+import os
+from dotenv import load_dotenv
+
+load_dotenv(dotenv_path="/home/utilisateur/Documents/devia_2425/Feedbacks_LM/.env")
+
+mode = os.getenv("SCRAPER_MODE", "prod")
 
 def upload_to_bigquery(csv_path, target_table_id):
     df = pd.read_csv(csv_path)
@@ -44,16 +50,23 @@ def upload_to_bigquery(csv_path, target_table_id):
 
 
 def main():
-    print("▶ Début du scraping à", datetime.now().isoformat())
-    # Scraping et sauvegarde directe dans CSV
-    scrape_reviews(mode='csv')  # stocke dans data/avis_boutique.csv
+    print("▶ Début du pipeline à", datetime.now().isoformat())
+    print(f"⚙️ Mode SCRAPER sélectionné : {mode}")
 
-    print("▶ Début du nettoyage à", datetime.now().isoformat())
-    input_file = 'data/avis_boutique.csv'
-    output_file = 'data/avis_nettoyes.csv'
+    if mode == "csv":
+        input_file = os.getenv("CSV_INPUT_PATH", "/opt/airflow/data/verbatims_test.csv")
+        output_file = "/opt/airflow/data/avis_nettoyes.csv"
+        print(f"📄 Lecture du fichier de test : {input_file}")
+    else:
+        print("🔍 Lancement du scraping en ligne...")
+        scrape_reviews(mode=mode)
+        input_file = "/opt/airflow/data/avis_boutique.csv"
+        output_file = "/opt/airflow/data/avis_nettoyes.csv"
+
+    print("🧼 Nettoyage des données...")
     clean_csv(input_file, output_file)
 
-    print("▶ Upload dans BigQuery...")
+    print("📤 Upload vers BigQuery...")
     upload_to_bigquery(output_file, "trustpilot-satisfaction.reviews_dataset.reviews")
 
     print("✅ Pipeline terminé avec succès.")

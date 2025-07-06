@@ -6,7 +6,12 @@ from api.claude_interface import classify_with_claude
 from google.cloud import bigquery
 from datetime import datetime
 import uuid
-from monitoring.metrics import log_analysis_metrics, monitor_start
+from monitoring.metrics import log_analysis_metrics, monitor_start, push_metrics_to_gateway
+from prometheus_client import push_to_gateway, REGISTRY
+
+
+if __name__ == "__main__" or os.getenv("AIRFLOW_RUN_METRICS") == "true":
+    monitor_start(port=8000)
 
 # Charger .env avec conditions: Si on est dans un test, utilise toujours le .env local
 if "PYTEST_CURRENT_TEST" in os.environ:
@@ -106,6 +111,14 @@ def insert_topic_analysis(review_id: str, theme_scores: list[dict], label_to_id:
 
 def run_analysis(scrape_date: str):
     verbatims = get_verbatims_by_date(scrape_date)
+
+    if not verbatims:
+        print("⚠️ Aucun verbatim trouvé pour la date, test avec un faux.")
+        verbatims = [{
+            "review_id": "test123",
+            "content": "Produit cassé à la livraison. Très déçu. Je ne recommande pas la boutique"
+        }]
+
     label_to_id = load_topic_ids()
 
     print(f"{len(verbatims)} verbatims trouvés pour la date : {scrape_date}")
@@ -155,28 +168,20 @@ def run_analysis(scrape_date: str):
                 duration=time.time() - start,
                 error=True
             )
-        # result = insert_topic_analysis(
-        #     review_id=v["review_id"],
-        #     theme_scores=theme_scores,
-        #     label_to_id=label_to_id
-        # )
-        # log_analysis_metrics(
-        #     verbatim_text=v["content"],
-        #     duration=time.time() - start,
-        #     new_topics=result["new_topics"],
-        #     bq_error=result["insert_errors"]
-        # )
-
-        # return {
-        #     "insert_errors": bool(errors),
-        #     "new_topics": unknown_topics
-        #     }
-
 
 
 def process_and_insert_all(scrape_date: str = None):
     """Fonction appelée dans le DAG Airflow."""
+    from monitoring.metrics import monitor_start , push_metrics_to_gateway # safe import ici aussi
+    monitor_start()  # <=== nécessaire pour initialiser Prometheus
+
+
+
     if not scrape_date:
         scrape_date = datetime.utcnow().date().isoformat()
     print(f"Lancement du traitement pour la date : {scrape_date}")
+
     run_analysis(scrape_date=scrape_date)
+
+    # Pousser les métriques vers le PushGateway
+    push_metrics_to_gateway()
