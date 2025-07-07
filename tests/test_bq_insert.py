@@ -1,4 +1,5 @@
-#Tester l'integration des données dans big query - tests d'intégration simulés
+#Tester l'integration des données dans big query - tests d'intégration simulés basés sur des mocks, 
+# pour verifier la logique d'insertion dans BigQuery
 import uuid, pytest, os
 from unittest.mock import patch
 from api.analyze_and_insert import insert_topic_analysis

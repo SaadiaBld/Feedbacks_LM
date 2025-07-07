@@ -5,10 +5,12 @@ on:
     branches:
       - main
       - airflow-grafana-prometheus
+      - ci-gcp-integration
   pull_request:
     branches:
       - main
       - airflow-grafana-prometheus
+      - ci-gcp-integration
   workflow_dispatch:
 
 jobs:
@@ -30,10 +32,10 @@ jobs:
           pip install -r requirements.txt
           pip install -r tests/requirements.txt 
       
-      # - name: Lint code
-      #   run: |
-      #     pip install flake8
-      #     flake8 api/ scripts_data/ tests/
+      - name: Set up Google credentials
+        run: |
+          echo "${{ secrets.GCP_CREDENTIALS_JSON }}" > gcp-creds.json
+        shell: bash
 
       - name: Run tests and generate report
         run: |
@@ -45,3 +47,9 @@ jobs:
         with:
           name: test-results
           path: tests/reports/
+    
+    env:
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      DATASET_ID: ${{ secrets.DATASET_ID }}
+      TABLE_ID: ${{ secrets.TABLE_ID }}
+      GOOGLE_APPLICATION_CREDENTIALS: gcp-creds.json
