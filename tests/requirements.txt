@@ -4,9 +4,6 @@ pytest-cov>=4.1.0
 pytest-mock>=3.11.0
 pytest-asyncio>=0.21.0
 
-# Tests Airflow spécifiques
-pytest-airflow
-
 # Validation des données
 great-expectations>=0.17.0
 pydantic>=2.0.0
