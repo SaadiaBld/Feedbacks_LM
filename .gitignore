@@ -228,14 +228,20 @@ pyrightconfig.json
 last_page.txt
 /brouillons
 .vscode/
-data/
-config/
+
+/config/*
+!/config/.keep
 monitoring/grafana
 #sdk gcloud
 google-cloud-sdk/
+data/*
+!data/avis_boutique.csv
+!data/avis_avec_vides.csv
+/tests/reports/*
+!tests/reports/.gitkeep
+
 
 # Fichiers temporaires
-data/*.csv
 airflow/logs/
 airflow/plugins
 tests/local-only-requirements.txt
