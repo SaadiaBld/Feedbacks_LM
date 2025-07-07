@@ -37,6 +37,7 @@ jobs:
 
       - name: Run tests
         run: |
+          export PYTHONPATH=$(pwd) 
           pytest tests/ --disable-warnings --maxfail=1  --ignore=tests/test_dag_workflow.py 
 
       - name: Upload test results
