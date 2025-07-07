@@ -1,11 +1,10 @@
 ###pour airlow, décommente la ligne suivante :
-import os, time
+import os, time, uuid
 from dotenv import load_dotenv
 from api.bq_connect import get_verbatims_by_date
 from api.claude_interface import classify_with_claude
 from google.cloud import bigquery
 from datetime import datetime
-import uuid
 from monitoring.metrics import log_analysis_metrics, monitor_start, push_metrics_to_gateway
 from prometheus_client import push_to_gateway, REGISTRY
 
@@ -22,17 +21,20 @@ else:
 load_dotenv(dotenv_path=dotenv_path)
 
 # Vérifier que les variables importantes sont bien présentes
-project_id = os.getenv("PROJECT_ID")
-if not project_id:
-    raise ValueError("La variable PROJECT_ID est absente de l'environnement.")
+def get_project_id():
+    project_id = os.getenv("PROJECT_ID")
+    if not project_id:
+        raise ValueError("La variable PROJECT_ID est absente de l'environnement.")
+    return project_id
 
-gcp_credentials = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-if not gcp_credentials or not os.path.isfile(gcp_credentials):
-    raise FileNotFoundError(f"Fichier de credentials GCP introuvable : {gcp_credentials}")
-
+def get_gcp_credentials_path():
+    gcp_credentials = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+    if not gcp_credentials or not os.path.isfile(gcp_credentials):
+        raise FileNotFoundError(f"Fichier de credentials GCP introuvable : {gcp_credentials}")
+    return gcp_credentials
 
 def load_topic_ids():
-    client = bigquery.Client(project=project_id)
+    client = bigquery.Client(project=get_project_id())
 
     query = """
         SELECT topic_label, topic_id
@@ -43,7 +45,7 @@ def load_topic_ids():
 
 
 def insert_topic_analysis(review_id: str, theme_scores: list[dict], label_to_id: dict):
-    client = bigquery.Client(project=project_id)
+    client = bigquery.Client(project=get_project_id())
     rows_to_insert = []
     unknown_topics = []
 
@@ -172,11 +174,12 @@ def run_analysis(scrape_date: str):
 
 def process_and_insert_all(scrape_date: str = None):
     """Fonction appelée dans le DAG Airflow."""
-    from monitoring.metrics import monitor_start , push_metrics_to_gateway # safe import ici aussi
-    monitor_start()  # <=== nécessaire pour initialiser Prometheus
+    from monitoring.metrics import monitor_start , push_metrics_to_gateway
+    monitor_start()
 
-
-
+    # S'assurer que les credentials existent AVANT les appels GCP
+    get_gcp_credentials_path()
+    
     if not scrape_date:
         scrape_date = datetime.utcnow().date().isoformat()
     print(f"Lancement du traitement pour la date : {scrape_date}")
