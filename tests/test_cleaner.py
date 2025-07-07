@@ -18,7 +18,7 @@ def test_clean_csv_output_structure(tmp_path):
     assert len(df) > 0, "Le fichier nettoyé est vide"
 
 def test_clean_csv_removes_empty_lines(tmp_path):
-    input_path = "data/exemples/avis_avec_vides.csv"
+    input_path = "data/avis_avec_vides.csv"
     output_path = tmp_path / "avis_clean.csv"
 
     clean_csv(input_path, str(output_path))
