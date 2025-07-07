@@ -25,7 +25,6 @@ services:
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
-      - ./airflow/plugins:/opt/airflow/plugins
       - ./requirements.txt:/requirements.txt
       - ./airflow/entrypoint.sh:/opt/airflow/entrypoint.sh
       - .:/opt/airflow/project
@@ -47,7 +46,6 @@ services:
       - ./airflow/dags:/opt/airflow/dags
       - ./data:/opt/airflow/data
       - ./airflow/logs:/opt/airflow/logs
-      - ./airflow/plugins:/opt/airflow/plugins
       - ./requirements.txt:/requirements.txt
       - .:/opt/airflow/project
     command: >
