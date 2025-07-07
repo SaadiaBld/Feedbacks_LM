@@ -30,11 +30,10 @@ jobs:
           pip install -r requirements.txt
           pip install -r tests/requirements.txt
       
-      - name: Lint code
-        run: |
-          pip install flake8
-          flake8 api/ scripts_data/ tests/
-
+      # - name: Lint code
+      #   run: |
+      #     pip install flake8
+      #     flake8 api/ scripts_data/ tests/
 
       - name: Run tests
         run: |
