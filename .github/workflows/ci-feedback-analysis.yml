@@ -35,13 +35,13 @@ jobs:
       #     pip install flake8
       #     flake8 api/ scripts_data/ tests/
 
-      - name: Run tests
+      - name: Run tests and generate report
         run: |
-          export PYTHONPATH=$(pwd) 
-          pytest tests/ --disable-warnings --maxfail=1  --ignore=tests/test_dag_workflow.py 
+          PYTHONPATH=$(pwd) pytest --junitxml=tests/reports/results.xml tests/ --disable-warnings --maxfail=1 --ignore=tests/test_dag_workflow.py
 
-      - name: Upload test results
+      - name: Upload test results as artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
+          path: tests/reports/
