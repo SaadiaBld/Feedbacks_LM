@@ -1,5 +1,5 @@
 #Tester l'integration des données dans big query - tests d'intégration simulés
-import uuid, pytest
+import uuid, pytest, os
 from unittest.mock import patch
 from api.analyze_and_insert import insert_topic_analysis
 
