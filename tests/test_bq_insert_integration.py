@@ -49,6 +49,9 @@ def test_insert_review_table():
     assert row.content == "TEST: Produit arrivé cassé"
     assert row.author == "test_user"
 
+    #Cleanup après test
+    cleanup = f"DELETE FROM `{REVIEWS_TABLE}` WHERE review_id = '{review_id}'"
+    client.query(cleanup).result()
 
 @pytest.mark.skipif(not PROJECT_ID, reason="Les credentials GCP ne sont pas configurés")
 def test_insert_topic_analysis_table():
@@ -94,4 +97,6 @@ def test_insert_topic_analysis_table():
         assert row.label_sentiment in ["Neutre", "Positif"], f"Label sentiment inattendu : {row.label_sentiment}"
         assert isinstance(row.score_0_1, float), f"score_0_1 doit être un float, obtenu : {row.score_0_1}"
 
-client.query(f"DELETE FROM `{REVIEWS_TABLE}` WHERE review_id = '{review_id}'").result()
+    # Cleanup après test
+    cleanup = f"DELETE FROM `{TOPIC_ANALYSIS_TABLE}` WHERE review_id = '{review_id}'"
+    client.query(cleanup).result()
