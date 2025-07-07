@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - airflow-grafana-prometheus
   pull_request:
     branches:
       - main
+      - airflow-grafana-prometheus
   workflow_dispatch:
 
 jobs:
