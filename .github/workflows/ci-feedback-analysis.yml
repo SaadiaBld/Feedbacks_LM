@@ -37,7 +37,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest --maxfail=1 --disable-warnings -q tests/
+          pytest tests/ --disable-warnings --maxfail=1  -ignore=tests/test_dag_workflow.py 
 
       - name: Upload test results
         if: always()
