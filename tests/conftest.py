@@ -12,5 +12,5 @@ def patch_env_and_files():
     """
     with patch("os.path.isfile", return_value=True), \
          patch("os.getenv", side_effect=lambda k, d=None: "dummy" if "GOOGLE_APPLICATION_CREDENTIALS" in k or "PROJECT_ID" in k else d), \
-         patch("project.api.analyze_and_insert.load_dotenv", return_value=True):
+         patch("api.analyze_and_insert.load_dotenv", return_value=True):
         yield
