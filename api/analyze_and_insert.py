@@ -113,13 +113,13 @@ def insert_topic_analysis(review_id: str, theme_scores: list[dict], label_to_id:
 
 def run_analysis(scrape_date: str):
     verbatims = get_verbatims_by_date(scrape_date)
+    print(f"📊 Verbatims récupérés : {len(verbatims)}")
+    for v in verbatims:
+        print(f"- {v['review_id']}: {v['content'][:60]}...")
 
     if not verbatims:
         print("⚠️ Aucun verbatim trouvé pour la date, test avec un faux.")
-        verbatims = [{
-            "review_id": "test123",
-            "content": "Produit cassé à la livraison. Très déçu. Je ne recommande pas la boutique"
-        }]
+        return
 
     label_to_id = load_topic_ids()
 
@@ -185,6 +185,7 @@ def process_and_insert_all(scrape_date: str = None):
     print(f"Lancement du traitement pour la date : {scrape_date}")
 
     run_analysis(scrape_date=scrape_date)
+    print(f"✅ Traitement terminé pour {scrape_date}")
 
     # Pousser les métriques vers le PushGateway
     push_metrics_to_gateway()

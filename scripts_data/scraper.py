@@ -12,7 +12,6 @@ SCRAPER_MODE = os.getenv("SCRAPER_MODE", "csv")
 def generate_review_hash(row):
     """
     Génère un hash unique pour chaque avis basé sur l'auteur et le contenu.
-    Utilisé pour éviter les doublons dans la base de données.
     """
     key = f"{row['author']}|{row['content']}|{row['publication_date']}"
     return hashlib.md5(key.encode('utf-8')).hexdigest()
@@ -28,21 +27,6 @@ def scrape_reviews(mode = None, scrape_date=None):
     """
     mode = mode or SCRAPER_MODE
     scrape_date = scrape_date or datetime.utcnow().date().isoformat()
-
-    if mode == 'csv':
-        print('✅ Mode CSV local activé : copie du fichier de test')
-
-        src = '/opt/airflow/project/data/verbatims_test.csv'
-        dest = '/opt/airflow/project/data/avis_boutique.csv'
-
-        if os.path.exists(src):
-            import shutil
-            shutil.copy(src, dest)
-            print(f"✅ Fichier de test copié depuis {src} vers {dest}")
-        else:
-            raise FileNotFoundError(f"❌ Fichier de test introuvable à l’emplacement : {src}")
-        return
-
     
     # Date d’aujourd’hui et seuil de 7 jours
     scrape_date = datetime.utcnow().date().isoformat()
@@ -147,5 +131,4 @@ def run_scraper(scrape_date=None):
     if scrape_date is None:
         scrape_date = datetime.utcnow().date().isoformat()
     scrape_reviews(mode=SCRAPER_MODE, scrape_date=scrape_date)
-    # ensuite passe `scrape_date` à `scrape_reviews(scrape_date=...)`
 

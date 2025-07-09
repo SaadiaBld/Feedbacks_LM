@@ -58,12 +58,16 @@ def clean_csv(input_file, output_file):
     print(f"Fichier nettoyé sauvegardé dans {output_file}")
 
 
-def clean_data():
-    input_file = os.getenv("INPUT_CSV", "data/avis_boutique.csv")
-    output_file = os.getenv("OUTPUT_CSV", "data/avis_boutique_clean.csv")
+def clean_data(input_file=None, output_file=None):
+    """Nettoyage du fichier CSV des avis Trustpilot."""
+               
+    input_file = input_file or "/opt/airflow/project/data/avis_boutique.csv"
+    output_file = output_file or "/opt/airflow/project/data/avis_boutique_clean.csv"
     if not os.path.exists(input_file):
         raise FileNotFoundError(f"{input_file} introuvable. Lance d'abord le scraper.")
     clean_csv(input_file, output_file)
     print(f"📂 INPUT_CSV = {input_file}")
     print(f"📂 OUTPUT_CSV = {output_file}")
 
+if __name__ == "__main__":
+    clean_data()
