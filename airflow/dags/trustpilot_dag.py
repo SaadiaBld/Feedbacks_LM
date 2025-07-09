@@ -18,6 +18,7 @@ sys.path.append("/opt/airflow/project/api")
 from scripts_data.scraper import scrape_reviews
 from scripts_data.cleaner import clean_data
 from scripts_data.main import main as run_full_scraper_pipeline
+from api.bq_insert_clean_data import insert_clean_reviews_to_bq
 
 try:
     from api.analyze_and_insert import process_and_insert_all
@@ -66,19 +67,31 @@ with DAG(
     start_date=datetime(2025, 6, 1, tzinfo=pendulum.timezone("Europe/Paris")),
     catchup=False,
     tags=['trustpilot', 'nlp', 'bq'],
+    doc_md="""
+    ### Pipeline Trustpilot
+    Ce DAG scrape les avis Trustpilot de Leroy Merlin, les nettoie, les insère dans BigQuery, puis les analyse via Claude.
+    """,
 ) as dag:
 
     # Scraping
     scrape_task = PythonOperator(
         task_id='scrape_trustpilot_reviews',
         python_callable=wrapper_run_scraper,
-        provide_context=True,
     )
 
     # Nettoyage
     clean_task = PythonOperator(
         task_id='clean_reviews',
         python_callable=clean_data,
+    op_kwargs={
+        "input_file": "/opt/airflow/project/data/avis_boutique.csv",
+        "output_file": "/opt/airflow/project/data/avis_boutique_clean.csv",
+    },
+    )
+    # Insertion des avis nettoyés dans BQ
+    insert_task = PythonOperator(
+    task_id="insert_clean_reviews_to_bq",
+    python_callable=insert_clean_reviews_to_bq,
     )
 
     # Analyse / Insertion ou Dummy si process indisponible
@@ -92,4 +105,4 @@ with DAG(
         analyze_insert_task = DummyOperator(task_id='skip_analyze_insert_due_to_missing_cred')
 
     # Orchestration
-    scrape_task >> clean_task >> analyze_insert_task
+    scrape_task >> clean_task >> insert_task >> analyze_insert_task
