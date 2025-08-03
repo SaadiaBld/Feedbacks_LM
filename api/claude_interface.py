@@ -1,15 +1,10 @@
-import anthropic
-import os
-import json
-import logging
-from dotenv import load_dotenv
+import anthropic, os, json, logging
+
 from pathlib import Path
 from .prompt_utils import build_prompt, THEMES
 
-# Load .env
-env_path = Path(__file__).resolve().parents[1] / ".env"
-#load_dotenv(dotenv_path=env_path)
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
+
+
 api_key = os.getenv("ANTHROPIC_API_KEY")
 
 client = anthropic.Anthropic(api_key=api_key)
@@ -25,6 +20,7 @@ if not logger.hasHandlers():
     handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
     logger.addHandler(handler)
 
+# Fonction principale pour classifier les verbatims avec Claude
 def classify_with_claude(verbatim: str) -> list[dict] | None:
     prompt = build_prompt(verbatim)
     try:
@@ -38,8 +34,8 @@ def classify_with_claude(verbatim: str) -> list[dict] | None:
 
         content = response.content[0].text.strip()
         
-        # 🔍 Print brut de la réponse JSON
-        print("\n📥 Réponse brute de Claude :\n", content)
+        # Print brut de la réponse JSON 
+        print("\nRéponse brute de Claude :\n", content)
 
         validated = validate_claude_response(content)
         if not validated:
