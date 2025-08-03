@@ -1,9 +1,15 @@
 import anthropic, os, json, logging
-
+from dotenv import load_dotenv
 from pathlib import Path
 from .prompt_utils import build_prompt, THEMES
 
-
+# Load .env 
+#env_path = Path(__file__).resolve().parents[1] / ".env" # assurer que le fichier .env est bien trouvé et chargé, quelle que soit la manière dont le script est exécuté (en local, dans Airflow,
+dotenv_path = os.path.join(os.path.dirname(__file__), '..', '..', '.env')
+if os.path.exists(dotenv_path):
+    load_dotenv(dotenv_path=dotenv_path)
+else:
+    raise FileNotFoundError(f"Le fichier .env est introuvable à l'emplacement : {dotenv_path}")
 
 api_key = os.getenv("ANTHROPIC_API_KEY")
 
@@ -81,5 +87,3 @@ def validate_claude_response(response_text: str) -> list[dict] | None:
     except json.JSONDecodeError as e:
         logger.error(f"Erreur JSON : {e} dans : {response_text}")
         raise ValueError("Réponse Claude invalide")
-
-
