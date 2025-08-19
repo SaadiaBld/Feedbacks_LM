@@ -36,9 +36,6 @@ if not logger.hasHandlers():
 def classify_with_claude(verbatim: str) -> list[dict] | None:
     prompt = build_prompt(verbatim)
     try:
-        # --- Ligne de débogage ajoutée ---
-        print(f"DEBUG: Calling Claude API with model 'claude-3-haiku-20240307'. API Key starts with: {api_key[:5]}...")
-        # --- Fin ligne de débogage ---
         response = client.messages.create(
             model="claude-3-haiku-20240307",
             max_tokens=500,
