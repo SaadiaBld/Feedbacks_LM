@@ -1,130 +1,157 @@
 import pytest
-from unittest.mock import patch
-from api.claude_interface import classify_with_claude
+from unittest.mock import patch, MagicMock
+from api.claude_interface import classify_with_claude, validate_claude_response
+import json
 
-# Tester la classification avec Claude en utilisant des réponses simulées
-@patch('api.claude_interface.client.messages.create')
-def test_classify_with_claude_valid_response(mock_create):
-    # Simulation d'une réponse JSON valide avec bon format
-    mock_create.return_value = type("Obj", (object,), {
-        "content": [type("SubObj", (object,), {
-            "text": '{"themes": ['
-                    '{"theme": "Livraison et retrait", "note": 1}, '
-                    '{"theme": "Retour et remboursement", "note": 2}]}'
-        })()]
-    })()
+# Mock de la réponse réussie de Claude
+class MockMessageContent:
+    def __init__(self, text):
+        self.text = text
 
-    verbatim = "Livraison lente et retour compliqué"
-    result = classify_with_claude(verbatim)
+class MockResponse:
+    def __init__(self, text_content):
+        self.content = [MockMessageContent(text_content)]
 
-    assert isinstance(result, list)
-    assert len(result) == 2
-    assert result[0]["theme"] == "Livraison et retrait"
-    assert result[0]["note"] == 1
+def test_classify_with_claude_success():
+    """Teste que classify_with_claude gère une réponse réussie de Claude."""
+    mock_claude_output = {
+        "themes": [
+            {"theme": "Service client / SAV", "note": 4.0},
+            {"theme": "Qualité des produits", "note": 3.0}
+        ]
+    }
+    mock_claude_output_str = json.dumps(mock_claude_output)
 
-@patch('api.claude_interface.client.messages.create')
-def test_classify_with_claude_invalid_json(mock_create):
-    mock_create.return_value = type("Obj", (object,), {
-        "content": [type("SubObj", (object,), {
-            "text": "not valid JSON"
-        })()]
-    })()
+    with patch('api.claude_interface.client.messages.create') as mock_create_method:
+        # Configure le mock pour retourner une réponse réussie
+        mock_create_method.return_value = MockResponse(mock_claude_output_str)
+        
+        verbatim = "Le service était bon mais le produit un peu décevant."
+        result = classify_with_claude(verbatim)
+        
+        # Vérifie que le résultat est bien celui attendu après validation
+        assert result == [
+            {"theme": "Service client / SAV", "note": 4.0},
+            {"theme": "Qualité des produits", "note": 3.0}
+        ]
+        # Vérifie que la méthode create a bien été appelée
+        mock_create_method.assert_called_once()
 
-    with pytest.raises(ValueError):
-        classify_with_claude("Texte cassé")
+def test_validate_claude_response_valid_json():
+    """Teste que validate_claude_response gère un JSON valide."""
+    valid_json_str = json.dumps({
+        "themes": [
+            {"theme": "Prix et promotions", "note": 3.5}
+        ]
+    })
+    expected_result = [{"theme": "Prix et promotions", "note": 3.5}]
+    assert validate_claude_response(valid_json_str) == expected_result
 
-# tester la classification avec un thème vide
-@patch('api.claude_interface.client.messages.create')
-def test_classify_with_claude_empty_response(mock_create):
-    mock_create.return_value = type("Obj", (object,), {
-        "content": [type("SubObj", (object,), {
-            "text": ""
-        })()]
-    })()
-    with pytest.raises(ValueError):
-        classify_with_claude("Texte vide")
+def test_validate_claude_response_invalid_theme():
+    """Teste que validate_claude_response rejette un thème inconnu."""
+    invalid_theme_json_str = json.dumps({
+        "themes": [
+            {"theme": "Thème Inconnu", "note": 2.0}
+        ]
+    })
+    assert validate_claude_response(invalid_theme_json_str) is None
 
-#theme detecté qui n'est pas dans la liste 
-@patch('api.claude_interface.client.messages.create')
-def test_classify_with_claude_unknown_theme(mock_create):
-    mock_create.return_value = type("Obj", (object,), {
-        "content": [type("SubObj", (object,), {
-            "text": '{"themes": ['
-                    '{"theme": "Organisation magasin", "note": 3}, '
-                    '{"theme": "Livraison et retrait", "note": 2}]}'
-        })()]
-    })()
+def test_validate_claude_response_invalid_note():
+    """Teste que validate_claude_response rejette une note invalide."""
+    invalid_note_json_str = json.dumps({
+        "themes": [
+            {"theme": "Livraison et retrait", "note": 6.0}
+        ]
+    })
+    assert validate_claude_response(invalid_note_json_str) is None
 
-    result = classify_with_claude("Livraison correcte, mais je prefere acheter en magasin")
-    assert isinstance(result, list)
-    assert len(result) == 1
-    assert result[0]["theme"] == "Livraison et retrait"
+def test_validate_claude_response_malformed_json():
+    """Teste que validate_claude_response lève une erreur pour un JSON malformé."""
+    malformed_json_str = "{themes: [}"
+    with pytest.raises(ValueError, match="Réponse Claude invalide"):
+        validate_claude_response(malformed_json_str)
 
-#note invalide 
-@patch('api.claude_interface.client.messages.create')
-def test_classify_with_claude_invalid_note(mock_create):
-    mock_create.return_value = type("Obj", (object,), {
-        "content": [type("SubObj", (object,), {
-            "text": '{"themes": ['
-                    '{"theme": "Livraison et retrait", "note": 10}]}'
-        })()]
-    })()
+def test_validate_claude_response_missing_themes_key():
+    """Teste que validate_claude_response rejette un JSON sans la clé 'themes'."""
+    missing_themes_json_str = json.dumps({"other_key": []})
+    assert validate_claude_response(missing_themes_json_str) is None
 
-    result = classify_with_claude("Livraison absurde")
-    assert result is None
+def test_validate_claude_response_empty_themes_list():
+    """Teste que validate_claude_response retourne None pour une liste de thèmes vide."""
+    empty_themes_json_str = json.dumps({"themes": []})
+    assert validate_claude_response(empty_themes_json_str) is None
 
-#tester le cas avec une note manquante
-@patch('api.claude_interface.client.messages.create')
-def test_classify_with_claude_missing_note(mock_create):
-    mock_create.return_value = type("Obj", (object,), {
-        "content": [type("SubObj", (object,), {
-            "text": '{"themes": [{"theme": "Livraison et retrait"}]}'
-        })()]
-    })()
-    result = classify_with_claude("Livraison correcte")
-    assert result is None
+# --- Nouveaux tests pour validate_claude_response ---
 
-# tester le cas où les thèmes ne sont pas une liste (un dictionnaire par exemple)
-@patch('api.claude_interface.client.messages.create')
-def test_classify_with_claude_themes_not_a_list(mock_create):
-    mock_create.return_value = type("Obj", (object,), {
-        "content": [type("SubObj", (object,), {
-            "text": '{"themes": {"theme": "Livraison et retrait", "note": 2}}'
-        })()]
-    })()
-    result = classify_with_claude("Mauvaise livraison")
-    assert result is None
+def test_validate_claude_response_multiple_themes():
+    """Teste que validate_claude_response gère correctement plusieurs thèmes."""
+    json_str = json.dumps({
+        "themes": [
+            {"theme": "Service client / SAV", "note": 4.0},
+            {"theme": "Qualité des produits", "note": 2.5}
+        ]
+    })
+    expected = [
+        {"theme": "Service client / SAV", "note": 4.0},
+        {"theme": "Qualité des produits", "note": 2.5}
+    ]
+    assert validate_claude_response(json_str) == expected
 
-# tester le cas où les thèmes sont un item qui n'est pas un dictionnaire
-@patch('api.claude_interface.client.messages.create')
-def test_classify_with_claude_item_not_dict(mock_create):
-    mock_create.return_value = type("Obj", (object,), {
-        "content": [type("SubObj", (object,), {
-            "text": '{"themes": ["not_a_dict"]}'
-        })()]
-    })()
-    result = classify_with_claude("Texte bidon")
-    assert result is None
+def test_validate_claude_response_decimal_note():
+    """Teste que validate_claude_response gère correctement les notes décimales."""
+    json_str = json.dumps({
+        "themes": [
+            {"theme": "Prix et promotions", "note": 3.75}
+        ]
+    })
+    expected = [{"theme": "Prix et promotions", "note": 3.75}]
+    assert validate_claude_response(json_str) == expected
 
-# tester le cas où la note est une chaîne de caractères et non un entier
-@patch('api.claude_interface.client.messages.create')
-def test_classify_with_claude_note_as_string(mock_create):
-    mock_create.return_value = type("Obj", (object,), {
-        "content": [type("SubObj", (object,), {
-            "text": '{"themes": [{"theme": "Livraison et retrait", "note": "3"}]}'
-        })()]
-    })()
-    result = classify_with_claude("Livraison correcte")
-    assert result is None
+def test_validate_claude_response_boundary_notes():
+    """Teste que validate_claude_response gère les notes aux limites (1.0 et 5.0)."""
+    json_str = json.dumps({
+        "themes": [
+            {"theme": "Livraison et retrait", "note": 1.0},
+            {"theme": "Expérience d'achat en ligne", "note": 5.0}
+        ]
+    })
+    expected = [
+        {"theme": "Livraison et retrait", "note": 1.0},
+        {"theme": "Expérience d'achat en ligne", "note": 5.0}
+    ]
+    assert validate_claude_response(json_str) == expected
 
+def test_validate_claude_response_themes_not_list():
+    """Teste que validate_claude_response rejette si 'themes' n'est pas une liste."""
+    json_str = json.dumps({"themes": "not_a_list"})
+    assert validate_claude_response(json_str) is None
 
-# tester le cas où la réponse de Claude est vide
-@patch('api.claude_interface.client.messages.create')
-def test_classify_with_claude_empty_verbatim(mock_create):
-    mock_create.return_value = type("Obj", (object,), {
-        "content": [type("SubObj", (object,), {
-            "text": '{"themes": []}'
-        })()]
-    })()
-    result = classify_with_claude("")
-    assert result is None
+def test_validate_claude_response_item_not_dict():
+    """Teste que validate_claude_response rejette si un élément de thème n'est pas un dict."""
+    json_str = json.dumps({"themes": ["not_a_dict"]})
+    assert validate_claude_response(json_str) is None
+
+def test_validate_claude_response_missing_theme_key_in_item():
+    """Teste que validate_claude_response rejette si un élément de thème manque la clé 'theme'."""
+    json_str = json.dumps({"themes": [{"note": 3.0}]})
+    assert validate_claude_response(json_str) is None
+
+def test_validate_claude_response_missing_note_key_in_item():
+    """Teste que validate_claude_response rejette si un élément de thème manque la clé 'note'."""
+    json_str = json.dumps({"themes": [{"theme": "Prix et promotions"}]})
+    assert validate_claude_response(json_str) is None
+
+def test_validate_claude_response_note_not_number():
+    """Teste que validate_claude_response rejette si la note n'est pas un nombre."""
+    json_str = json.dumps({"themes": [{"theme": "Prix et promotions", "note": "trois"}]})
+    assert validate_claude_response(json_str) is None
+
+def test_validate_claude_response_empty_string_input():
+    """Teste que validate_claude_response lève une erreur pour une chaîne vide."""
+    with pytest.raises(ValueError, match="Réponse Claude invalide"):
+        validate_claude_response("")
+
+def test_validate_claude_response_non_json_string_input():
+    """Teste que validate_claude_response lève une erreur pour une chaîne non-JSON."""
+    with pytest.raises(ValueError, match="Réponse Claude invalide"):
+        validate_claude_response("Ceci n'est pas du JSON")
