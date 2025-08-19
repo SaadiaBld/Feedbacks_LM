@@ -6,10 +6,16 @@ from .prompt_utils import build_prompt, THEMES
 # Load .env 
 #env_path = Path(__file__).resolve().parents[1] / ".env" # assurer que le fichier .env est bien trouvé et chargé, quelle que soit la manière dont le script est exécuté (en local, dans Airflow,
 dotenv_path = os.path.join(os.path.dirname(__file__), '..', '..', '.env')
-if os.path.exists(dotenv_path):
-    load_dotenv(dotenv_path=dotenv_path)
+if os.getenv("PYTEST_RUNNING"):
+    # En mode test, on ne lève pas d'erreur si le .env n'est pas trouvé
+    # Les variables d'environnement seront mockées par pytest
+    if os.path.exists(dotenv_path):
+        load_dotenv(dotenv_path=dotenv_path)
 else:
-    raise FileNotFoundError(f"Le fichier .env est introuvable à l'emplacement : {dotenv_path}")
+    if os.path.exists(dotenv_path):
+        load_dotenv(dotenv_path=dotenv_path)
+    else:
+        raise FileNotFoundError(f"Le fichier .env est introuvable à l'emplacement : {dotenv_path}")
 
 api_key = os.getenv("ANTHROPIC_API_KEY")
 
