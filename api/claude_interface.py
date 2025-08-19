@@ -17,7 +17,7 @@ else:
     else:
         raise FileNotFoundError(f"Le fichier .env est introuvable à l'emplacement : {dotenv_path}")
 
-api_key = os.getenv("ANTHROPIC_API_KEY")
+api_key = os.getenv("ANTHROPIC_API_KEY") or ""
 
 client = anthropic.Anthropic(api_key=api_key, timeout=30.0)
 THEME_LABELS = {t["nom"] for t in THEMES}
