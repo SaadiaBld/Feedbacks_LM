@@ -1,0 +1,394 @@
+[2025-06-21T17:00:44.244+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-06-21T17:00:44.274+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: trustpilot_pipeline.analyze_and_insert manual__2025-06-21T16:56:39.539393+00:00 [queued]>
+[2025-06-21T17:00:44.281+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: trustpilot_pipeline.analyze_and_insert manual__2025-06-21T16:56:39.539393+00:00 [queued]>
+[2025-06-21T17:00:44.282+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-06-21T17:00:44.296+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): analyze_and_insert> on 2025-06-21 16:56:39.539393+00:00
+[2025-06-21T17:00:44.303+0000] {standard_task_runner.py:63} INFO - Started process 233 to run task
+[2025-06-21T17:00:44.306+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'trustpilot_pipeline', 'analyze_and_insert', 'manual__2025-06-21T16:56:39.539393+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/trustpilot_dag.py', '--cfg-path', '/tmp/tmpb1fgdatw']
+[2025-06-21T17:00:44.309+0000] {standard_task_runner.py:91} INFO - Job 6: Subtask analyze_and_insert
+[2025-06-21T17:00:44.324+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.11/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-06-21T17:00:44.358+0000] {task_command.py:426} INFO - Running <TaskInstance: trustpilot_pipeline.analyze_and_insert manual__2025-06-21T16:56:39.539393+00:00 [running]> on host 92146c76f2b4
+[2025-06-21T17:00:44.444+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='trustpilot_pipeline' AIRFLOW_CTX_TASK_ID='analyze_and_insert' AIRFLOW_CTX_EXECUTION_DATE='2025-06-21T16:56:39.539393+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-21T16:56:39.539393+00:00'
+[2025-06-21T17:00:44.445+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-06-21T17:00:44.460+0000] {logging_mixin.py:188} INFO - 📆 Wrapper Analyse/Insert : scrape_date = 2025-06-21
+[2025-06-21T17:00:44.460+0000] {logging_mixin.py:188} INFO - 📂 Fichier de credentials GCP :  /opt/***/project/config/trustpilot-satisfaction-43aac3dd82a9.json
+[2025-06-21T17:00:44.460+0000] {logging_mixin.py:188} INFO - Lancement du traitement pour la date : 2025-06-21
+[2025-06-21T17:00:46.712+0000] {logging_mixin.py:188} INFO - 14 verbatims trouvés pour la date : 2025-06-21
+[2025-06-21T17:00:46.712+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 1 :
+Commande d’un support rond pour tenir pot de fleur, reçu pot de fleur carré au bout de 8 jours… Message service client : d’après le suivi transport, votre colis est bien livré !!! Non mais je rêve… De multiples messages demandant capture de la commande, ils font des erreurs et c’est encore au client d’apporter des preuves, ils n’ont pas accès aux commandes clients ??? Commande passée hier sur Amazon J’attends le remboursement si vous êtes aussi réactif que pour traiter les erreurs de commande et bien ce n’est pas prêt d’être fini…
+[2025-06-21T17:00:48.442+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:00:48.476+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:00:48.476+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.5
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T17:00:48.525+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:00:48.953+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review eacb426bb1e506f57e033c0dd38990f0
+[2025-06-21T17:00:48.954+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:00:48.955+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:00:48.955+0000] {logging_mixin.py:188} INFO -  - 3 (note : 2.0)
+[2025-06-21T17:00:48.956+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.5)
+[2025-06-21T17:00:48.957+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 2 :
+Leroy Merlin se moque de ses clients. Encore une fois et comme nous pouvons le voir sur les nombreux forums, Leroy Merlin ne prend pas en charge les demandes de ses clients. J'ai commandé un store il y'a plus de trois semaines, le délai annoncé était bien de trois semaines (étrange pour un produit en stock). A ce jour le produits est en rupture pour une durée non défini... Aucune réponse à mes mails, des appels téléphoniques où je dois être rappelé, mais bien entendu personne ne vous rappelle. Ne serait il pas temps de prendre en considération vos clients ? Commande 25149L33261-1
+[2025-06-21T17:00:50.392+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:00:50.394+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:00:50.394+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:00:50.441+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:00:50.676+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review e73e89d8b57a4e04a0eb4eeae7e30fa1
+[2025-06-21T17:00:50.676+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:00:50.677+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:00:50.677+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:00:50.678+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 3 :
+Et encore s'il y avait la possibilité de mettre 0 etoiles ce serait mieux J’ai rencontré un certain nombre de problèmes tres importants sur une commande de meubles de cuisine Cette commande portait d’une part sur le changement du plan de travail de ma cuisine preexistante et d’autre part sur l’ameublement d’une nouvelle piece attenante a cette cuisine centrale . S’agissant du changement du plan de travail de la cuisine prexistante ( cf plan en copie 1) la partie droite qui m’ a ete livrée etait longue de 2,23 m au lieu des 1,91 prevus . Le menuisier qui me le posait à donc dû le couper mais de ce fait les encoches pour poser les grandes vis raboutant ce morceau au pan voisin par dessous ne coïncidaient plus . Il a Posé un « rafistolage" en dessous pour solidariser les 2 pans .cela devrait tenmais sur un élément neuf c est un peu dommage ( sans compter le travail supplémentaire que cela a occasionné) Mais le plus ennuyeux est qu il en était de même pour les découpes ( visibles sur le dessus ) qui normalement devaient s ajuster .Le plan de travail de la cuisine étant en 3 morceaux , il s est efforcé de reproduire la découpe raboutant les morceaux 2 et 3 mais n a pu faire que quelque chose d approchant .l.esthétique du plan de travail en souffre inévitablement.(photos 1 et 2) S’agissant de l’ameublement de la nouvelle piece j’ai precisé au service cuisine les dimensions de ma piece ainsi que les contraintes qui s’y trouvaient à savoir d’un coté un four et un frigo et de l’autre la volonté de mettre un petit meuble sous fenetre. La personne qui m’a « conseillée » m’a conseillée des dimensions pour l’ilot central de la piece . Au tracé au sol chez moi je me suis apercue que ces dimensions ne pouvaient convenir car elles ne permettaient pas de circuler autour de l’ilot central. J’ai donc rappelé le service cuisine qui m’a repondu : Vous avez signé ; tant pis pour vous . Le fait que j’ai ete mal conseillée n’entrait pas en consideration . Tout au plus m’a t il ete concédé que le plan de travail de cet ilot central pouvait être coupé . Dommage : j’avais choisi des coins arrondis → cela impliquait que sur les 4 angles , 2 seraient arrondis et les autres droits . Dommage pour un meuble neuf .… et ce d’autant que je n’avais pas tardé à signaler la sur dimension ( la livraison etant prevue 2 mois apres ) et que Leroy Merlin ne voulait pas coller le chant sur la partie recoupée, n’étant m’ont ils dit « pas equipés pour » . ( pour un magasin de bricolage c’est tout de même etonnant … ) Lorsque ce plan de travail m’a été livré il n’avait pas été recoupé. Les joues du petit meuble ( acheté en même temps chez Leroy merlin ) que je mettais sous la fenêtre étaient trop hautes et trop étroites pour le meuble . Le plan de travail de l’ilot central a ete repris et j’ai reçu 2 nouvelles joues .Ces 2 joues ne sont toujours pas à la bonne dimension ( trop larges cette fois) Au regard de tous les déboires que j’ai connus , et du fait que je suis plutôt une bonne cliente de Leroy merlin j’avais demandé à Leroy Merlin au moins de coller le chant sur la partie recoupée . Aucune reponse J’avais demandé a voir un responsable du magasin qui a semblé prendre mes problèmes en considération .Je lui avais signalé que dans l’attente la pose de ma cuisine restait en stand by. Que je ne pouvais ni ranger ni même poser les tiroirs dans l attente de la fixation des éléments défectueux . Tout restait en chantier. J’ajoutais que « quant au menuisier il attend mon feu vert pour finir mais l'attendra t il longtemps ? » Il s’est contenté de transférer mes messages et mes questions à la responsable du service cuisine qui ne m’a jamais rappelée non plus . J’avais Quant au plan de travail , il m’a ete annoncé dans un 1er temps que je retrouverais entièrement refait le 26 juillet prochain solution qui au final m’aurait convenu ( l’esthétique du plan de travail etant respectée et un délai , certes long m’était fixé pour me permettre de m’organiser). Puis voici a 2 jours l’on m’annoncé que le plan de travail simplement recoupé me serait livré vendredi prochain . Au regard du nombre d’erreurs je me demande meme ce que je vais réceptionner . J’ai voulu avoir des precisions . Aucune reponse . Je ne vous cacherai pas que je trouve la gestion de ce dossier proprement indigente. Les cuisines Leroy Merlin . A fuir absolument .
+[2025-06-21T17:00:52.742+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:00:52.744+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:00:52.745+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Qualité des produits",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Suivi de projet / travaux sur mesure",
+      "note": 1.5
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:00:52.806+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:00:53.053+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 4da6548da75e67d9f1994e1d9103f03a
+[2025-06-21T17:00:53.054+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:00:53.054+0000] {logging_mixin.py:188} INFO -  - 4 (note : 2.0)
+[2025-06-21T17:00:53.055+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:00:53.055+0000] {logging_mixin.py:188} INFO -  - 8 (note : 1.5)
+[2025-06-21T17:00:53.056+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 4 :
+A fuir pour l'achat d'une cuisine!!! Multiples problèmes. achat effectué le 25 février, à ce jour soit le 17 juin nous n'avons toujours pas le plan de travail sur mesure suite à un problème à un problème lors de la première livraison. Erreur sur certaines pièces du produit et qualité à réfléchir on verra dans le temps.
+[2025-06-21T17:00:54.279+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:00:54.283+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:00:54.283+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 2.0
+    },
+    {
+      "theme": "Suivi de projet / travaux sur mesure",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:00:54.610+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review f5a7700d10036b5e54080b0454a2048b
+[2025-06-21T17:00:54.611+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:00:54.612+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:00:54.612+0000] {logging_mixin.py:188} INFO -  - 4 (note : 2.0)
+[2025-06-21T17:00:54.612+0000] {logging_mixin.py:188} INFO -  - 8 (note : 1.0)
+[2025-06-21T17:00:54.613+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 5 :
+Bonjour, Très bonne expérience, pour la Xème fois, jamais déçu de Leroy Merlin, cet après-midi achat d'un robot Work, bien renseigné par Guillaume, très professionnel, et explicatif. De plus il est allé chercher un chariot à l'extérieur, m'a aidé au paiement, et , rangé les cartons dans le coffre de ma voiture. Franchement Guillaume au top. Je le recommande.
+[2025-06-21T17:00:56.194+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:00:56.196+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:00:56.196+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Expérience d'achat en magasin",
+      "note": 5.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 5.0
+    }
+  ]
+}
+[2025-06-21T17:00:56.258+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en magasin
+[2025-06-21T17:00:56.468+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 63d2371d882df891eeaab4319b327223
+[2025-06-21T17:00:56.468+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:00:56.469+0000] {logging_mixin.py:188} INFO -  - 5 (note : 5.0)
+[2025-06-21T17:00:56.469+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 6 :
+J'ai acheté un porte savon bleu le mois dernier. La couleur bleu commence s'enlève. Je suis déçu du produit.
+[2025-06-21T17:00:57.181+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:00:57.183+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:00:57.184+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Qualité des produits",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T17:00:57.470+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review c62fbe0eb5a71c8b56dc3c5333382199
+[2025-06-21T17:00:57.470+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:00:57.470+0000] {logging_mixin.py:188} INFO -  - 4 (note : 2.0)
+[2025-06-21T17:00:57.470+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 7 :
+A EVITER!!!! SERVICE APRES VENTE INCOMPETENT ET NE DONNANT AUCUNE SOLUTION Ca fait trois mois que j'attend le retour d'un frigo parce qu'un CONSEILLER LEROY MERLIN m'a recommandé un frigo trop petit pour mon meuble a encastrer. Comme la cuisine n'était pas posée au moment de l'achat, j'ai réalisé au 21e jour (quand le meuble du frigo était enfin posé) que le frigo recommandé par ce conseiller ne convenait pas a mon meuble. ILS REFUSENT DE LE RETOURNER, ME FONT TOURNER EN RONDS DEPUIS 3 MOIS, LE PIRE SERVICE APRES VENTE JE N'AI JAMAIS CONNU.
+[2025-06-21T17:00:58.414+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:00:58.416+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:00:58.416+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:00:58.699+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review b52a1d6ed0331e0a73ceec39aae3470b
+[2025-06-21T17:00:58.699+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:00:58.699+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:00:58.700+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:00:58.700+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 8 :
+Lors d'un retour d'article chez leroy merlin à Montivilliers en décembre 2024, j'ai eu un bon d'achat utilisable jusqu'en juin 2025. Malheureusement, j'ai voulu l'utiliser et celui-ci est arrivé à expiration. Je me suis donc rendu à Leroy Merlin pour réactivé mon bon d'achat ou mettre le montant sur ma cagnotte. Aucun geste commercial m'a été proposé et le seul retour que j'ai eu c'est que cela était de la perte / bénéfice pour l'entreprise. Je trouve inadmissible qu'aucun geste commercial ne m'a été proposé alors que l'argent est bien sur les comptes de l'entreprise et que j'ai pu voir sur la communauté leroy merlin des situations similaires ayant eu une réactivation du bon. Je suis très déçu, d'autant plus que j'ai fait des travaux à mon domicile où j'ai demandé à l'entreprise que les matériaux soit acheté chez leroy merlin.
+[2025-06-21T17:01:00.012+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:00.014+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:00.014+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Retour et remboursement",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:00.298+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review c95df6d5a6ee8afbdfa07b2160c22d85
+[2025-06-21T17:01:00.299+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:00.299+0000] {logging_mixin.py:188} INFO -  - 3 (note : 2.0)
+[2025-06-21T17:01:00.300+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:00.300+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 9 :
+Enseigne médiocre. Les produits mal emballés, ré-scotchés. Résultat quand vous achetez vérifier que toutes les pièces sont présentes. Sans ça risque de mauvaises surprises. Ce qui engendre d'abîmer l'emballage... cercle vicieux.
+[2025-06-21T17:01:01.549+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:01.551+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:01.551+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Qualité des produits",
+      "note": 2.0
+    },
+    {
+      "theme": "Livraison et retrait",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T17:01:01.852+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 7b5c84cd5a95568071162eeba1004fe9
+[2025-06-21T17:01:01.853+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:01.853+0000] {logging_mixin.py:188} INFO -  - 4 (note : 2.0)
+[2025-06-21T17:01:01.853+0000] {logging_mixin.py:188} INFO -  - 2 (note : 2.0)
+[2025-06-21T17:01:01.853+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 10 :
+J'ai commandé une série de pots en terre cuite. Ils sont arrivés tous cassés ou fêlés en tous cas inutilisables. L'emballage était inadéquat pour un tel envoi : le carton était fin et ouvert, le papier bulle était extrêmement fin. Je les ai contactés pour un remboursement mais après les avoir relancés j'attends toujours une résolution à mon problème
+[2025-06-21T17:01:03.376+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:03.378+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:03.378+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 2.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T17:01:03.639+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review 4a047825ba34c146de18680ca9ad5cb8
+[2025-06-21T17:01:03.640+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:03.640+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:03.640+0000] {logging_mixin.py:188} INFO -  - 3 (note : 2.0)
+[2025-06-21T17:01:03.641+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T17:01:03.641+0000] {logging_mixin.py:188} INFO -  - 5 (note : 2.0)
+[2025-06-21T17:01:03.641+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 11 :
+J'ai commandé une voile d'ombrage qui est arrivée avec un oeillet manquant et elle mesurait 280cm au lieu de 300cm. Impossible de leur faire entendre raison, ils voulaient que je renvoie le colis à mes frais, ce que j'ai évidemment refusé. Pour l'instant rien n'est résolu... Je regrette de ne pas avoir passé cette commande sur Amazon...
+[2025-06-21T17:01:05.235+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:05.236+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:05.236+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:05.514+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review 1b633e3ba84dad1ccc86250bd8c65c05
+[2025-06-21T17:01:05.514+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:05.515+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:05.515+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:01:05.515+0000] {logging_mixin.py:188} INFO -  - 4 (note : 2.0)
+[2025-06-21T17:01:05.515+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:05.515+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 12 :
+Commande sur le MarketPlace (site internet de Leroy-Merlin) N°25148L12369-A du 28/05/2025 d'un Panneau de douche Verre 25 x 44,6 x 130 cm Blanc. Le 05/06, le carton a été livré à la va vite, scotché pour cacher un trou sur le côté. Au déballage, on remarque tout de suite qu'au niveau du scotch la partie plastique du totem de douche est cassé exactement au niveau de la fixation murale. Le produit est donc totalement inutilisable. Le jour même, je fais une remontée avec photos horodatées au SAV (plate-forme de communication avec le Marchand). Il me propose un rabais de 22% en me laissant un produit inutilisable et sans remplacement. Ce que je refuse. On me demande alors de fixer une date pour le retrait suivi d'un remboursement. Le livreur devant me contacter au préalable. Aucun appel du moindre coursier. Le jour prévu, personne ne vient. Il me faut relancer le commerçant, sans succès depuis. Contacté le SAV Leroy-Merlin service Internent, on me demande d'attendre puisque les échanges "sont fluides" et d'avoir "un peu de bon sens". 19/06, relançant à nouveau le commerçant hier, il vient de me répondre qu'il n'a aucun retour de leur coursier et donc aucune proposition à me faire si ce n'est d'attendre qu'il me recontacte sans aucun délai. Il devraient au moins procéder au remboursement en attendant, car il s'agit d'un vice caché (scotch sur le carton) de ce fait le remboursement devrait intervenir sous 14 jours (c'est la loi et leur propres conditions d'utilisation du MarketPlace). Expérience déplorable d'autant plus que Leroy-Merlin me proposant de laisser un avis, me l'a supprimé en prétextant leurs conditions d'utilisation des avis ne concerneraient pas les livraisons. Ce qui est faut, cf CONDITIONS GÉNÉRALES D'UTILISATION NOTES ET AVIS CLIENTS Version N°2 du 30 avril 2025 La définition des Produits précise : désignent l’ensemble des produits/services proposés à la vente sur le Site et en Magasin. Par services on entend notamment le conseil, la vente, la pose, le SAV, la location, la livraison de produits réalisés par LEROY MERLIN ou des partenaires. Les Produits comprennent des produits LEROY MERLIN et des produits Marketplace (= produits et/ou services proposés à la vente par des vendeurs tiers sur le Site et soumis aux Conditions Générales de la Marketplace et aux conditions générales de vente du vendeur tiers). Attention donc sur le MarketPlace Leroy-Merlin, le SAV des clients est très déplorable.
+[2025-06-21T17:01:07.283+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:07.286+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:07.286+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 2.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:07.346+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:07.569+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review b2b02cb73c975d3cea0aad0546e5b031
+[2025-06-21T17:01:07.569+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:07.569+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:07.570+0000] {logging_mixin.py:188} INFO -  - 3 (note : 2.0)
+[2025-06-21T17:01:07.570+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T17:01:07.570+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:07.570+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 13 :
+Avis concernant le SAV Surtout n’apportez jamais vous appareil en SAV chez Leroy Merlin ils font appel à des sous-traitants et les délais annoncés ne sont absolument pas respectées. Ma première expérience concerne un autoportée où j’ai dû attendre deux mois juste pour avoir un devis et malgré ça l’auto porté défectueux maintenant j’ai un souci avec une débroussailleuse, j’en suis déjà à sept semaines d’attente donc aller voir un professionnel.
+[2025-06-21T17:01:08.922+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:08.924+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:08.924+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Délais de livraison",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:09.181+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 68c40c4366d2f58019b76cb9d9664229
+[2025-06-21T17:01:09.182+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:09.182+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:09.183+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 14 :
+La livraison d'une fenêtre n'a jamais été effectuée, et silence radio... je me retrouve dans l'obligation d'acheter une deuxième fenêtre sans aucun geste commercial et sans avoir été remboursé de la première, service client complètement impuissant et sans solution
+[2025-06-21T17:01:10.662+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:10.663+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:10.664+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:10.927+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 54767f643a05f443c5d36086c601d2b9
+[2025-06-21T17:01:10.927+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:10.927+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:10.928+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:01:10.928+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:10.928+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-06-21T17:01:10.928+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-06-21T17:01:10.949+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=trustpilot_pipeline, task_id=analyze_and_insert, run_id=manual__2025-06-21T16:56:39.539393+00:00, execution_date=20250621T165639, start_date=20250621T170044, end_date=20250621T170110
+[2025-06-21T17:01:10.978+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-06-21T17:01:10.996+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-06-21T17:01:10.998+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

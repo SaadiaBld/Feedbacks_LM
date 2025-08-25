@@ -1,0 +1,245 @@
+[2025-07-04T17:13:15.469+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-04T17:13:15.496+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [queued]>
+[2025-07-04T17:13:15.504+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [queued]>
+[2025-07-04T17:13:15.504+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-07-04T17:13:15.514+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): scrape_trustpilot_reviews> on 2025-06-23 04:00:00+00:00
+[2025-07-04T17:13:15.521+0000] {standard_task_runner.py:63} INFO - Started process 209 to run task
+[2025-07-04T17:13:15.524+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'trustpilot_pipeline', 'scrape_trustpilot_reviews', 'scheduled__2025-06-23T04:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/trustpilot_dag.py', '--cfg-path', '/tmp/tmphq3y367r']
+[2025-07-04T17:13:15.527+0000] {standard_task_runner.py:91} INFO - Job 2: Subtask scrape_trustpilot_reviews
+[2025-07-04T17:13:15.571+0000] {task_command.py:426} INFO - Running <TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [running]> on host b58886cb315d
+[2025-07-04T17:13:15.653+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='trustpilot_pipeline' AIRFLOW_CTX_TASK_ID='scrape_trustpilot_reviews' AIRFLOW_CTX_EXECUTION_DATE='2025-06-23T04:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-06-23T04:00:00+00:00'
+[2025-07-04T17:13:15.654+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-04T17:13:15.680+0000] {logging_mixin.py:188} INFO - ▶ Début du scraping à 2025-07-04T17:13:15.680458
+[2025-07-04T17:13:15.680+0000] {logging_mixin.py:188} INFO - Scraping : https://fr.trustpilot.com/review/www.leroymerlin.fr
+[2025-07-04T17:13:21.200+0000] {logging_mixin.py:188} INFO - Scraping : https://fr.trustpilot.com/review/www.leroymerlin.fr?page=2
+[2025-07-04T17:13:21.379+0000] {logging_mixin.py:188} INFO - Tous les avis restants datent de plus de 7 jours. Fin.
+[2025-07-04T17:13:21.379+0000] {logging_mixin.py:188} INFO - Scraping terminé.
+[2025-07-04T17:13:21.379+0000] {logging_mixin.py:188} INFO - 30 avis collectés.
+[2025-07-04T17:13:21.382+0000] {logging_mixin.py:188} INFO - ▶ Début du nettoyage à 2025-07-04T17:13:21.381934
+[2025-07-04T17:13:21.395+0000] {logging_mixin.py:188} INFO - Fichier nettoyé sauvegardé dans data/avis_nettoyes.csv
+[2025-07-04T17:13:21.395+0000] {logging_mixin.py:188} INFO - ▶ Upload dans BigQuery...
+[2025-07-04T17:13:25.461+0000] {logging_mixin.py:188} INFO - ✅ Données chargées dans la table temporaire trustpilot-satisfaction.reviews_dataset.temp_reviews.
+[2025-07-04T17:13:28.097+0000] {logging_mixin.py:188} INFO - ✅ Données fusionnées dans la table trustpilot-satisfaction.reviews_dataset.reviews.
+[2025-07-04T17:13:28.097+0000] {logging_mixin.py:188} INFO - ✅ Pipeline terminé avec succès.
+[2025-07-04T17:13:28.098+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-07-04T17:13:28.098+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-04T17:13:28.110+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=trustpilot_pipeline, task_id=scrape_trustpilot_reviews, run_id=scheduled__2025-06-23T04:00:00+00:00, execution_date=20250623T040000, start_date=20250704T171315, end_date=20250704T171328
+[2025-07-04T17:13:28.131+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-07-04T17:13:28.155+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-07-04T17:13:28.157+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-07-04T18:25:58.286+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-04T18:25:58.318+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [queued]>
+[2025-07-04T18:25:58.328+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [queued]>
+[2025-07-04T18:25:58.328+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-07-04T18:25:58.341+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): scrape_trustpilot_reviews> on 2025-06-23 04:00:00+00:00
+[2025-07-04T18:25:58.349+0000] {standard_task_runner.py:63} INFO - Started process 247 to run task
+[2025-07-04T18:25:58.353+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'trustpilot_pipeline', 'scrape_trustpilot_reviews', 'scheduled__2025-06-23T04:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/trustpilot_dag.py', '--cfg-path', '/tmp/tmpqqo6hj6k']
+[2025-07-04T18:25:58.357+0000] {standard_task_runner.py:91} INFO - Job 2: Subtask scrape_trustpilot_reviews
+[2025-07-04T18:25:58.409+0000] {task_command.py:426} INFO - Running <TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [running]> on host 183d0867eeb2
+[2025-07-04T18:25:58.507+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='trustpilot_pipeline' AIRFLOW_CTX_TASK_ID='scrape_trustpilot_reviews' AIRFLOW_CTX_EXECUTION_DATE='2025-06-23T04:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-06-23T04:00:00+00:00'
+[2025-07-04T18:25:58.508+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-04T18:25:58.537+0000] {logging_mixin.py:188} INFO - ▶ Début du pipeline à 2025-07-04T18:25:58.537240
+[2025-07-04T18:25:58.537+0000] {logging_mixin.py:188} INFO - ⚙️ Mode SCRAPER sélectionné : csv
+[2025-07-04T18:25:58.537+0000] {logging_mixin.py:188} INFO - 📄 Lecture du fichier de test : /opt/***/data/verbatims_test.csv
+[2025-07-04T18:25:58.537+0000] {logging_mixin.py:188} INFO - 🧼 Nettoyage des données...
+[2025-07-04T18:25:58.552+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-04T18:25:58.552+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/project/scripts_data/main.py", line 65, in main
+    clean_csv(input_file, output_file)
+  File "/opt/airflow/project/scripts_data/cleaner.py", line 48, in clean_csv
+    df.to_csv(output_file, index=False, encoding='utf-8')
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/core/generic.py", line 3902, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/formats/format.py", line 1152, in to_csv
+    csv_formatter.save()
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/formats/csvs.py", line 247, in save
+    with get_handle(
+         ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/common.py", line 863, in get_handle
+    handle = open(
+             ^^^^^
+PermissionError: [Errno 13] Permission denied: 'data/avis_nettoyes.csv'
+[2025-07-04T18:25:58.566+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=trustpilot_pipeline, task_id=scrape_trustpilot_reviews, run_id=scheduled__2025-06-23T04:00:00+00:00, execution_date=20250623T040000, start_date=20250704T182558, end_date=20250704T182558
+[2025-07-04T18:25:58.580+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2 for task scrape_trustpilot_reviews ([Errno 13] Permission denied: 'data/avis_nettoyes.csv'; 247)
+[2025-07-04T18:25:58.604+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-04T18:25:58.629+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-04T18:25:58.635+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-07-04T18:29:08.451+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-04T18:29:08.482+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [queued]>
+[2025-07-04T18:29:08.489+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [queued]>
+[2025-07-04T18:29:08.489+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-07-04T18:29:08.500+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): scrape_trustpilot_reviews> on 2025-06-23 04:00:00+00:00
+[2025-07-04T18:29:08.506+0000] {standard_task_runner.py:63} INFO - Started process 290 to run task
+[2025-07-04T18:29:08.509+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'trustpilot_pipeline', 'scrape_trustpilot_reviews', 'scheduled__2025-06-23T04:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/trustpilot_dag.py', '--cfg-path', '/tmp/tmp4om5zjh9']
+[2025-07-04T18:29:08.512+0000] {standard_task_runner.py:91} INFO - Job 4: Subtask scrape_trustpilot_reviews
+[2025-07-04T18:29:08.556+0000] {task_command.py:426} INFO - Running <TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [running]> on host 183d0867eeb2
+[2025-07-04T18:29:08.631+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='trustpilot_pipeline' AIRFLOW_CTX_TASK_ID='scrape_trustpilot_reviews' AIRFLOW_CTX_EXECUTION_DATE='2025-06-23T04:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-06-23T04:00:00+00:00'
+[2025-07-04T18:29:08.631+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-04T18:29:08.642+0000] {logging_mixin.py:188} INFO - ▶ Début du pipeline à 2025-07-04T18:29:08.642922
+[2025-07-04T18:29:08.643+0000] {logging_mixin.py:188} INFO - ⚙️ Mode SCRAPER sélectionné : csv
+[2025-07-04T18:29:08.643+0000] {logging_mixin.py:188} INFO - 📄 Lecture du fichier de test : /opt/***/data/verbatims_test.csv
+[2025-07-04T18:29:08.643+0000] {logging_mixin.py:188} INFO - 🧼 Nettoyage des données...
+[2025-07-04T18:29:08.653+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-04T18:29:08.653+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/project/scripts_data/main.py", line 65, in main
+    clean_csv(input_file, output_file)
+  File "/opt/airflow/project/scripts_data/cleaner.py", line 48, in clean_csv
+    df.to_csv(output_file, index=False, encoding='utf-8')
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/core/generic.py", line 3902, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/formats/format.py", line 1152, in to_csv
+    csv_formatter.save()
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/formats/csvs.py", line 247, in save
+    with get_handle(
+         ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/common.py", line 863, in get_handle
+    handle = open(
+             ^^^^^
+PermissionError: [Errno 13] Permission denied: 'data/avis_nettoyes.csv'
+[2025-07-04T18:29:08.665+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=trustpilot_pipeline, task_id=scrape_trustpilot_reviews, run_id=scheduled__2025-06-23T04:00:00+00:00, execution_date=20250623T040000, start_date=20250704T182908, end_date=20250704T182908
+[2025-07-04T18:29:08.674+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 4 for task scrape_trustpilot_reviews ([Errno 13] Permission denied: 'data/avis_nettoyes.csv'; 290)
+[2025-07-04T18:29:08.722+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-04T18:29:08.761+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-04T18:29:08.764+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-07-04T18:36:53.255+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-04T18:36:53.293+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [queued]>
+[2025-07-04T18:36:53.302+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [queued]>
+[2025-07-04T18:36:53.302+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-07-04T18:36:53.317+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): scrape_trustpilot_reviews> on 2025-06-23 04:00:00+00:00
+[2025-07-04T18:36:53.325+0000] {standard_task_runner.py:63} INFO - Started process 209 to run task
+[2025-07-04T18:36:53.328+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'trustpilot_pipeline', 'scrape_trustpilot_reviews', 'scheduled__2025-06-23T04:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/trustpilot_dag.py', '--cfg-path', '/tmp/tmp1nx31og9']
+[2025-07-04T18:36:53.331+0000] {standard_task_runner.py:91} INFO - Job 3: Subtask scrape_trustpilot_reviews
+[2025-07-04T18:36:53.381+0000] {task_command.py:426} INFO - Running <TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [running]> on host 8a733a1b3149
+[2025-07-04T18:36:53.467+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='trustpilot_pipeline' AIRFLOW_CTX_TASK_ID='scrape_trustpilot_reviews' AIRFLOW_CTX_EXECUTION_DATE='2025-06-23T04:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-06-23T04:00:00+00:00'
+[2025-07-04T18:36:53.468+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-04T18:36:53.494+0000] {logging_mixin.py:188} INFO - ▶ Début du pipeline à 2025-07-04T18:36:53.494511
+[2025-07-04T18:36:53.494+0000] {logging_mixin.py:188} INFO - ⚙️ Mode SCRAPER sélectionné : csv
+[2025-07-04T18:36:53.494+0000] {logging_mixin.py:188} INFO - 📄 Lecture du fichier de test : /opt/***/data/verbatims_test.csv
+[2025-07-04T18:36:53.495+0000] {logging_mixin.py:188} INFO - 🧼 Nettoyage des données...
+[2025-07-04T18:36:53.507+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-04T18:36:53.508+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/project/scripts_data/main.py", line 66, in main
+    clean_csv(input_file, output_file)
+  File "/opt/airflow/project/scripts_data/cleaner.py", line 48, in clean_csv
+    df.to_csv(output_file, index=False, encoding='utf-8')
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/core/generic.py", line 3902, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/formats/format.py", line 1152, in to_csv
+    csv_formatter.save()
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/formats/csvs.py", line 247, in save
+    with get_handle(
+         ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/common.py", line 863, in get_handle
+    handle = open(
+             ^^^^^
+PermissionError: [Errno 13] Permission denied: 'data/avis_nettoyes.csv'
+[2025-07-04T18:36:53.526+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=trustpilot_pipeline, task_id=scrape_trustpilot_reviews, run_id=scheduled__2025-06-23T04:00:00+00:00, execution_date=20250623T040000, start_date=20250704T183653, end_date=20250704T183653
+[2025-07-04T18:36:53.538+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 3 for task scrape_trustpilot_reviews ([Errno 13] Permission denied: 'data/avis_nettoyes.csv'; 209)
+[2025-07-04T18:36:53.580+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-04T18:36:53.603+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-04T18:36:53.605+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-07-04T18:55:23.120+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-04T18:55:23.147+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [queued]>
+[2025-07-04T18:55:23.154+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [queued]>
+[2025-07-04T18:55:23.154+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-07-04T18:55:23.165+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): scrape_trustpilot_reviews> on 2025-06-23 04:00:00+00:00
+[2025-07-04T18:55:23.172+0000] {standard_task_runner.py:63} INFO - Started process 305 to run task
+[2025-07-04T18:55:23.175+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'trustpilot_pipeline', 'scrape_trustpilot_reviews', 'scheduled__2025-06-23T04:00:00+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/trustpilot_dag.py', '--cfg-path', '/tmp/tmpcfj21ujg']
+[2025-07-04T18:55:23.178+0000] {standard_task_runner.py:91} INFO - Job 8: Subtask scrape_trustpilot_reviews
+[2025-07-04T18:55:23.226+0000] {task_command.py:426} INFO - Running <TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews scheduled__2025-06-23T04:00:00+00:00 [running]> on host d2d3566e3ba2
+[2025-07-04T18:55:23.307+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='trustpilot_pipeline' AIRFLOW_CTX_TASK_ID='scrape_trustpilot_reviews' AIRFLOW_CTX_EXECUTION_DATE='2025-06-23T04:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-06-23T04:00:00+00:00'
+[2025-07-04T18:55:23.308+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-04T18:55:23.321+0000] {logging_mixin.py:188} INFO - ▶ Début du pipeline à 2025-07-04T18:55:23.321827
+[2025-07-04T18:55:23.322+0000] {logging_mixin.py:188} INFO - ⚙️ Mode SCRAPER sélectionné : csv
+[2025-07-04T18:55:23.322+0000] {logging_mixin.py:188} INFO - 📄 Lecture du fichier de test : /opt/***/data/verbatims_test.csv
+[2025-07-04T18:55:23.322+0000] {logging_mixin.py:188} INFO - 🧼 Nettoyage des données...
+[2025-07-04T18:55:23.334+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-04T18:55:23.334+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/project/scripts_data/main.py", line 66, in main
+    clean_csv(input_file, output_file)
+  File "/opt/airflow/project/scripts_data/cleaner.py", line 48, in clean_csv
+    df.to_csv(output_file, index=False, encoding='utf-8')
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/core/generic.py", line 3902, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/formats/format.py", line 1152, in to_csv
+    csv_formatter.save()
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/formats/csvs.py", line 247, in save
+    with get_handle(
+         ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/common.py", line 863, in get_handle
+    handle = open(
+             ^^^^^
+PermissionError: [Errno 13] Permission denied: '/opt/airflow/data/avis_nettoyes.csv'
+[2025-07-04T18:55:23.347+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=trustpilot_pipeline, task_id=scrape_trustpilot_reviews, run_id=scheduled__2025-06-23T04:00:00+00:00, execution_date=20250623T040000, start_date=20250704T185523, end_date=20250704T185523
+[2025-07-04T18:55:23.356+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 8 for task scrape_trustpilot_reviews ([Errno 13] Permission denied: '/opt/airflow/data/avis_nettoyes.csv'; 305)
+[2025-07-04T18:55:23.387+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-04T18:55:23.416+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-04T18:55:23.418+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

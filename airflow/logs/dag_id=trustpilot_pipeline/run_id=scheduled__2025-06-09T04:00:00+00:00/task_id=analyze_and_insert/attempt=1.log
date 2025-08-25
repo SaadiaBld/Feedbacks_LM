@@ -1,0 +1,2137 @@
+[2025-06-21T16:49:38.717+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-06-21T16:49:38.744+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: trustpilot_pipeline.analyze_and_insert scheduled__2025-06-09T04:00:00+00:00 [queued]>
+[2025-06-21T16:49:38.752+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: trustpilot_pipeline.analyze_and_insert scheduled__2025-06-09T04:00:00+00:00 [queued]>
+[2025-06-21T16:49:38.752+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-06-21T16:49:38.763+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): analyze_and_insert> on 2025-06-09 04:00:00+00:00
+[2025-06-21T16:49:38.770+0000] {standard_task_runner.py:63} INFO - Started process 265 to run task
+[2025-06-21T16:49:38.773+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'trustpilot_pipeline', 'analyze_and_insert', 'scheduled__2025-06-09T04:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/trustpilot_dag.py', '--cfg-path', '/tmp/tmpyewr98lm']
+[2025-06-21T16:49:38.776+0000] {standard_task_runner.py:91} INFO - Job 4: Subtask analyze_and_insert
+[2025-06-21T16:49:38.791+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.11/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-06-21T16:49:38.826+0000] {task_command.py:426} INFO - Running <TaskInstance: trustpilot_pipeline.analyze_and_insert scheduled__2025-06-09T04:00:00+00:00 [running]> on host 37d52fe92b1c
+[2025-06-21T16:49:38.911+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='trustpilot_pipeline' AIRFLOW_CTX_TASK_ID='analyze_and_insert' AIRFLOW_CTX_EXECUTION_DATE='2025-06-09T04:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-06-09T04:00:00+00:00'
+[2025-06-21T16:49:38.912+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-06-21T16:49:38.927+0000] {logging_mixin.py:188} INFO - 📆 Wrapper Analyse/Insert : scrape_date = 2025-06-09
+[2025-06-21T16:49:38.927+0000] {logging_mixin.py:188} INFO - 📂 Fichier de credentials GCP :  /opt/***/project/config/trustpilot-satisfaction-43aac3dd82a9.json
+[2025-06-21T16:49:38.927+0000] {logging_mixin.py:188} INFO - Lancement du traitement pour la date : 2025-06-09
+[2025-06-21T16:49:41.563+0000] {logging_mixin.py:188} INFO - 38 verbatims trouvés pour la date : 2025-06-09
+[2025-06-21T16:49:41.564+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 1 :
+J’ai commandé une grande plaque de 3 mètres. Je me déplace au magasin avec ma remorque pour la récupérer. Là on m’annonce que le stock est à -1 ! Pourquoi leur informatique n’est-elle pas capable, en plusieurs jours, de détecter qu’ils ont vendu quelque chose qu’ils n’ont pas en stock ? C’est un manque de respect.
+[2025-06-21T16:49:43.240+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:49:43.276+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:49:43.277+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 2.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T16:49:43.322+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:49:43.956+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review aff72d51609dd0cb812c84bc1ae3adfc
+[2025-06-21T16:49:43.956+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:49:43.957+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:49:43.957+0000] {logging_mixin.py:188} INFO -  - 5 (note : 2.0)
+[2025-06-21T16:49:43.958+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 2 :
+Bonjour j' ai acheté 24 M2 de cannisse pour couvrir ma terrasse et a grande surprise tout au long du montage les dimensions me paraissait douteuses et effectivement une fois déroulé mes 4 rouleaux de 2x3 il me manquait 2,45m2 je retourne à mon magasin de Puget sur Argens et le responsable du rayon me dit qu'il faut voir avec le permanent qui lui me dit que c est comme ça et qu il n'y a rien a faire.merci Leroy Merlin et a jamais
+[2025-06-21T16:49:47.232+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:49:47.234+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:49:47.234+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:49:47.294+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:49:47.567+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review 58f8c2e98ba407a27f2987530a5b0d3d
+[2025-06-21T16:49:47.567+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:49:47.568+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:49:47.568+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T16:49:47.568+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T16:49:47.569+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:49:47.569+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 3 :
+Client depuis près de 40 ans j’ai acheté il y a 2 ans pour 5729e de pavés avec consignation de palettes pour un montant de consigne de 513e N’ayant put faire mes travaux avant raison de santé j’ai terminé ce mois de juin 2025 j’ai retourné mes palettes consignées il refuse de me les reprendres prétexte délai dépassé Je n’ai aucune date de restitution de marqué et le vendeur m’avait dit un an ou deux c’est bon Le chef de cour leroy merlin arras a été expéditive pour ne pas dire malhonnête Je ne recommande pas ce magasin c’est le remerciement de 40 année d’achat je n’y mettrai plus jamais les pieds
+[2025-06-21T16:49:48.870+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:49:48.873+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:49:48.874+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    },
+    {
+      "theme": "Fidélité client",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:49:48.937+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:49:49.178+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 6ea1545138aac705bbcb29a39e797535
+[2025-06-21T16:49:49.178+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:49:49.179+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T16:49:49.179+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:49:49.179+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 4 :
+Très très mauvaise expérience de cet enseigne Leroy merlin ils encaissent notre commande et puis on attend des semaines pour être livré c'est honteux et inacceptable. Je sais que cette enseigne n'en a rien à faire de nos avis défavorables .je n'achèterai plus chez Leroy Merlin à bannir cette enseigne
+[2025-06-21T16:49:50.201+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:49:50.203+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:49:50.204+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:49:50.561+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 6b7f1c32706ecb750c8c3c23a1952daa
+[2025-06-21T16:49:50.561+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:49:50.561+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:49:50.561+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:49:50.562+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 5 :
+Une étoile, c'est encore trop. Si l'on parle de service client médiocre, c'est le point le plus important. Leroy Merlin ne répond jamais correctement aux formulaires de contact. Les questions sur les stocks restent sans réponse, les commandes en ligne sont impossibles, et si vous déposez une réclamation, vous obtenez une réponse à Clermont-Ferrand : ils sont en stock. Vous voulez commander 16 packs immédiatement ? Ils n'en ont que 8. J'ai demandé une deuxième fois la suppression de mes données personnelles, je ne souhaite plus être client d'une telle entreprise. Et maintenant, ça a enfin fonctionné.
+[2025-06-21T16:49:52.044+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:49:52.045+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:49:52.046+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    },
+    {
+      "theme": "Expérience d'achat en ligne",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:49:52.099+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:49:52.099+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en ligne
+[2025-06-21T16:49:52.315+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 5069c8cfdd07625d0d984910db1346da
+[2025-06-21T16:49:52.315+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:49:52.315+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:49:52.315+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 6 :
+Livraison programmée ce jour et non réceptionnée!! Commande de plus de 5000 euros. C est inadmissible : il est plus de 19h30 aucun appel téléphonique de la part du chauffeur ni de Leroy Merlin malgré mon appel, congé posé ce jour et aucune reprogrammation de livraison !!!
+[2025-06-21T16:49:53.378+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:49:53.379+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:49:53.379+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:49:53.697+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 92449ad19eee31f6c2c45946df2572ca
+[2025-06-21T16:49:53.697+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:49:53.698+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:49:53.698+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:49:53.698+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 7 :
+J'ai beaucoup acheté sur Leroy Merlin. Mais force est de constater que le service client n'est pas acceptable... Il réfutent tout avis négatif sur leur site, vous répondent via un email qui ne permet pas de réponse directe, avec un modus operandi qui décourage toute démarche. Photos et écrits à l'appui pourtant... C'est lamentable...
+[2025-06-21T16:49:55.747+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:49:55.749+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:49:55.749+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:49:55.797+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:49:56.034+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review f0ab294c7d37872f13a94d05e5af1846
+[2025-06-21T16:49:56.034+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:49:56.035+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:49:56.035+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 8 :
+Nulle. Commande internet en livraison le livreur fait tomber le carton il insiste pour laisser le carton et fait signer une réserve, la vasque est cassée. Obligé d annuler le plombier qui venait monter le meuble dans l après midi. Aucune réaction de leroy merlin malgré plusieurs appels. Personne ne vous rappelle. Obligé d aller acheter une autre vasque sans etre remboursé. 10 jours sans retour de leur part. Inadmissible service sav pitoyable.
+[2025-06-21T16:49:57.676+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:49:57.678+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:49:57.679+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:49:57.993+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review f621c42f61b6783f09e4c3d38babae0a
+[2025-06-21T16:49:57.993+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:49:57.994+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:49:57.994+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T16:49:57.994+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:49:57.994+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T16:49:57.995+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 9 :
+Y a t il.un ancient client qui peut me recommender une société de recouvrement. Début Février j'ai commandé un moto cutulture. 600 euros. Mars et avril.. mi Mai. Pas de livraison. Service communication superbe, sauf tout les semaines le même message!! Cela fait 3 semaines que je demande à ces pirates un remboursement. Sans résultat!
+[2025-06-21T16:49:59.722+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:49:59.723+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:49:59.724+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 2.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T16:49:59.772+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:49:59.993+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 47f2e593889b3c86e64bb079025db87f
+[2025-06-21T16:49:59.994+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:49:59.994+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:49:59.994+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T16:49:59.994+0000] {logging_mixin.py:188} INFO -  - 5 (note : 2.0)
+[2025-06-21T16:49:59.994+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 10 :
+J'ai acheté un meuble sur le site de Leroy Merlin il y a un mois et demi, et je n'ai reçu que la moitié de ma commande. Malgré mes nombreuses relances, le service client ne m'a apporté aucune solution concrète, à part de patienter. Presque 2 mois plus tard, toujours pas de meuble ni de remboursement ! Ils me demandent maintenant de porter plainte. Je suis extrêmement déçu par ce manque de professionnalisme et le peu de considération envers leurs clients. Je déconseille fortement d'acheter sur leur site.
+[2025-06-21T16:50:01.640+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:01.641+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:01.642+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:01.705+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:50:01.926+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review e8153f0d8a49b87cee2bd874461ab48e
+[2025-06-21T16:50:01.926+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:01.927+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:50:01.927+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T16:50:01.927+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:01.927+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 11 :
+Climatiseur mobile commandé chez Leroy Merlin avec livraison à domicile Créneau initial de livraison 8h00 /20h00 Inadmissible en 2025 Le créneau fini par se réduire à 17h 30/19h30. Non respect du nouveau créneau horaire. Le livreur est arrogant et et me dit que ce nouveau créneau est caduque . Aucune excuse Enseigne à bannir pour les commandes en ligne
+[2025-06-21T16:50:03.104+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:03.106+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:03.106+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:03.382+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 0210949cc7f14840c623db2e48ca5f56
+[2025-06-21T16:50:03.383+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:03.383+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:50:03.383+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:03.384+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 12 :
+de soit disant vendeurs certifiés vérifiés, à vous de payer le retour, sans garantie de remboursement, du made in china de mauvaise qualité (vendeur : La vie à la Maison), et ne comptez pas sur leroy merlin vous aider, c'est à vous de contacter le vendeur et de vous débrouiller avec!
+[2025-06-21T16:50:05.152+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:05.154+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:05.155+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:05.218+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:50:05.473+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 4ca0be1dded01d826bbb3a930fc0cdea
+[2025-06-21T16:50:05.473+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:05.474+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T16:50:05.474+0000] {logging_mixin.py:188} INFO -  - 4 (note : 2.0)
+[2025-06-21T16:50:05.474+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:05.475+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 13 :
+Une étoile c'est encore trop! J'ai acheté une "tente de réception" le vendredi, montée le samedi et par terre le mardi en rentrant du travail! Pas de vent annoncé! Portes non installées. Structure attachée et protégée par la maison, un par vue et une haie...la vendeuse me dit que j'aurai dû démonter le soir et remonter le matin! Donc c'est de ma faute...pas de geste commercial ni de garantie! Et pas de tente pour les 18ans de mon fils ce week-end car je n'ai pas les moyens d'en acheter une autre...je ne suis pas allée dans un magasin discount car j'avais confiance en eux en cette enseigne même pour 99€...que j'ai la désagréable sensation d'avoir jeté par la fenêtre en moins d'une semaine! On m'a juste proposé de racheter une toile à 30€ alors que je l'ai achetée entière à 99€! On se moque de qui?
+[2025-06-21T16:50:06.981+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:06.983+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:06.984+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Prix et promotions",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:07.269+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review a0a8fda9a40a0fb949643c8b3ddcceaa
+[2025-06-21T16:50:07.269+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:07.270+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T16:50:07.270+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T16:50:07.270+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:07.271+0000] {logging_mixin.py:188} INFO -  - 1 (note : 1.0)
+[2025-06-21T16:50:07.271+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 14 :
+Ils mettent des prix de fou j'ai vu des articles à plus de 10 000 euros mdr alors que ça vaut 50 euros trop chère chez eux ! Mdr un genre de ebay et bricolage .
+[2025-06-21T16:50:08.224+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:08.226+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:08.226+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Prix et promotions",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:08.509+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 97b11c99c64d12385250a9498c8d4c4c
+[2025-06-21T16:50:08.510+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:08.510+0000] {logging_mixin.py:188} INFO -  - 1 (note : 1.0)
+[2025-06-21T16:50:08.510+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 15 :
+suite à ma commande en ligne : 25136L28114-A pour un retrait dans un point retrait de Lagoa (Portugal), le transporteur n'a jamais livré ma commande ni même traverser la ville en question (dixit le tracking : XW163328705JF Chronopost). Jamais aucune communication, ni appel, ni sms, ni e-mail. J'ai fait une requete a Leroy Merlin en ligne, leur réponse me renvoit sur le code tracking du transporteur (XW163328705JF Chronopost). Leroy merlin se défausse sur le transporteur. Maintenant le produit est bloqué a Lisbonne et je n'ai toujours reçu aucune communication. Je demande le remboursement immédiat car depuis le temps j'ai remplacé le produit (sécurité des personnes).
+[2025-06-21T16:50:09.862+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:09.865+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:09.866+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:09.937+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:50:10.374+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review e5d9d397b06bdafefaf5a5d6c3510845
+[2025-06-21T16:50:10.375+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:10.375+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:50:10.376+0000] {logging_mixin.py:188} INFO -  - 3 (note : 2.0)
+[2025-06-21T16:50:10.376+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:10.376+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 16 :
+commande internet catastrophique ! annulations sans propositions de solution, livraisons en retard, mauvais adresse .... à éviter
+[2025-06-21T16:50:11.706+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:11.707+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:11.708+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:11.999+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review c845b7c4ba153c7f665f65f0552fa3db
+[2025-06-21T16:50:12.000+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:12.000+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:50:12.001+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T16:50:12.001+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:12.001+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 17 :
+Bonjour tout le monde , je suis une cliente chez eux depuis très longtemps, hier je suis partie acheter le bas d’une cuisine, avec évier table de travail, la fille qui m’a fait la commande, et qui a fait la facture à la caisse , m’a dit de descendre dans le sous-sol pour récupérer la commande , sans me dire qu’il faut récupérer la planche chez eux dans les rayons, je suis descendu, au même temps j’ai appelé un transporteur pour récupérer la marchandise et me la ramener chez moi , je suis handicapé je ne peux pas me déplacer facilement, je suis rentrée par métro, 3h après j’ai reçu ma marchandise chez moi par mon livreur, mais je me suis rendu comptes qu’il manquait le plan travail, j’ai demander au livreur il m’a dit , il m’ont pas donner, j’ai contacter par téléphone leur magasin, ils m’ont qu’ils allaient me rappeler plus tard, il m’ont jamais rappeler, le lendemain, c’est à dire aujourd’hui je me suis déplacer encore une fois pour réclamer ma planche , Il m’ont dit oui tu dois aller voir les caisses pour vérifier les caméras si ta pas prit la planche déjà hier , je suis handicapée , je n’est pas de voiture et comment je dois le savoir que je dois récupérer la planche dans les rayons? Puis après descendre au sous-sol récupérer le reste ,, moi j’ai laisser tout là-bas à quelqu’un qui connaît le livreur,j’étais mal reçu mal traité , et insulter, humilié pour une planche de 64€ ,je suis une très ancienne cliente chez Leroy Merlin, mais la c’est bon , je ne mettrai plus jamais les pieds chez eux ,ça veux pas le coup , on m’a conseillé d’aller chez Bricorama, j’ai pas écouter, on apprend des choses dans la vie , mais je suis marquée à vie .
+[2025-06-21T16:50:13.753+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:13.755+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:13.756+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Expérience d'achat en magasin",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:13.816+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en magasin
+[2025-06-21T16:50:13.816+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:50:14.027+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review f6beeb88818998a9844fbe012e60b644
+[2025-06-21T16:50:14.027+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:14.028+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:50:14.028+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:14.028+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 18 :
+J’ai commandé une colonne pour ma cuisine à 350€, et cette expérience fut malheureusement très décevante, tant sur le plan logistique que sécuritaire. 1. Livraison incomplète : La colonne a été livrée avec une porte manquante. J’ai dû poser une journée de télétravail pour la réceptionner… pour constater qu’il manquait une pièce essentielle. C’est moi-même qui ai dû signaler l’erreur au service client. La porte manquante m’a été livrée une semaine plus tard, nécessitant encore une demi-journée de présence. 2. Plan de montage imprécis : Le plan fourni est mal conçu et approximatif. Étant issue du secteur industriel, je peux affirmer que ce type de plan ne respecte pas les standards élémentaires de clarté et de sécurité 3. Problème de conception majeur : Les portes de la colonne sont très lourdes (10 kg et 7 kg) par rapport à la structure, ce qui a provoqué un risque réel de basculement. Lors de l’installation, la colonne a failli m’écraser, malgré sa fixation au mur. La structure elle-même est instable, et sans les portes, elle bascule déjà. Avec les portes, une chute pourrait entraîner des blessures graves (fracture, coupure…). Pour un meuble supposé cacher de la vaisselle, c’est tout simplement inacceptable. En résumé, pour 350€, j’ai eu : une livraison incomplète, deux semaines d’attente, deux demi-journées de télétravail gâchées, un montage pénible, un produit potentiellement dangereux à l’usage. C’est une expérience que je ne souhaite à personne,
+[2025-06-21T16:50:15.905+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:15.919+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:15.919+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 2.0
+    },
+    {
+      "theme": "Suivi de projet / travaux sur mesure",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:15.968+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:50:16.199+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review f23ef2fea6397bc077c50dc06c719c44
+[2025-06-21T16:50:16.199+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:16.199+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:50:16.199+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T16:50:16.200+0000] {logging_mixin.py:188} INFO -  - 5 (note : 2.0)
+[2025-06-21T16:50:16.200+0000] {logging_mixin.py:188} INFO -  - 8 (note : 1.0)
+[2025-06-21T16:50:16.200+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 19 :
+Suite à un achat d'un abri bois 2390€ sur internet je reçois un produit qui présente un défaut de conception par l'absence d'une poutre centrale et donc fuite +++ au niveau de la faitière bitumée aujourd'hui remplacée par un bac acier. le dernier conseil du S.A.V me renvoie à mon assurance. incroyable mais vrai ! promesse d'un geste commercial non tenu et 350€ de réparation à ma charge. MR DEBONO
+[2025-06-21T16:50:17.542+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:17.543+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:17.544+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:17.845+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 3160580b40e0cdb9fee34be24994724f
+[2025-06-21T16:50:17.845+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:17.846+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T16:50:17.846+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:17.846+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T16:50:17.846+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 20 :
+Très mauvaise expérience !! Commande passée en ligne, et réception d'un mail le lendemain, annulant ma commande et me la remboursant , sous prétexte que l'article n'est plus disponible , alors qu'il est toujours en ligne avec un délai de livraison de 4 jours !!! Bien sûr une rupture de stock , ça peut arriver, par contre, je n'accepte pas leur façon de procéder : Aucune excuse ! Aucun appel ! Aucun article de substitution proposé ! C'est honteux, du jenfoutisme !
+[2025-06-21T16:50:19.181+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:19.183+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:19.184+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:19.250+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:50:19.469+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 1ecdea473f9481177da6e4ac251d40c9
+[2025-06-21T16:50:19.469+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:19.470+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:50:19.470+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T16:50:19.470+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:19.471+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 21 :
+J'ai acheté des taquets qui ne sont pas ébavurés. Il me faudra donc les limer. Mon commentaire a été refusé sur leur site car j'ai osé indiquer que la vérification des produits ne devrait pas être à la charge du Client. De plus leur application ne permet pas de faire des commentaires sur certains produits ... j'attends leur correctif.
+[2025-06-21T16:50:20.820+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:20.821+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:20.822+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Qualité des produits",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 2.0
+    },
+    {
+      "theme": "Expérience d'achat en ligne",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T16:50:20.875+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en ligne
+[2025-06-21T16:50:21.097+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review babf823920b86f00e479619d2d3e8f6b
+[2025-06-21T16:50:21.097+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:21.097+0000] {logging_mixin.py:188} INFO -  - 4 (note : 2.0)
+[2025-06-21T16:50:21.098+0000] {logging_mixin.py:188} INFO -  - 5 (note : 2.0)
+[2025-06-21T16:50:21.098+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 22 :
+Changement d’adresse de livraison, le site bug comme le service . Transporteur injoignable…. J’ignore ou sont passés mes achats.
+[2025-06-21T16:50:22.648+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:22.649+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:22.650+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Expérience d'achat en ligne",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:22.698+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en ligne
+[2025-06-21T16:50:22.895+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 4c5f818aabcd80bb8791ee4995a8e3a4
+[2025-06-21T16:50:22.895+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:22.895+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:50:22.896+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:22.896+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 23 :
+Commande non honorée, remboursement découvert sur le compte bancaire par hasard....
+[2025-06-21T16:50:24.085+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:24.086+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:24.087+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:24.379+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 270086dccfbf8ab1669ec4393497e1ef
+[2025-06-21T16:50:24.379+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:24.380+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T16:50:24.380+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:24.380+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 24 :
+Une catastrophe cette enseigne vous commandez un produit et vous pouvez pas le récupérer même arrivé sans rendez vous même avec les accueils vide ! Mettez votre orgueil de côté pour s’abaisser à prendre rendez vous et faites vous de nouveau humilier pour déplacer votre véhicule sinon on vous donne pas non plus votre produit payé !! Comment ne pas respecter ses clients à ce point !! Magasins à fuire !!
+[2025-06-21T16:50:25.632+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:25.633+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:25.633+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Expérience d'achat en magasin",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:25.678+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en magasin
+[2025-06-21T16:50:25.878+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 86ea4c0660f6ea69ce8e5f38a7762bd4
+[2025-06-21T16:50:25.878+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:25.878+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:50:25.878+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:25.878+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 25 :
+On me propose un créneau de 5 h pour la pose de trois radiateurs, je demande une tranche horaire plus resserrée ( je travaille aussi… et c’est pour un appartement vide actuellement), on me répond que j’ai signé le contrat sans pour autant répondre à ma question de savoir si le contrat (qui ne m’a pas été remis) prévoit bien cela, puis on me raccroche au nez.
+[2025-06-21T16:50:26.860+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:26.869+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:26.869+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:26.914+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:50:27.113+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review ac971d887e02006717a830bc9f0b419d
+[2025-06-21T16:50:27.113+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:27.113+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:27.113+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 26 :
+J’ai passé commande auprès de Leroy Merlin Nice (Boulevard du Mercantour) pour un sol stratifié, et malheureusement l’expérience a été très décevante. La livraison a été retardée d’une semaine en raison de l’absence d’un seul carton, ce qui a entraîné un décalage d’une semaine de mes travaux. À la réception, j’ai constaté qu’un carton était endommagé. J’ai immédiatement signalé le problème au service client, qui m’a demandé d’envoyer des photos. Malgré trois envois, j’ai reçu des messages affirmant que je n’avais jamais transmis de preuve. Il semble y avoir un manque flagrant de communication entre les différentes équipes du service client. Plutôt que de se concerter en interne, on sollicite à plusieurs reprises le client, comme s’il n’y avait aucun suivi. Je suis très déçu par la qualité du service et la gestion des litiges. Pour ma part, je ne recommande pas ce magasin, en particulier si vous avez des délais à respecter ou si vous attendez un service après-vente fiable.
+[2025-06-21T16:50:28.500+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:28.502+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:28.502+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 2.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 2.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T16:50:28.562+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:50:28.792+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 966ff8e7ef4c5a70136c80e1bc1ea762
+[2025-06-21T16:50:28.793+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:28.793+0000] {logging_mixin.py:188} INFO -  - 2 (note : 2.0)
+[2025-06-21T16:50:28.793+0000] {logging_mixin.py:188} INFO -  - 3 (note : 2.0)
+[2025-06-21T16:50:28.793+0000] {logging_mixin.py:188} INFO -  - 5 (note : 2.0)
+[2025-06-21T16:50:28.794+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 27 :
+Enseigne à fuir pour les achats par internet surtout pour des produits vendus par des sites partenaires comme le dressing d’angle extensible DORIAN (544.99€). Non seulement vous payer sur le site Leroy Merlin, mais l’enseigne décharge ses responsa Sur le site partenaire. Quant au site partenaire VENTE UNIQUE, il propose des produits mais non livrables car le transporteur vient d’annuler à deux reprise et à deux dates différentes sans raison. Enfin si, interroge par téléphone, le chauffeur déclare qu’il n’y avait personne à l’adresse de livraison. Payez, mais ne soyez pas livré et en plus le transporteur n’a que le mensonge pour se soustraire à ses responsabilités professionnelles : Vir by JP
+[2025-06-21T16:50:30.311+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:30.312+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:30.312+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:30.373+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:50:30.609+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 6f2da48cad86d8d6679eecb9521f14df
+[2025-06-21T16:50:30.609+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:30.609+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:50:30.610+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T16:50:30.610+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:30.610+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 28 :
+Bonjour je veux juste dire a Annemasse hier samedi 7 juin nous allé au rayon quincaillerie et mon mari a demandé si vous plaît au vendeur ( Théo) et a deux filles ( Constance et Mélissa ) il lui a dit c là bas il a demandé si il pouvait le conseiller non c est là bas puis je suis passé après avec mon fils et la Théo a dis quel sa ne ce dis pas et les filles on rigole (mul )
+[2025-06-21T16:50:31.817+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:31.819+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:31.819+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Expérience d'achat en magasin",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T16:50:31.867+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en magasin
+[2025-06-21T16:50:32.085+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 2253476109a60053077f5f1ef0788a94
+[2025-06-21T16:50:32.085+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:32.085+0000] {logging_mixin.py:188} INFO -  - 5 (note : 2.0)
+[2025-06-21T16:50:32.085+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 29 :
+Achat d’un caisson et porte de salle de bain au mois d’avril. Refus de la marchandise le jour de la livraison par la poste (colissimo) car le caisson arrive cassé, le carton eventré. Je demande donc le remboursement. 1 semaine après sans remboursement je contacté le service qui m’informe que le retour est incomplet. Je précise qu’il ne s’agit pas d’un retour mais d’un refus de colis et que le soucis n’est pas le mien mais celui du transporteur. 1 mois plus tard après une dizaine d’appels au service client, je décide de me rendre en magasin qui appelle le siège pour savoir ce qu’il en est. La commande de 130€ est donc toujours en attente de remboursement pour une erreur qui n’est pas de mon fait. Service lamentable, aucune considération pour les clients alors que je suis plus que fidele
+[2025-06-21T16:50:33.517+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:33.518+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:33.518+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:33.585+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:50:33.825+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review b68cde79cbfbd035cd366c2602e8462e
+[2025-06-21T16:50:33.825+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:33.825+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T16:50:33.826+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:33.826+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 30 :
+Ce magasin est une catastrophe, très mécontente, acheter une cuisine très cher Meubles, tout abîmé, manque les trois quarts des électroménagers, je ne recommande pas du tout Leroy Merlin à quiconque car je trouve ça attendre encore 3 semaine pour avoir des nouveaux Meubles Mauvaise qualité des Meubles, par contre Poseur, au top Mme Delcroix
+[2025-06-21T16:50:35.772+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:35.773+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:35.773+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 3.0
+    },
+    {
+      "theme": "Prix et promotions",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:36.060+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review d96a5a4973f848cb2940f25d5e355f4d
+[2025-06-21T16:50:36.060+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:36.060+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T16:50:36.060+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:50:36.060+0000] {logging_mixin.py:188} INFO -  - 5 (note : 3.0)
+[2025-06-21T16:50:36.061+0000] {logging_mixin.py:188} INFO -  - 1 (note : 1.0)
+[2025-06-21T16:50:36.061+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 31 :
+C'est devenu une catastrophe, Leroy Merlin se contente d'empocher les données mais aucun suivi rien n'est jamais de leur faute pourtant ils sont intermédiaire entre les escrocs de vendeur, les magasins ou autre... Nous avons affaire à des personnes absolument pas présent je te Leroy Merlin mais sur une plateforme internet à l'autre bout du monde ici pour faire du pognon. Quand vous commandez par le biais de Leroy merlin.fr et que l'on vous dit que votre commande est prête est arrivé à l'heure de retrait des marchandises rien n'est prêt c'est à vous de refaire tout votre panier avec bien évidemment une majoration tarifaire je trouve cela scandaleux mais bien évidemment les opérateurs du marketplace vous sortent des beaux textes disant c'est pas notre faute c'est la faute du magasin... Et bien non on paye une prestation on paye des produits j'estime qu'il y a un minimum aujourd'hui Leroy Merlin a tellement de pognon qu'ils ont droit de traiter les gens comme des moins que rien c'est bien triste et tant que nous serons pas assez nombreux à déposer les recours auprès de 60 millions de consommateurs et que choisir il sera impossible de leur massacrer les dents et de les faire plier face à leur absence de responsabilité.
+[2025-06-21T16:50:37.510+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:37.511+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:37.512+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:37.560+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:50:37.792+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 97239a9c5c4dec8709033ef31ffbcc9e
+[2025-06-21T16:50:37.792+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:37.793+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:37.793+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:50:37.793+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 32 :
+commande payée. RDV pour la livraison pris et confirme par Leroy merlin et.... rien. Pas de livreur, pas de produit, pas de reponse
+[2025-06-21T16:50:39.057+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:39.059+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:39.059+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:39.326+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 5725f5e754450b22247894aaf1fb0aea
+[2025-06-21T16:50:39.326+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:39.327+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T16:50:39.327+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:39.327+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 33 :
+Vendeur désagréable au rayon carrelage Chasseneuil du Poitou (Nicolas). Machisme évident. Aucune envie de faire d’efforts. Il ne pensait qu’à rentrer chez lui. Expérience très désagréable. Porcelanosa fait 40% de réduction. La conclusion s’impose. Enfin, je comprends que leurs affaires aillent mal.
+[2025-06-21T16:50:40.589+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:40.590+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:40.591+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Expérience d'achat en magasin",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:40.637+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en magasin
+[2025-06-21T16:50:40.638+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:50:40.879+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 1e5eb27f4122c2ac86e8ca195ecc3e49
+[2025-06-21T16:50:40.879+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:40.880+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:40.880+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 34 :
+Après plusieurs réclamations au sujet de mon achat abris bois (foresta) qui présente un défaut de conception, j ai demandé un geste commercial qui ne donne pas suite, on me mène en bateau, plus jamais d'achat par internet .PAS SÉRIEUX
+[2025-06-21T16:50:42.835+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:42.836+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:42.836+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Achat en ligne",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T16:50:43.078+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 3832adf364995fd334fcd1cb758d83db
+[2025-06-21T16:50:43.078+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:43.078+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T16:50:43.078+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T16:50:43.079+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T16:50:43.079+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 35 :
+Comme je n'ai pas trouvé pour le SAV de Boé. Je place mon avis ici qui réhaussera un peu la niveau déplorable des avis. Le SAV Leroy Merlin de Boé a réparé ma tondeuse en un clin d’œil pour un montant très raisonnable et en un temps record (1 jour). Donc je n'ai que des louanges. En revanche, côté informatique, c'est la Bérézina. Je reçois un devis de réparation et en même temps un courriel qui m'indique que ma tondeuse est irréparable ?!!!!? Puis à la récupération de ma tondeuse, personne ne retrouve le montant de 30 euros laissés pour le prix du devis. J'ai dû râler pour qu'ils en tiennent compte. Là, ça fait moins sérieux ! Sinon, la tondeuse, elle, elle fonctionne super impeccable ! Merci.
+[2025-06-21T16:50:44.781+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:44.782+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:44.782+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 4.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 2.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 5.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T16:50:44.827+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:50:45.068+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 0010ac0efc26237ad10a748a49d505e7
+[2025-06-21T16:50:45.068+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:45.069+0000] {logging_mixin.py:188} INFO -  - 5 (note : 4.0)
+[2025-06-21T16:50:45.069+0000] {logging_mixin.py:188} INFO -  - 3 (note : 2.0)
+[2025-06-21T16:50:45.069+0000] {logging_mixin.py:188} INFO -  - 4 (note : 5.0)
+[2025-06-21T16:50:45.069+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 36 :
+Je suis allée à Lesquin à la coupe de bois et vraiment je n’y connais rien, le vendeur Nicolas je crois , m’a aidé à trouvé ce que je cherchais et a découpé mes planches . Quand je lui ai demandé où je pouvais trouver les petits taquets ( j’avais un exemplaire ) pour mes étagères il a dit « allée 83 au centre du rayon! » et bingo c’était la !!! Alors si ça ce n’est pas du service … J’adore ce Magasin !!!’
+[2025-06-21T16:50:46.726+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:46.727+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:46.728+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Expérience d'achat en magasin",
+      "note": 5.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 5.0
+    }
+  ]
+}
+[2025-06-21T16:50:46.776+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en magasin
+[2025-06-21T16:50:47.014+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 061d0607d68564685d43cf81097b2b1a
+[2025-06-21T16:50:47.014+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:47.014+0000] {logging_mixin.py:188} INFO -  - 5 (note : 5.0)
+[2025-06-21T16:50:47.015+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 37 :
+Je ne comprends pas les avis négatifs. J'ai toujours été bien conseillé chez eux. Je ne peux que recommander.
+[2025-06-21T16:50:48.672+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:48.673+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:48.673+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 5.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 5.0
+    }
+  ]
+}
+[2025-06-21T16:50:48.718+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T16:50:48.962+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 4e6d8daf5e9b02ddd7de1dc81d870f0d
+[2025-06-21T16:50:48.962+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:48.962+0000] {logging_mixin.py:188} INFO -  - 5 (note : 5.0)
+[2025-06-21T16:50:48.963+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 38 :
+Nous avons été très bien reçu par Christophe Merci de son aide pour avoir mis notre matériel dans la voiture
+[2025-06-21T16:50:49.988+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T16:50:49.990+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T16:50:49.990+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Expérience d'achat en magasin",
+      "note": 5.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 5.0
+    }
+  ]
+}
+[2025-06-21T16:50:50.039+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en magasin
+[2025-06-21T16:50:50.254+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review dd081dd084009d7d62f8d58b50c8a762
+[2025-06-21T16:50:50.255+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T16:50:50.255+0000] {logging_mixin.py:188} INFO -  - 5 (note : 5.0)
+[2025-06-21T16:50:50.255+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-06-21T16:50:50.256+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-06-21T16:50:50.277+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=trustpilot_pipeline, task_id=analyze_and_insert, run_id=scheduled__2025-06-09T04:00:00+00:00, execution_date=20250609T040000, start_date=20250621T164938, end_date=20250621T165050
+[2025-06-21T16:50:50.339+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-06-21T16:50:50.354+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-06-21T16:50:50.356+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-06-21T17:00:45.431+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-06-21T17:00:45.463+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: trustpilot_pipeline.analyze_and_insert scheduled__2025-06-09T04:00:00+00:00 [queued]>
+[2025-06-21T17:00:45.473+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: trustpilot_pipeline.analyze_and_insert scheduled__2025-06-09T04:00:00+00:00 [queued]>
+[2025-06-21T17:00:45.473+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-06-21T17:00:45.487+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): analyze_and_insert> on 2025-06-09 04:00:00+00:00
+[2025-06-21T17:00:45.496+0000] {standard_task_runner.py:63} INFO - Started process 235 to run task
+[2025-06-21T17:00:45.499+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'trustpilot_pipeline', 'analyze_and_insert', 'scheduled__2025-06-09T04:00:00+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/trustpilot_dag.py', '--cfg-path', '/tmp/tmpxi9g26ay']
+[2025-06-21T17:00:45.502+0000] {standard_task_runner.py:91} INFO - Job 7: Subtask analyze_and_insert
+[2025-06-21T17:00:45.519+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.11/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-06-21T17:00:45.553+0000] {task_command.py:426} INFO - Running <TaskInstance: trustpilot_pipeline.analyze_and_insert scheduled__2025-06-09T04:00:00+00:00 [running]> on host 92146c76f2b4
+[2025-06-21T17:00:45.636+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='trustpilot_pipeline' AIRFLOW_CTX_TASK_ID='analyze_and_insert' AIRFLOW_CTX_EXECUTION_DATE='2025-06-09T04:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-06-09T04:00:00+00:00'
+[2025-06-21T17:00:45.636+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-06-21T17:00:45.649+0000] {logging_mixin.py:188} INFO - 📆 Wrapper Analyse/Insert : scrape_date = 2025-06-09
+[2025-06-21T17:00:45.649+0000] {logging_mixin.py:188} INFO - 📂 Fichier de credentials GCP :  /opt/***/project/config/trustpilot-satisfaction-43aac3dd82a9.json
+[2025-06-21T17:00:45.650+0000] {logging_mixin.py:188} INFO - Lancement du traitement pour la date : 2025-06-09
+[2025-06-21T17:00:47.594+0000] {logging_mixin.py:188} INFO - 38 verbatims trouvés pour la date : 2025-06-09
+[2025-06-21T17:00:47.594+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 1 :
+J’ai commandé une grande plaque de 3 mètres. Je me déplace au magasin avec ma remorque pour la récupérer. Là on m’annonce que le stock est à -1 ! Pourquoi leur informatique n’est-elle pas capable, en plusieurs jours, de détecter qu’ils ont vendu quelque chose qu’ils n’ont pas en stock ? C’est un manque de respect.
+[2025-06-21T17:00:49.364+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:00:49.402+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:00:49.403+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T17:00:49.480+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:00:49.700+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review aff72d51609dd0cb812c84bc1ae3adfc
+[2025-06-21T17:00:49.700+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:00:49.700+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:00:49.700+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 2 :
+Bonjour j' ai acheté 24 M2 de cannisse pour couvrir ma terrasse et a grande surprise tout au long du montage les dimensions me paraissait douteuses et effectivement une fois déroulé mes 4 rouleaux de 2x3 il me manquait 2,45m2 je retourne à mon magasin de Puget sur Argens et le responsable du rayon me dit qu'il faut voir avec le permanent qui lui me dit que c est comme ça et qu il n'y a rien a faire.merci Leroy Merlin et a jamais
+[2025-06-21T17:00:51.309+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:00:51.312+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:00:51.312+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:00:51.374+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:00:51.599+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review 58f8c2e98ba407a27f2987530a5b0d3d
+[2025-06-21T17:00:51.599+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:00:51.599+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:00:51.599+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:00:51.600+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T17:00:51.600+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:00:51.600+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 3 :
+Client depuis près de 40 ans j’ai acheté il y a 2 ans pour 5729e de pavés avec consignation de palettes pour un montant de consigne de 513e N’ayant put faire mes travaux avant raison de santé j’ai terminé ce mois de juin 2025 j’ai retourné mes palettes consignées il refuse de me les reprendres prétexte délai dépassé Je n’ai aucune date de restitution de marqué et le vendeur m’avait dit un an ou deux c’est bon Le chef de cour leroy merlin arras a été expéditive pour ne pas dire malhonnête Je ne recommande pas ce magasin c’est le remerciement de 40 année d’achat je n’y mettrai plus jamais les pieds
+[2025-06-21T17:00:53.128+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:00:53.130+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:00:53.130+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    },
+    {
+      "theme": "Fidélité client",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:00:53.189+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:00:53.400+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 6ea1545138aac705bbcb29a39e797535
+[2025-06-21T17:00:53.400+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:00:53.401+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:00:53.401+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:00:53.401+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 4 :
+Très très mauvaise expérience de cet enseigne Leroy merlin ils encaissent notre commande et puis on attend des semaines pour être livré c'est honteux et inacceptable. Je sais que cette enseigne n'en a rien à faire de nos avis défavorables .je n'achèterai plus chez Leroy Merlin à bannir cette enseigne
+[2025-06-21T17:00:54.370+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:00:54.371+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:00:54.371+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:00:54.729+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 6b7f1c32706ecb750c8c3c23a1952daa
+[2025-06-21T17:00:54.730+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:00:54.731+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:00:54.731+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:00:54.731+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 5 :
+Une étoile, c'est encore trop. Si l'on parle de service client médiocre, c'est le point le plus important. Leroy Merlin ne répond jamais correctement aux formulaires de contact. Les questions sur les stocks restent sans réponse, les commandes en ligne sont impossibles, et si vous déposez une réclamation, vous obtenez une réponse à Clermont-Ferrand : ils sont en stock. Vous voulez commander 16 packs immédiatement ? Ils n'en ont que 8. J'ai demandé une deuxième fois la suppression de mes données personnelles, je ne souhaite plus être client d'une telle entreprise. Et maintenant, ça a enfin fonctionné.
+[2025-06-21T17:00:56.019+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:00:56.021+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:00:56.022+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    },
+    {
+      "theme": "Expérience d'achat en ligne",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:00:56.080+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:00:56.081+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en ligne
+[2025-06-21T17:00:56.303+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 5069c8cfdd07625d0d984910db1346da
+[2025-06-21T17:00:56.303+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:00:56.303+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:00:56.304+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 6 :
+Livraison programmée ce jour et non réceptionnée!! Commande de plus de 5000 euros. C est inadmissible : il est plus de 19h30 aucun appel téléphonique de la part du chauffeur ni de Leroy Merlin malgré mon appel, congé posé ce jour et aucune reprogrammation de livraison !!!
+[2025-06-21T17:00:57.657+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:00:57.659+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:00:57.659+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:00:57.949+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 92449ad19eee31f6c2c45946df2572ca
+[2025-06-21T17:00:57.949+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:00:57.950+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:00:57.950+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:00:57.951+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 7 :
+J'ai beaucoup acheté sur Leroy Merlin. Mais force est de constater que le service client n'est pas acceptable... Il réfutent tout avis négatif sur leur site, vous répondent via un email qui ne permet pas de réponse directe, avec un modus operandi qui décourage toute démarche. Photos et écrits à l'appui pourtant... C'est lamentable...
+[2025-06-21T17:00:58.989+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:00:58.991+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:00:58.992+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:00:59.049+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:00:59.242+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review f0ab294c7d37872f13a94d05e5af1846
+[2025-06-21T17:00:59.242+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:00:59.243+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:00:59.243+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 8 :
+Nulle. Commande internet en livraison le livreur fait tomber le carton il insiste pour laisser le carton et fait signer une réserve, la vasque est cassée. Obligé d annuler le plombier qui venait monter le meuble dans l après midi. Aucune réaction de leroy merlin malgré plusieurs appels. Personne ne vous rappelle. Obligé d aller acheter une autre vasque sans etre remboursé. 10 jours sans retour de leur part. Inadmissible service sav pitoyable.
+[2025-06-21T17:01:00.832+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:00.834+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:00.834+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:01.118+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review f621c42f61b6783f09e4c3d38babae0a
+[2025-06-21T17:01:01.118+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:01.118+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:01.118+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T17:01:01.118+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:01.119+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:01:01.119+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 9 :
+Y a t il.un ancient client qui peut me recommender une société de recouvrement. Début Février j'ai commandé un moto cutulture. 600 euros. Mars et avril.. mi Mai. Pas de livraison. Service communication superbe, sauf tout les semaines le même message!! Cela fait 3 semaines que je demande à ces pirates un remboursement. Sans résultat!
+[2025-06-21T17:01:02.470+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:02.472+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:02.472+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 2.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T17:01:02.533+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:02.747+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 47f2e593889b3c86e64bb079025db87f
+[2025-06-21T17:01:02.747+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:02.747+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:02.748+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:01:02.748+0000] {logging_mixin.py:188} INFO -  - 5 (note : 2.0)
+[2025-06-21T17:01:02.748+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 10 :
+J'ai acheté un meuble sur le site de Leroy Merlin il y a un mois et demi, et je n'ai reçu que la moitié de ma commande. Malgré mes nombreuses relances, le service client ne m'a apporté aucune solution concrète, à part de patienter. Presque 2 mois plus tard, toujours pas de meuble ni de remboursement ! Ils me demandent maintenant de porter plainte. Je suis extrêmement déçu par ce manque de professionnalisme et le peu de considération envers leurs clients. Je déconseille fortement d'acheter sur leur site.
+[2025-06-21T17:01:04.211+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:04.213+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:04.213+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:04.282+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:04.503+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review e8153f0d8a49b87cee2bd874461ab48e
+[2025-06-21T17:01:04.504+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:04.504+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:04.504+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:01:04.504+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:04.504+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 11 :
+Climatiseur mobile commandé chez Leroy Merlin avec livraison à domicile Créneau initial de livraison 8h00 /20h00 Inadmissible en 2025 Le créneau fini par se réduire à 17h 30/19h30. Non respect du nouveau créneau horaire. Le livreur est arrogant et et me dit que ce nouveau créneau est caduque . Aucune excuse Enseigne à bannir pour les commandes en ligne
+[2025-06-21T17:01:06.362+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:06.363+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:06.364+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:06.657+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 0210949cc7f14840c623db2e48ca5f56
+[2025-06-21T17:01:06.657+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:06.657+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:06.658+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:06.658+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 12 :
+de soit disant vendeurs certifiés vérifiés, à vous de payer le retour, sans garantie de remboursement, du made in china de mauvaise qualité (vendeur : La vie à la Maison), et ne comptez pas sur leroy merlin vous aider, c'est à vous de contacter le vendeur et de vous débrouiller avec!
+[2025-06-21T17:01:08.102+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:08.103+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:08.103+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:08.150+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:08.360+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 4ca0be1dded01d826bbb3a930fc0cdea
+[2025-06-21T17:01:08.361+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:08.361+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:01:08.361+0000] {logging_mixin.py:188} INFO -  - 4 (note : 2.0)
+[2025-06-21T17:01:08.361+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:08.361+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 13 :
+Une étoile c'est encore trop! J'ai acheté une "tente de réception" le vendredi, montée le samedi et par terre le mardi en rentrant du travail! Pas de vent annoncé! Portes non installées. Structure attachée et protégée par la maison, un par vue et une haie...la vendeuse me dit que j'aurai dû démonter le soir et remonter le matin! Donc c'est de ma faute...pas de geste commercial ni de garantie! Et pas de tente pour les 18ans de mon fils ce week-end car je n'ai pas les moyens d'en acheter une autre...je ne suis pas allée dans un magasin discount car j'avais confiance en eux en cette enseigne même pour 99€...que j'ai la désagréable sensation d'avoir jeté par la fenêtre en moins d'une semaine! On m'a juste proposé de racheter une toile à 30€ alors que je l'ai achetée entière à 99€! On se moque de qui?
+[2025-06-21T17:01:09.946+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:09.947+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:09.948+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Prix et promotions",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:10.205+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review a0a8fda9a40a0fb949643c8b3ddcceaa
+[2025-06-21T17:01:10.206+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:10.206+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:01:10.206+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T17:01:10.206+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:10.206+0000] {logging_mixin.py:188} INFO -  - 1 (note : 1.0)
+[2025-06-21T17:01:10.207+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 14 :
+Ils mettent des prix de fou j'ai vu des articles à plus de 10 000 euros mdr alors que ça vaut 50 euros trop chère chez eux ! Mdr un genre de ebay et bricolage .
+[2025-06-21T17:01:10.925+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:10.926+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:10.927+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Prix et promotions",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:11.187+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 97b11c99c64d12385250a9498c8d4c4c
+[2025-06-21T17:01:11.187+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:11.187+0000] {logging_mixin.py:188} INFO -  - 1 (note : 1.0)
+[2025-06-21T17:01:11.187+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 15 :
+suite à ma commande en ligne : 25136L28114-A pour un retrait dans un point retrait de Lagoa (Portugal), le transporteur n'a jamais livré ma commande ni même traverser la ville en question (dixit le tracking : XW163328705JF Chronopost). Jamais aucune communication, ni appel, ni sms, ni e-mail. J'ai fait une requete a Leroy Merlin en ligne, leur réponse me renvoit sur le code tracking du transporteur (XW163328705JF Chronopost). Leroy merlin se défausse sur le transporteur. Maintenant le produit est bloqué a Lisbonne et je n'ai toujours reçu aucune communication. Je demande le remboursement immédiat car depuis le temps j'ai remplacé le produit (sécurité des personnes).
+[2025-06-21T17:01:12.608+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:12.610+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:12.610+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:12.678+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:12.934+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review e5d9d397b06bdafefaf5a5d6c3510845
+[2025-06-21T17:01:12.935+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:12.935+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:12.936+0000] {logging_mixin.py:188} INFO -  - 3 (note : 2.0)
+[2025-06-21T17:01:12.936+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:12.936+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 16 :
+commande internet catastrophique ! annulations sans propositions de solution, livraisons en retard, mauvais adresse .... à éviter
+[2025-06-21T17:01:14.172+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:14.173+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:14.174+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:14.430+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review c845b7c4ba153c7f665f65f0552fa3db
+[2025-06-21T17:01:14.431+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:14.431+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:14.431+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:01:14.431+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:14.431+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 17 :
+Bonjour tout le monde , je suis une cliente chez eux depuis très longtemps, hier je suis partie acheter le bas d’une cuisine, avec évier table de travail, la fille qui m’a fait la commande, et qui a fait la facture à la caisse , m’a dit de descendre dans le sous-sol pour récupérer la commande , sans me dire qu’il faut récupérer la planche chez eux dans les rayons, je suis descendu, au même temps j’ai appelé un transporteur pour récupérer la marchandise et me la ramener chez moi , je suis handicapé je ne peux pas me déplacer facilement, je suis rentrée par métro, 3h après j’ai reçu ma marchandise chez moi par mon livreur, mais je me suis rendu comptes qu’il manquait le plan travail, j’ai demander au livreur il m’a dit , il m’ont pas donner, j’ai contacter par téléphone leur magasin, ils m’ont qu’ils allaient me rappeler plus tard, il m’ont jamais rappeler, le lendemain, c’est à dire aujourd’hui je me suis déplacer encore une fois pour réclamer ma planche , Il m’ont dit oui tu dois aller voir les caisses pour vérifier les caméras si ta pas prit la planche déjà hier , je suis handicapée , je n’est pas de voiture et comment je dois le savoir que je dois récupérer la planche dans les rayons? Puis après descendre au sous-sol récupérer le reste ,, moi j’ai laisser tout là-bas à quelqu’un qui connaît le livreur,j’étais mal reçu mal traité , et insulter, humilié pour une planche de 64€ ,je suis une très ancienne cliente chez Leroy Merlin, mais la c’est bon , je ne mettrai plus jamais les pieds chez eux ,ça veux pas le coup , on m’a conseillé d’aller chez Bricorama, j’ai pas écouter, on apprend des choses dans la vie , mais je suis marquée à vie .
+[2025-06-21T17:01:15.885+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:15.887+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:15.888+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Expérience d'achat en magasin",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:15.950+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en magasin
+[2025-06-21T17:01:15.950+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:16.171+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review f6beeb88818998a9844fbe012e60b644
+[2025-06-21T17:01:16.171+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:16.171+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:16.171+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:16.172+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 18 :
+J’ai commandé une colonne pour ma cuisine à 350€, et cette expérience fut malheureusement très décevante, tant sur le plan logistique que sécuritaire. 1. Livraison incomplète : La colonne a été livrée avec une porte manquante. J’ai dû poser une journée de télétravail pour la réceptionner… pour constater qu’il manquait une pièce essentielle. C’est moi-même qui ai dû signaler l’erreur au service client. La porte manquante m’a été livrée une semaine plus tard, nécessitant encore une demi-journée de présence. 2. Plan de montage imprécis : Le plan fourni est mal conçu et approximatif. Étant issue du secteur industriel, je peux affirmer que ce type de plan ne respecte pas les standards élémentaires de clarté et de sécurité 3. Problème de conception majeur : Les portes de la colonne sont très lourdes (10 kg et 7 kg) par rapport à la structure, ce qui a provoqué un risque réel de basculement. Lors de l’installation, la colonne a failli m’écraser, malgré sa fixation au mur. La structure elle-même est instable, et sans les portes, elle bascule déjà. Avec les portes, une chute pourrait entraîner des blessures graves (fracture, coupure…). Pour un meuble supposé cacher de la vaisselle, c’est tout simplement inacceptable. En résumé, pour 350€, j’ai eu : une livraison incomplète, deux semaines d’attente, deux demi-journées de télétravail gâchées, un montage pénible, un produit potentiellement dangereux à l’usage. C’est une expérience que je ne souhaite à personne,
+[2025-06-21T17:01:17.959+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:17.961+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:17.962+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 2.0
+    },
+    {
+      "theme": "Suivi de projet / travaux sur mesure",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:18.024+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:18.231+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review f23ef2fea6397bc077c50dc06c719c44
+[2025-06-21T17:01:18.232+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:18.232+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:18.232+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T17:01:18.232+0000] {logging_mixin.py:188} INFO -  - 5 (note : 2.0)
+[2025-06-21T17:01:18.232+0000] {logging_mixin.py:188} INFO -  - 8 (note : 1.0)
+[2025-06-21T17:01:18.232+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 19 :
+Suite à un achat d'un abri bois 2390€ sur internet je reçois un produit qui présente un défaut de conception par l'absence d'une poutre centrale et donc fuite +++ au niveau de la faitière bitumée aujourd'hui remplacée par un bac acier. le dernier conseil du S.A.V me renvoie à mon assurance. incroyable mais vrai ! promesse d'un geste commercial non tenu et 350€ de réparation à ma charge. MR DEBONO
+[2025-06-21T17:01:19.776+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:19.790+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:19.790+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:21.196+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 3160580b40e0cdb9fee34be24994724f
+[2025-06-21T17:01:21.196+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:21.197+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T17:01:21.197+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:21.197+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:01:21.198+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 20 :
+Très mauvaise expérience !! Commande passée en ligne, et réception d'un mail le lendemain, annulant ma commande et me la remboursant , sous prétexte que l'article n'est plus disponible , alors qu'il est toujours en ligne avec un délai de livraison de 4 jours !!! Bien sûr une rupture de stock , ça peut arriver, par contre, je n'accepte pas leur façon de procéder : Aucune excuse ! Aucun appel ! Aucun article de substitution proposé ! C'est honteux, du jenfoutisme !
+[2025-06-21T17:01:23.058+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:23.060+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:23.061+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:23.121+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:28.870+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 1ecdea473f9481177da6e4ac251d40c9
+[2025-06-21T17:01:28.871+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:28.871+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:28.872+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:01:28.872+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:28.872+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 21 :
+J'ai acheté des taquets qui ne sont pas ébavurés. Il me faudra donc les limer. Mon commentaire a été refusé sur leur site car j'ai osé indiquer que la vérification des produits ne devrait pas être à la charge du Client. De plus leur application ne permet pas de faire des commentaires sur certains produits ... j'attends leur correctif.
+[2025-06-21T17:01:30.433+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:30.435+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:30.436+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Qualité des produits",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 2.0
+    },
+    {
+      "theme": "Expérience d'achat en ligne",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T17:01:30.496+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en ligne
+[2025-06-21T17:01:31.787+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review babf823920b86f00e479619d2d3e8f6b
+[2025-06-21T17:01:31.787+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:31.788+0000] {logging_mixin.py:188} INFO -  - 4 (note : 2.0)
+[2025-06-21T17:01:31.788+0000] {logging_mixin.py:188} INFO -  - 5 (note : 2.0)
+[2025-06-21T17:01:31.788+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 22 :
+Changement d’adresse de livraison, le site bug comme le service . Transporteur injoignable…. J’ignore ou sont passés mes achats.
+[2025-06-21T17:01:33.190+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:33.192+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:33.192+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Expérience d'achat en ligne",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:33.250+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en ligne
+[2025-06-21T17:01:33.467+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 4c5f818aabcd80bb8791ee4995a8e3a4
+[2025-06-21T17:01:33.468+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:33.468+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:33.468+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:33.468+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 23 :
+Commande non honorée, remboursement découvert sur le compte bancaire par hasard....
+[2025-06-21T17:01:34.524+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:34.526+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:34.527+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:34.844+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 270086dccfbf8ab1669ec4393497e1ef
+[2025-06-21T17:01:34.844+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:34.844+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:01:34.845+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:34.845+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 24 :
+Une catastrophe cette enseigne vous commandez un produit et vous pouvez pas le récupérer même arrivé sans rendez vous même avec les accueils vide ! Mettez votre orgueil de côté pour s’abaisser à prendre rendez vous et faites vous de nouveau humilier pour déplacer votre véhicule sinon on vous donne pas non plus votre produit payé !! Comment ne pas respecter ses clients à ce point !! Magasins à fuire !!
+[2025-06-21T17:01:36.016+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:36.018+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:36.018+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Expérience d'achat en magasin",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:36.071+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en magasin
+[2025-06-21T17:01:36.285+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 86ea4c0660f6ea69ce8e5f38a7762bd4
+[2025-06-21T17:01:36.285+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:36.286+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:36.286+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:36.286+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 25 :
+On me propose un créneau de 5 h pour la pose de trois radiateurs, je demande une tranche horaire plus resserrée ( je travaille aussi… et c’est pour un appartement vide actuellement), on me répond que j’ai signé le contrat sans pour autant répondre à ma question de savoir si le contrat (qui ne m’a pas été remis) prévoit bien cela, puis on me raccroche au nez.
+[2025-06-21T17:01:37.389+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:37.391+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:37.391+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:37.441+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:37.695+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review ac971d887e02006717a830bc9f0b419d
+[2025-06-21T17:01:37.695+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:37.695+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:37.696+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 26 :
+J’ai passé commande auprès de Leroy Merlin Nice (Boulevard du Mercantour) pour un sol stratifié, et malheureusement l’expérience a été très décevante. La livraison a été retardée d’une semaine en raison de l’absence d’un seul carton, ce qui a entraîné un décalage d’une semaine de mes travaux. À la réception, j’ai constaté qu’un carton était endommagé. J’ai immédiatement signalé le problème au service client, qui m’a demandé d’envoyer des photos. Malgré trois envois, j’ai reçu des messages affirmant que je n’avais jamais transmis de preuve. Il semble y avoir un manque flagrant de communication entre les différentes équipes du service client. Plutôt que de se concerter en interne, on sollicite à plusieurs reprises le client, comme s’il n’y avait aucun suivi. Je suis très déçu par la qualité du service et la gestion des litiges. Pour ma part, je ne recommande pas ce magasin, en particulier si vous avez des délais à respecter ou si vous attendez un service après-vente fiable.
+[2025-06-21T17:01:39.348+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:39.351+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:39.351+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 2.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 2.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T17:01:39.406+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:39.627+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 966ff8e7ef4c5a70136c80e1bc1ea762
+[2025-06-21T17:01:39.628+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:39.628+0000] {logging_mixin.py:188} INFO -  - 2 (note : 2.0)
+[2025-06-21T17:01:39.628+0000] {logging_mixin.py:188} INFO -  - 3 (note : 2.0)
+[2025-06-21T17:01:39.628+0000] {logging_mixin.py:188} INFO -  - 5 (note : 2.0)
+[2025-06-21T17:01:39.628+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 27 :
+Enseigne à fuir pour les achats par internet surtout pour des produits vendus par des sites partenaires comme le dressing d’angle extensible DORIAN (544.99€). Non seulement vous payer sur le site Leroy Merlin, mais l’enseigne décharge ses responsa Sur le site partenaire. Quant au site partenaire VENTE UNIQUE, il propose des produits mais non livrables car le transporteur vient d’annuler à deux reprise et à deux dates différentes sans raison. Enfin si, interroge par téléphone, le chauffeur déclare qu’il n’y avait personne à l’adresse de livraison. Payez, mais ne soyez pas livré et en plus le transporteur n’a que le mensonge pour se soustraire à ses responsabilités professionnelles : Vir by JP
+[2025-06-21T17:01:41.485+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:41.487+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:41.488+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:41.550+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:41.752+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 6f2da48cad86d8d6679eecb9521f14df
+[2025-06-21T17:01:41.752+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:41.753+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:41.753+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:01:41.753+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:41.754+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 28 :
+Bonjour je veux juste dire a Annemasse hier samedi 7 juin nous allé au rayon quincaillerie et mon mari a demandé si vous plaît au vendeur ( Théo) et a deux filles ( Constance et Mélissa ) il lui a dit c là bas il a demandé si il pouvait le conseiller non c est là bas puis je suis passé après avec mon fils et la Théo a dis quel sa ne ce dis pas et les filles on rigole (mul )
+[2025-06-21T17:01:42.918+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:42.920+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:42.920+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Expérience d'achat en magasin",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T17:01:42.969+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en magasin
+[2025-06-21T17:01:43.220+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 2253476109a60053077f5f1ef0788a94
+[2025-06-21T17:01:43.221+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:43.221+0000] {logging_mixin.py:188} INFO -  - 5 (note : 2.0)
+[2025-06-21T17:01:43.221+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 29 :
+Achat d’un caisson et porte de salle de bain au mois d’avril. Refus de la marchandise le jour de la livraison par la poste (colissimo) car le caisson arrive cassé, le carton eventré. Je demande donc le remboursement. 1 semaine après sans remboursement je contacté le service qui m’informe que le retour est incomplet. Je précise qu’il ne s’agit pas d’un retour mais d’un refus de colis et que le soucis n’est pas le mien mais celui du transporteur. 1 mois plus tard après une dizaine d’appels au service client, je décide de me rendre en magasin qui appelle le siège pour savoir ce qu’il en est. La commande de 130€ est donc toujours en attente de remboursement pour une erreur qui n’est pas de mon fait. Service lamentable, aucune considération pour les clients alors que je suis plus que fidele
+[2025-06-21T17:01:44.660+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:44.663+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:44.663+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:44.720+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:44.951+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review b68cde79cbfbd035cd366c2602e8462e
+[2025-06-21T17:01:44.952+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:44.952+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:01:44.952+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:44.952+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 30 :
+Ce magasin est une catastrophe, très mécontente, acheter une cuisine très cher Meubles, tout abîmé, manque les trois quarts des électroménagers, je ne recommande pas du tout Leroy Merlin à quiconque car je trouve ça attendre encore 3 semaine pour avoir des nouveaux Meubles Mauvaise qualité des Meubles, par contre Poseur, au top Mme Delcroix
+[2025-06-21T17:01:46.605+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:46.607+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:46.608+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Prix et promotions",
+      "note": 1.0
+    },
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 4.0
+    }
+  ]
+}
+[2025-06-21T17:01:46.861+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review d96a5a4973f848cb2940f25d5e355f4d
+[2025-06-21T17:01:46.861+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:46.861+0000] {logging_mixin.py:188} INFO -  - 1 (note : 1.0)
+[2025-06-21T17:01:46.861+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:46.861+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T17:01:46.862+0000] {logging_mixin.py:188} INFO -  - 5 (note : 4.0)
+[2025-06-21T17:01:46.862+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 31 :
+C'est devenu une catastrophe, Leroy Merlin se contente d'empocher les données mais aucun suivi rien n'est jamais de leur faute pourtant ils sont intermédiaire entre les escrocs de vendeur, les magasins ou autre... Nous avons affaire à des personnes absolument pas présent je te Leroy Merlin mais sur une plateforme internet à l'autre bout du monde ici pour faire du pognon. Quand vous commandez par le biais de Leroy merlin.fr et que l'on vous dit que votre commande est prête est arrivé à l'heure de retrait des marchandises rien n'est prêt c'est à vous de refaire tout votre panier avec bien évidemment une majoration tarifaire je trouve cela scandaleux mais bien évidemment les opérateurs du marketplace vous sortent des beaux textes disant c'est pas notre faute c'est la faute du magasin... Et bien non on paye une prestation on paye des produits j'estime qu'il y a un minimum aujourd'hui Leroy Merlin a tellement de pognon qu'ils ont droit de traiter les gens comme des moins que rien c'est bien triste et tant que nous serons pas assez nombreux à déposer les recours auprès de 60 millions de consommateurs et que choisir il sera impossible de leur massacrer les dents et de les faire plier face à leur absence de responsabilité.
+[2025-06-21T17:01:48.552+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:48.554+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:48.554+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:48.617+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:48.923+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 97239a9c5c4dec8709033ef31ffbcc9e
+[2025-06-21T17:01:48.923+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:48.924+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:48.924+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:48.925+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 32 :
+commande payée. RDV pour la livraison pris et confirme par Leroy merlin et.... rien. Pas de livreur, pas de produit, pas de reponse
+[2025-06-21T17:01:49.985+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:49.986+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:49.986+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:50.240+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review 5725f5e754450b22247894aaf1fb0aea
+[2025-06-21T17:01:50.240+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:50.240+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-21T17:01:50.240+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:50.240+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 33 :
+Vendeur désagréable au rayon carrelage Chasseneuil du Poitou (Nicolas). Machisme évident. Aucune envie de faire d’efforts. Il ne pensait qu’à rentrer chez lui. Expérience très désagréable. Porcelanosa fait 40% de réduction. La conclusion s’impose. Enfin, je comprends que leurs affaires aillent mal.
+[2025-06-21T17:01:51.930+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:51.945+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:51.945+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Expérience d'achat en magasin",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:52.000+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en magasin
+[2025-06-21T17:01:52.000+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:52.221+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 1e5eb27f4122c2ac86e8ca195ecc3e49
+[2025-06-21T17:01:52.222+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:52.222+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:52.223+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 34 :
+Après plusieurs réclamations au sujet de mon achat abris bois (foresta) qui présente un défaut de conception, j ai demandé un geste commercial qui ne donne pas suite, on me mène en bateau, plus jamais d'achat par internet .PAS SÉRIEUX
+[2025-06-21T17:01:53.638+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:53.640+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:53.640+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Achat en ligne",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-21T17:01:53.936+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 3832adf364995fd334fcd1cb758d83db
+[2025-06-21T17:01:53.937+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:53.937+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-21T17:01:53.937+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-21T17:01:53.938+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-21T17:01:53.938+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 35 :
+Comme je n'ai pas trouvé pour le SAV de Boé. Je place mon avis ici qui réhaussera un peu la niveau déplorable des avis. Le SAV Leroy Merlin de Boé a réparé ma tondeuse en un clin d’œil pour un montant très raisonnable et en un temps record (1 jour). Donc je n'ai que des louanges. En revanche, côté informatique, c'est la Bérézina. Je reçois un devis de réparation et en même temps un courriel qui m'indique que ma tondeuse est irréparable ?!!!!? Puis à la récupération de ma tondeuse, personne ne retrouve le montant de 30 euros laissés pour le prix du devis. J'ai dû râler pour qu'ils en tiennent compte. Là, ça fait moins sérieux ! Sinon, la tondeuse, elle, elle fonctionne super impeccable ! Merci.
+[2025-06-21T17:01:55.924+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:55.926+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:55.926+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 4.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 2.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 5.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-21T17:01:55.986+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:56.206+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 0010ac0efc26237ad10a748a49d505e7
+[2025-06-21T17:01:56.206+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:56.206+0000] {logging_mixin.py:188} INFO -  - 5 (note : 4.0)
+[2025-06-21T17:01:56.206+0000] {logging_mixin.py:188} INFO -  - 3 (note : 2.0)
+[2025-06-21T17:01:56.206+0000] {logging_mixin.py:188} INFO -  - 4 (note : 5.0)
+[2025-06-21T17:01:56.206+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 36 :
+Je suis allée à Lesquin à la coupe de bois et vraiment je n’y connais rien, le vendeur Nicolas je crois , m’a aidé à trouvé ce que je cherchais et a découpé mes planches . Quand je lui ai demandé où je pouvais trouver les petits taquets ( j’avais un exemplaire ) pour mes étagères il a dit « allée 83 au centre du rayon! » et bingo c’était la !!! Alors si ça ce n’est pas du service … J’adore ce Magasin !!!’
+[2025-06-21T17:01:57.255+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:57.257+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:57.257+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Expérience d'achat en magasin",
+      "note": 5.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 5.0
+    }
+  ]
+}
+[2025-06-21T17:01:57.316+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en magasin
+[2025-06-21T17:01:57.524+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 061d0607d68564685d43cf81097b2b1a
+[2025-06-21T17:01:57.524+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:57.524+0000] {logging_mixin.py:188} INFO -  - 5 (note : 5.0)
+[2025-06-21T17:01:57.525+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 37 :
+Je ne comprends pas les avis négatifs. J'ai toujours été bien conseillé chez eux. Je ne peux que recommander.
+[2025-06-21T17:01:58.792+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:01:58.794+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:01:58.794+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 5.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 5.0
+    }
+  ]
+}
+[2025-06-21T17:01:58.855+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-21T17:01:59.052+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 4e6d8daf5e9b02ddd7de1dc81d870f0d
+[2025-06-21T17:01:59.052+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:01:59.053+0000] {logging_mixin.py:188} INFO -  - 5 (note : 5.0)
+[2025-06-21T17:01:59.053+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 38 :
+Nous avons été très bien reçu par Christophe Merci de son aide pour avoir mis notre matériel dans la voiture
+[2025-06-21T17:02:00.634+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-21T17:02:00.636+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-21T17:02:00.637+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Expérience d'achat en magasin",
+      "note": 5.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 5.0
+    }
+  ]
+}
+[2025-06-21T17:02:00.697+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en magasin
+[2025-06-21T17:02:00.902+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review dd081dd084009d7d62f8d58b50c8a762
+[2025-06-21T17:02:00.902+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-21T17:02:00.902+0000] {logging_mixin.py:188} INFO -  - 5 (note : 5.0)
+[2025-06-21T17:02:00.903+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-06-21T17:02:00.903+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-06-21T17:02:00.916+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=trustpilot_pipeline, task_id=analyze_and_insert, run_id=scheduled__2025-06-09T04:00:00+00:00, execution_date=20250609T040000, start_date=20250621T170045, end_date=20250621T170200
+[2025-06-21T17:02:00.941+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-06-21T17:02:00.957+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-06-21T17:02:00.958+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

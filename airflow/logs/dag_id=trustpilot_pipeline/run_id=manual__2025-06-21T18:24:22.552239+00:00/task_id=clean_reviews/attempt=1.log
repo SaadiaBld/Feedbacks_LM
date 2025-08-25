@@ -1,0 +1,19 @@
+[2025-06-21T18:24:31.736+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-06-21T18:24:31.772+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: trustpilot_pipeline.clean_reviews manual__2025-06-21T18:24:22.552239+00:00 [queued]>
+[2025-06-21T18:24:31.780+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: trustpilot_pipeline.clean_reviews manual__2025-06-21T18:24:22.552239+00:00 [queued]>
+[2025-06-21T18:24:31.780+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-06-21T18:24:31.797+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): clean_reviews> on 2025-06-21 18:24:22.552239+00:00
+[2025-06-21T18:24:31.806+0000] {standard_task_runner.py:63} INFO - Started process 604 to run task
+[2025-06-21T18:24:31.810+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'trustpilot_pipeline', 'clean_reviews', 'manual__2025-06-21T18:24:22.552239+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/trustpilot_dag.py', '--cfg-path', '/tmp/tmp1rlxml0h']
+[2025-06-21T18:24:31.812+0000] {standard_task_runner.py:91} INFO - Job 11: Subtask clean_reviews
+[2025-06-21T18:24:31.828+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.11/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-06-21T18:24:31.863+0000] {task_command.py:426} INFO - Running <TaskInstance: trustpilot_pipeline.clean_reviews manual__2025-06-21T18:24:22.552239+00:00 [running]> on host 80ca18e5691f
+[2025-06-21T18:24:31.957+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='trustpilot_pipeline' AIRFLOW_CTX_TASK_ID='clean_reviews' AIRFLOW_CTX_EXECUTION_DATE='2025-06-21T18:24:22.552239+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-21T18:24:22.552239+00:00'
+[2025-06-21T18:24:31.958+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-06-21T18:24:31.986+0000] {logging_mixin.py:188} INFO - Fichier nettoyé sauvegardé dans data/avis_boutique_clean.csv
+[2025-06-21T18:24:31.986+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-06-21T18:24:31.986+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-06-21T18:24:31.996+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=trustpilot_pipeline, task_id=clean_reviews, run_id=manual__2025-06-21T18:24:22.552239+00:00, execution_date=20250621T182422, start_date=20250621T182431, end_date=20250621T182431
+[2025-06-21T18:24:32.022+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-06-21T18:24:32.046+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-06-21T18:24:32.048+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

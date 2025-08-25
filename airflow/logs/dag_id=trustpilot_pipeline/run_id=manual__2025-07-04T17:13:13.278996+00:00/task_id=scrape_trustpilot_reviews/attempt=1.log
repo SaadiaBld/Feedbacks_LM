@@ -1,0 +1,29 @@
+[2025-07-04T17:13:15.466+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-04T17:13:15.493+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews manual__2025-07-04T17:13:13.278996+00:00 [queued]>
+[2025-07-04T17:13:15.501+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews manual__2025-07-04T17:13:13.278996+00:00 [queued]>
+[2025-07-04T17:13:15.502+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-07-04T17:13:15.512+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): scrape_trustpilot_reviews> on 2025-07-04 17:13:13.278996+00:00
+[2025-07-04T17:13:15.518+0000] {standard_task_runner.py:63} INFO - Started process 208 to run task
+[2025-07-04T17:13:15.521+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'trustpilot_pipeline', 'scrape_trustpilot_reviews', 'manual__2025-07-04T17:13:13.278996+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/trustpilot_dag.py', '--cfg-path', '/tmp/tmpp2iwjft3']
+[2025-07-04T17:13:15.524+0000] {standard_task_runner.py:91} INFO - Job 3: Subtask scrape_trustpilot_reviews
+[2025-07-04T17:13:15.566+0000] {task_command.py:426} INFO - Running <TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews manual__2025-07-04T17:13:13.278996+00:00 [running]> on host b58886cb315d
+[2025-07-04T17:13:15.648+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='trustpilot_pipeline' AIRFLOW_CTX_TASK_ID='scrape_trustpilot_reviews' AIRFLOW_CTX_EXECUTION_DATE='2025-07-04T17:13:13.278996+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-04T17:13:13.278996+00:00'
+[2025-07-04T17:13:15.649+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-04T17:13:15.680+0000] {logging_mixin.py:188} INFO - ▶ Début du scraping à 2025-07-04T17:13:15.680417
+[2025-07-04T17:13:15.680+0000] {logging_mixin.py:188} INFO - Scraping : https://fr.trustpilot.com/review/www.leroymerlin.fr
+[2025-07-04T17:13:19.673+0000] {logging_mixin.py:188} INFO - Scraping : https://fr.trustpilot.com/review/www.leroymerlin.fr?page=2
+[2025-07-04T17:13:20.212+0000] {logging_mixin.py:188} INFO - Tous les avis restants datent de plus de 7 jours. Fin.
+[2025-07-04T17:13:20.213+0000] {logging_mixin.py:188} INFO - Scraping terminé.
+[2025-07-04T17:13:20.213+0000] {logging_mixin.py:188} INFO - 30 avis collectés.
+[2025-07-04T17:13:20.215+0000] {logging_mixin.py:188} INFO - ▶ Début du nettoyage à 2025-07-04T17:13:20.215821
+[2025-07-04T17:13:20.241+0000] {logging_mixin.py:188} INFO - Fichier nettoyé sauvegardé dans data/avis_nettoyes.csv
+[2025-07-04T17:13:20.242+0000] {logging_mixin.py:188} INFO - ▶ Upload dans BigQuery...
+[2025-07-04T17:13:23.668+0000] {logging_mixin.py:188} INFO - ✅ Données chargées dans la table temporaire trustpilot-satisfaction.reviews_dataset.temp_reviews.
+[2025-07-04T17:13:26.619+0000] {logging_mixin.py:188} INFO - ✅ Données fusionnées dans la table trustpilot-satisfaction.reviews_dataset.reviews.
+[2025-07-04T17:13:26.619+0000] {logging_mixin.py:188} INFO - ✅ Pipeline terminé avec succès.
+[2025-07-04T17:13:26.620+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-07-04T17:13:26.620+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-04T17:13:26.638+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=trustpilot_pipeline, task_id=scrape_trustpilot_reviews, run_id=manual__2025-07-04T17:13:13.278996+00:00, execution_date=20250704T171313, start_date=20250704T171315, end_date=20250704T171326
+[2025-07-04T17:13:26.687+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-07-04T17:13:26.710+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-07-04T17:13:26.711+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

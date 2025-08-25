@@ -1,0 +1,98 @@
+[2025-06-24T23:21:52.721+0000] {processor.py:161} INFO - Started process (PID=210) to work on /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:21:52.722+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/trustpilot_dag.py for tasks to queue
+[2025-06-24T23:21:52.724+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:21:52.724+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:21:53.806+0000] {processor.py:840} INFO - DAG(s) 'trustpilot_pipeline' retrieved from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:21:53.933+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:21:53.932+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-06-24T23:21:53.958+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:21:53.958+0000] {dag.py:3954} INFO - Setting next_dagrun for trustpilot_pipeline to 2025-06-23 04:00:00+00:00, run_after=2025-06-30 04:00:00+00:00
+[2025-06-24T23:21:53.977+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/trustpilot_dag.py took 1.263 seconds
+[2025-06-24T23:22:24.146+0000] {processor.py:161} INFO - Started process (PID=227) to work on /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:22:24.148+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/trustpilot_dag.py for tasks to queue
+[2025-06-24T23:22:24.151+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:22:24.150+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:22:25.106+0000] {processor.py:840} INFO - DAG(s) 'trustpilot_pipeline' retrieved from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:22:25.126+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:22:25.126+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-06-24T23:22:25.144+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:22:25.144+0000] {dag.py:3954} INFO - Setting next_dagrun for trustpilot_pipeline to 2025-06-23 04:00:00+00:00, run_after=2025-06-30 04:00:00+00:00
+[2025-06-24T23:22:25.159+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/trustpilot_dag.py took 1.027 seconds
+[2025-06-24T23:22:55.258+0000] {processor.py:161} INFO - Started process (PID=233) to work on /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:22:55.259+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/trustpilot_dag.py for tasks to queue
+[2025-06-24T23:22:55.261+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:22:55.261+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:22:56.333+0000] {processor.py:840} INFO - DAG(s) 'trustpilot_pipeline' retrieved from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:22:56.354+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:22:56.354+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-06-24T23:22:56.375+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:22:56.375+0000] {dag.py:3954} INFO - Setting next_dagrun for trustpilot_pipeline to 2025-06-23 04:00:00+00:00, run_after=2025-06-30 04:00:00+00:00
+[2025-06-24T23:22:56.393+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/trustpilot_dag.py took 1.143 seconds
+[2025-06-24T23:23:26.663+0000] {processor.py:161} INFO - Started process (PID=239) to work on /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:23:26.664+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/trustpilot_dag.py for tasks to queue
+[2025-06-24T23:23:26.666+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:23:26.665+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:23:27.641+0000] {processor.py:840} INFO - DAG(s) 'trustpilot_pipeline' retrieved from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:23:27.667+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:23:27.666+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-06-24T23:23:27.690+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:23:27.690+0000] {dag.py:3954} INFO - Setting next_dagrun for trustpilot_pipeline to 2025-06-23 04:00:00+00:00, run_after=2025-06-30 04:00:00+00:00
+[2025-06-24T23:23:27.709+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/trustpilot_dag.py took 1.052 seconds
+[2025-06-24T23:23:57.786+0000] {processor.py:161} INFO - Started process (PID=245) to work on /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:23:57.787+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/trustpilot_dag.py for tasks to queue
+[2025-06-24T23:23:57.788+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:23:57.788+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:23:58.654+0000] {processor.py:840} INFO - DAG(s) 'trustpilot_pipeline' retrieved from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:23:58.674+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:23:58.673+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-06-24T23:23:58.694+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:23:58.693+0000] {dag.py:3954} INFO - Setting next_dagrun for trustpilot_pipeline to 2025-06-23 04:00:00+00:00, run_after=2025-06-30 04:00:00+00:00
+[2025-06-24T23:23:58.708+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/trustpilot_dag.py took 0.928 seconds
+[2025-06-24T23:24:28.900+0000] {processor.py:161} INFO - Started process (PID=251) to work on /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:24:28.902+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/trustpilot_dag.py for tasks to queue
+[2025-06-24T23:24:28.904+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:24:28.904+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:24:29.947+0000] {processor.py:840} INFO - DAG(s) 'trustpilot_pipeline' retrieved from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:24:29.970+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:24:29.969+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-06-24T23:24:29.994+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:24:29.994+0000] {dag.py:3954} INFO - Setting next_dagrun for trustpilot_pipeline to 2025-06-23 04:00:00+00:00, run_after=2025-06-30 04:00:00+00:00
+[2025-06-24T23:24:30.012+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/trustpilot_dag.py took 1.125 seconds
+[2025-06-24T23:25:00.057+0000] {processor.py:161} INFO - Started process (PID=257) to work on /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:25:00.058+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/trustpilot_dag.py for tasks to queue
+[2025-06-24T23:25:00.060+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:25:00.059+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:25:01.007+0000] {processor.py:840} INFO - DAG(s) 'trustpilot_pipeline' retrieved from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:25:01.030+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:25:01.030+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-06-24T23:25:01.051+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:25:01.051+0000] {dag.py:3954} INFO - Setting next_dagrun for trustpilot_pipeline to 2025-06-23 04:00:00+00:00, run_after=2025-06-30 04:00:00+00:00
+[2025-06-24T23:25:01.068+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/trustpilot_dag.py took 1.018 seconds
+[2025-06-24T23:25:31.159+0000] {processor.py:161} INFO - Started process (PID=263) to work on /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:25:31.160+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/trustpilot_dag.py for tasks to queue
+[2025-06-24T23:25:31.162+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:25:31.162+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:25:32.185+0000] {processor.py:840} INFO - DAG(s) 'trustpilot_pipeline' retrieved from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:25:32.214+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:25:32.213+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-06-24T23:25:32.243+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:25:32.242+0000] {dag.py:3954} INFO - Setting next_dagrun for trustpilot_pipeline to 2025-06-23 04:00:00+00:00, run_after=2025-06-30 04:00:00+00:00
+[2025-06-24T23:25:32.265+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/trustpilot_dag.py took 1.113 seconds
+[2025-06-24T23:26:02.414+0000] {processor.py:161} INFO - Started process (PID=269) to work on /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:26:02.416+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/trustpilot_dag.py for tasks to queue
+[2025-06-24T23:26:02.419+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:26:02.419+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:26:03.377+0000] {processor.py:840} INFO - DAG(s) 'trustpilot_pipeline' retrieved from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:26:03.398+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:26:03.398+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-06-24T23:26:03.417+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:26:03.417+0000] {dag.py:3954} INFO - Setting next_dagrun for trustpilot_pipeline to 2025-06-23 04:00:00+00:00, run_after=2025-06-30 04:00:00+00:00
+[2025-06-24T23:26:03.433+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/trustpilot_dag.py took 1.033 seconds
+[2025-06-24T23:26:33.578+0000] {processor.py:161} INFO - Started process (PID=275) to work on /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:26:33.581+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/trustpilot_dag.py for tasks to queue
+[2025-06-24T23:26:33.584+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:26:33.584+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:26:34.578+0000] {processor.py:840} INFO - DAG(s) 'trustpilot_pipeline' retrieved from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:26:34.599+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:26:34.599+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-06-24T23:26:34.618+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:26:34.618+0000] {dag.py:3954} INFO - Setting next_dagrun for trustpilot_pipeline to 2025-06-23 04:00:00+00:00, run_after=2025-06-30 04:00:00+00:00
+[2025-06-24T23:26:34.637+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/trustpilot_dag.py took 1.075 seconds
+[2025-06-24T23:27:04.779+0000] {processor.py:161} INFO - Started process (PID=281) to work on /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:27:04.780+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/trustpilot_dag.py for tasks to queue
+[2025-06-24T23:27:04.783+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:27:04.782+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:27:05.758+0000] {processor.py:840} INFO - DAG(s) 'trustpilot_pipeline' retrieved from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:27:05.780+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:27:05.780+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-06-24T23:27:05.801+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:27:05.801+0000] {dag.py:3954} INFO - Setting next_dagrun for trustpilot_pipeline to 2025-06-23 04:00:00+00:00, run_after=2025-06-30 04:00:00+00:00
+[2025-06-24T23:27:05.818+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/trustpilot_dag.py took 1.054 seconds
+[2025-06-24T23:27:35.966+0000] {processor.py:161} INFO - Started process (PID=287) to work on /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:27:35.969+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/trustpilot_dag.py for tasks to queue
+[2025-06-24T23:27:35.971+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:27:35.971+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:27:36.942+0000] {processor.py:840} INFO - DAG(s) 'trustpilot_pipeline' retrieved from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:27:36.963+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:27:36.963+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-06-24T23:27:36.983+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:27:36.983+0000] {dag.py:3954} INFO - Setting next_dagrun for trustpilot_pipeline to 2025-06-23 04:00:00+00:00, run_after=2025-06-30 04:00:00+00:00
+[2025-06-24T23:27:37.000+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/trustpilot_dag.py took 1.049 seconds
+[2025-06-24T23:28:07.146+0000] {processor.py:161} INFO - Started process (PID=293) to work on /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:28:07.147+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/trustpilot_dag.py for tasks to queue
+[2025-06-24T23:28:07.149+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:28:07.148+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:28:08.179+0000] {processor.py:840} INFO - DAG(s) 'trustpilot_pipeline' retrieved from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:28:08.199+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:28:08.199+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-06-24T23:28:08.217+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:28:08.217+0000] {dag.py:3954} INFO - Setting next_dagrun for trustpilot_pipeline to 2025-06-23 04:00:00+00:00, run_after=2025-06-30 04:00:00+00:00
+[2025-06-24T23:28:08.235+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/trustpilot_dag.py took 1.098 seconds
+[2025-06-24T23:28:38.292+0000] {processor.py:161} INFO - Started process (PID=299) to work on /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:28:38.293+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/trustpilot_dag.py for tasks to queue
+[2025-06-24T23:28:38.296+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:28:38.295+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:28:39.333+0000] {processor.py:840} INFO - DAG(s) 'trustpilot_pipeline' retrieved from /opt/airflow/dags/trustpilot_dag.py
+[2025-06-24T23:28:39.358+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:28:39.358+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-06-24T23:28:39.382+0000] {logging_mixin.py:188} INFO - [2025-06-24T23:28:39.382+0000] {dag.py:3954} INFO - Setting next_dagrun for trustpilot_pipeline to 2025-06-23 04:00:00+00:00, run_after=2025-06-30 04:00:00+00:00
+[2025-06-24T23:28:39.403+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/trustpilot_dag.py took 1.119 seconds

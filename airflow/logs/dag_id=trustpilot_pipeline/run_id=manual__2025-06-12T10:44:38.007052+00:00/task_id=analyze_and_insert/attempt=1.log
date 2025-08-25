@@ -1,0 +1,19 @@
+[2025-06-12T10:44:47.438+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-06-12T10:44:47.466+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: trustpilot_pipeline.analyze_and_insert manual__2025-06-12T10:44:38.007052+00:00 [queued]>
+[2025-06-12T10:44:47.475+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: trustpilot_pipeline.analyze_and_insert manual__2025-06-12T10:44:38.007052+00:00 [queued]>
+[2025-06-12T10:44:47.475+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-06-12T10:44:47.490+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): analyze_and_insert> on 2025-06-12 10:44:38.007052+00:00
+[2025-06-12T10:44:47.496+0000] {standard_task_runner.py:63} INFO - Started process 441 to run task
+[2025-06-12T10:44:47.501+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'trustpilot_pipeline', 'analyze_and_insert', 'manual__2025-06-12T10:44:38.007052+00:00', '--job-id', '16', '--raw', '--subdir', 'DAGS_FOLDER/trustpilot_dag.py', '--cfg-path', '/tmp/tmpbte4wg2f']
+[2025-06-12T10:44:47.505+0000] {standard_task_runner.py:91} INFO - Job 16: Subtask analyze_and_insert
+[2025-06-12T10:44:47.523+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.11/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-06-12T10:44:47.560+0000] {task_command.py:426} INFO - Running <TaskInstance: trustpilot_pipeline.analyze_and_insert manual__2025-06-12T10:44:38.007052+00:00 [running]> on host 76d17f364da3
+[2025-06-12T10:44:47.650+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='trustpilot_pipeline' AIRFLOW_CTX_TASK_ID='analyze_and_insert' AIRFLOW_CTX_EXECUTION_DATE='2025-06-12T10:44:38.007052+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-12T10:44:38.007052+00:00'
+[2025-06-12T10:44:47.652+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-06-12T10:44:49.824+0000] {logging_mixin.py:188} INFO - 📅 0 verbatims trouvés pour la date : 2025-06-12
+[2025-06-12T10:44:49.825+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-06-12T10:44:49.826+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-06-12T10:44:49.863+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=trustpilot_pipeline, task_id=analyze_and_insert, run_id=manual__2025-06-12T10:44:38.007052+00:00, execution_date=20250612T104438, start_date=20250612T104447, end_date=20250612T104449
+[2025-06-12T10:44:49.935+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-06-12T10:44:49.966+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-06-12T10:44:49.969+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

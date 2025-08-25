@@ -1,0 +1,49 @@
+2025-08-03 20:27:43,663 - WARNING - Thème inconnu : Expérience d'achat en extérieur
+2025-08-03 20:27:43,664 - WARNING - Réponse non valide : {
+  "themes": [
+    {
+      "theme": "Expérience d'achat en extérieur",
+      "note": 4.0
+    }
+  ]
+}
+2025-08-03 21:26:13,852 - WARNING - Thème inconnu : Expérience d'achat en extérieur
+2025-08-03 21:26:13,852 - WARNING - Réponse non valide : {
+  "themes": [
+    {
+      "theme": "Expérience d'achat en extérieur",
+      "note": 4.0
+    }
+  ]
+}
+2025-08-19 17:52:52,333 - WARNING - Thème inconnu : Thème Inconnu
+2025-08-19 17:52:52,337 - WARNING - Note invalide pour Livraison et retrait : 6.0
+2025-08-19 17:52:52,338 - ERROR - Erreur JSON : Expecting property name enclosed in double quotes: line 1 column 2 (char 1) dans : {themes: [}
+2025-08-19 17:52:52,340 - WARNING - Clé 'themes' manquante ou invalide dans : {"other_key": []}
+2025-08-19 17:54:15,827 - WARNING - Thème inconnu : Thème Inconnu
+2025-08-19 17:54:15,829 - WARNING - Note invalide pour Livraison et retrait : 6.0
+2025-08-19 17:54:15,831 - ERROR - Erreur JSON : Expecting property name enclosed in double quotes: line 1 column 2 (char 1) dans : {themes: [}
+2025-08-19 17:54:15,832 - WARNING - Clé 'themes' manquante ou invalide dans : {"other_key": []}
+2025-08-19 17:55:03,486 - WARNING - Thème inconnu : Thème Inconnu
+2025-08-19 17:55:03,489 - WARNING - Note invalide pour Livraison et retrait : 6.0
+2025-08-19 17:55:03,491 - ERROR - Erreur JSON : Expecting property name enclosed in double quotes: line 1 column 2 (char 1) dans : {themes: [}
+2025-08-19 17:55:03,493 - WARNING - Clé 'themes' manquante ou invalide dans : {"other_key": []}
+2025-08-19 17:55:29,133 - WARNING - Thème inconnu : Thème Inconnu
+2025-08-19 17:55:29,135 - WARNING - Note invalide pour Livraison et retrait : 6.0
+2025-08-19 17:55:29,136 - ERROR - Erreur JSON : Expecting property name enclosed in double quotes: line 1 column 2 (char 1) dans : {themes: [}
+2025-08-19 17:55:29,138 - WARNING - Clé 'themes' manquante ou invalide dans : {"other_key": []}
+2025-08-19 17:55:44,856 - WARNING - Thème inconnu : Thème Inconnu
+2025-08-19 17:55:44,858 - WARNING - Note invalide pour Livraison et retrait : 6.0
+2025-08-19 17:55:44,860 - ERROR - Erreur JSON : Expecting property name enclosed in double quotes: line 1 column 2 (char 1) dans : {themes: [}
+2025-08-19 17:55:44,862 - WARNING - Clé 'themes' manquante ou invalide dans : {"other_key": []}
+2025-08-19 18:09:21,247 - WARNING - Thème inconnu : Thème Inconnu
+2025-08-19 18:09:21,249 - WARNING - Note invalide pour Livraison et retrait : 6.0
+2025-08-19 18:09:21,251 - ERROR - Erreur JSON : Expecting property name enclosed in double quotes: line 1 column 2 (char 1) dans : {themes: [}
+2025-08-19 18:09:21,253 - WARNING - Clé 'themes' manquante ou invalide dans : {"other_key": []}
+2025-08-19 18:09:21,259 - WARNING - Clé 'themes' manquante ou invalide dans : {"themes": "not_a_list"}
+2025-08-19 18:09:21,260 - WARNING - Item non structuré correctement : not_a_dict
+2025-08-19 18:09:21,262 - WARNING - Thème inconnu : None
+2025-08-19 18:09:21,263 - WARNING - Note invalide pour Prix et promotions : None
+2025-08-19 18:09:21,264 - WARNING - Note invalide pour Prix et promotions : trois
+2025-08-19 18:09:21,265 - ERROR - Erreur JSON : Expecting value: line 1 column 1 (char 0) dans : 
+2025-08-19 18:09:21,266 - ERROR - Erreur JSON : Expecting value: line 1 column 1 (char 0) dans : Ceci n'est pas du JSON

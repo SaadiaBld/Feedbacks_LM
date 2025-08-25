@@ -1,0 +1,48 @@
+[2025-07-05T08:03:34.577+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-05T08:03:34.604+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: trustpilot_pipeline.analyze_and_insert manual__2025-07-05T08:03:23.034982+00:00 [queued]>
+[2025-07-05T08:03:34.613+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: trustpilot_pipeline.analyze_and_insert manual__2025-07-05T08:03:23.034982+00:00 [queued]>
+[2025-07-05T08:03:34.614+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-07-05T08:03:34.632+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): analyze_and_insert> on 2025-07-05 08:03:23.034982+00:00
+[2025-07-05T08:03:34.639+0000] {standard_task_runner.py:63} INFO - Started process 387 to run task
+[2025-07-05T08:03:34.642+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'trustpilot_pipeline', 'analyze_and_insert', 'manual__2025-07-05T08:03:23.034982+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/trustpilot_dag.py', '--cfg-path', '/tmp/tmprmaca72i']
+[2025-07-05T08:03:34.645+0000] {standard_task_runner.py:91} INFO - Job 7: Subtask analyze_and_insert
+[2025-07-05T08:03:34.688+0000] {task_command.py:426} INFO - Running <TaskInstance: trustpilot_pipeline.analyze_and_insert manual__2025-07-05T08:03:23.034982+00:00 [running]> on host 4b0766ebde83
+[2025-07-05T08:03:34.769+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='trustpilot_pipeline' AIRFLOW_CTX_TASK_ID='analyze_and_insert' AIRFLOW_CTX_EXECUTION_DATE='2025-07-05T08:03:23.034982+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-05T08:03:23.034982+00:00'
+[2025-07-05T08:03:34.770+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-05T08:03:34.783+0000] {logging_mixin.py:188} INFO - 📆 Wrapper Analyse/Insert : scrape_date = 2025-07-05
+[2025-07-05T08:03:34.784+0000] {logging_mixin.py:188} INFO - 📂 Fichier de credentials GCP :  /opt/***/project/config/trustpilot-satisfaction-43aac3dd82a9.json
+[2025-07-05T08:03:34.785+0000] {logging_mixin.py:188} INFO - ✅ Exporter Prometheus lancé sur http://localhost:8000/metrics
+[2025-07-05T08:03:34.785+0000] {logging_mixin.py:188} INFO - Lancement du traitement pour la date : 2025-07-05
+[2025-07-05T08:03:35.999+0000] {logging_mixin.py:188} INFO - ⚠️ Aucun verbatim trouvé pour la date, test avec un faux.
+[2025-07-05T08:03:36.820+0000] {logging_mixin.py:188} INFO - 1 verbatims trouvés pour la date : 2025-07-05
+[2025-07-05T08:03:36.821+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 1 :
+Produit cassé à la livraison. Très déçu. Je ne recommande pas la boutique
+[2025-07-05T08:03:37.861+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-07-05T08:03:37.898+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-07-05T08:03:37.899+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    }
+  ]
+}
+[2025-07-05T08:03:38.566+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review test123
+[2025-07-05T08:03:38.566+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-07-05T08:03:38.567+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-07-05T08:03:38.567+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-07-05T08:03:38.568+0000] {logging_mixin.py:188} INFO - ➡️ VERBATIMS_ANALYZED avant: 0.0
+[2025-07-05T08:03:38.569+0000] {logging_mixin.py:188} INFO - ➡️ VERBATIMS_ANALYZED après: 1.0
+[2025-07-05T08:03:38.576+0000] {logging_mixin.py:188} INFO - 📡 Métriques poussées vers le PushGateway pour le job : verbatim_pipeline
+[2025-07-05T08:03:38.577+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-07-05T08:03:38.577+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-05T08:03:38.594+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=trustpilot_pipeline, task_id=analyze_and_insert, run_id=manual__2025-07-05T08:03:23.034982+00:00, execution_date=20250705T080323, start_date=20250705T080334, end_date=20250705T080338
+[2025-07-05T08:03:38.666+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-07-05T08:03:38.684+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-05T08:03:38.687+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

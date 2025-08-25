@@ -26,7 +26,7 @@ def upload_to_bigquery(csv_path, target_table_id):
     job_config = bigquery.LoadJobConfig(write_disposition="WRITE_TRUNCATE")
     job = client.load_table_from_dataframe(df, temp_table_id, job_config=job_config)
     job.result()  # Attendre la fin du job
-    print(f"✅ Données chargées dans la table temporaire {temp_table_id}.")
+    print(f"Données chargées dans la table temporaire {temp_table_id}.")
 
     #verifier les colonnes du df
     expected_columns = ['review_id', 'rating', 'content', 'author', 'publication_date', 'scrape_date']
@@ -45,31 +45,31 @@ def upload_to_bigquery(csv_path, target_table_id):
 
     query_job = client.query(merge_query)
     query_job.result()  # Attendre la fin du job
-    print(f"✅ Données fusionnées dans la table {target_table_id}.")
+    print(f"Données fusionnées dans la table {target_table_id}.")
 
 
 
 def main():
     print("▶ Début du pipeline à", datetime.now().isoformat())
-    print(f"⚙️ Mode SCRAPER sélectionné : {mode}")
+    print(f" Mode SCRAPER sélectionné : {mode}")
 
     if mode == "csv":
         input_file = os.getenv("CSV_INPUT_PATH", "/opt/airflow/data/verbatims_test.csv")
         output_file = "/opt/airflow/data/avis_nettoyes.csv"
-        print(f"📄 Lecture du fichier de test : {input_file}")
+        print(f"Lecture du fichier de test : {input_file}")
     else:
-        print("🔍 Lancement du scraping en ligne...")
+        print("Lancement du scraping en ligne...")
         scrape_reviews(mode=mode)
         input_file = "/opt/airflow/data/avis_boutique.csv"
         output_file = "/opt/airflow/data/avis_nettoyes.csv"
 
-    print("🧼 Nettoyage des données...")
+    print("Nettoyage des données...")
     clean_csv(input_file, output_file)
 
-    print("📤 Upload vers BigQuery...")
+    print("Upload vers BigQuery...")
     upload_to_bigquery(output_file, "trustpilot-satisfaction.reviews_dataset.reviews")
 
-    print("✅ Pipeline terminé avec succès.")
+    print("Pipeline terminé avec succès.")
 
 if __name__ == "__main__":
     main()

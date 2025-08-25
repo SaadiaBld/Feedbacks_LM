@@ -1,0 +1,290 @@
+[2025-06-24T23:22:08.886+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-06-24T23:22:08.913+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: trustpilot_pipeline.analyze_and_insert scheduled__2025-06-16T04:00:00+00:00 [queued]>
+[2025-06-24T23:22:08.921+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: trustpilot_pipeline.analyze_and_insert scheduled__2025-06-16T04:00:00+00:00 [queued]>
+[2025-06-24T23:22:08.922+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-06-24T23:22:08.934+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): analyze_and_insert> on 2025-06-16 04:00:00+00:00
+[2025-06-24T23:22:08.941+0000] {standard_task_runner.py:63} INFO - Started process 225 to run task
+[2025-06-24T23:22:08.944+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'trustpilot_pipeline', 'analyze_and_insert', 'scheduled__2025-06-16T04:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/trustpilot_dag.py', '--cfg-path', '/tmp/tmpk286bd5v']
+[2025-06-24T23:22:08.947+0000] {standard_task_runner.py:91} INFO - Job 4: Subtask analyze_and_insert
+[2025-06-24T23:22:08.962+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.11/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-06-24T23:22:08.995+0000] {task_command.py:426} INFO - Running <TaskInstance: trustpilot_pipeline.analyze_and_insert scheduled__2025-06-16T04:00:00+00:00 [running]> on host f535c6d1d77c
+[2025-06-24T23:22:09.075+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='trustpilot_pipeline' AIRFLOW_CTX_TASK_ID='analyze_and_insert' AIRFLOW_CTX_EXECUTION_DATE='2025-06-16T04:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-06-16T04:00:00+00:00'
+[2025-06-24T23:22:09.075+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-06-24T23:22:09.086+0000] {logging_mixin.py:188} INFO - 📆 Wrapper Analyse/Insert : scrape_date = 2025-06-16
+[2025-06-24T23:22:09.087+0000] {logging_mixin.py:188} INFO - 📂 Fichier de credentials GCP :  /opt/***/project/config/trustpilot-satisfaction-43aac3dd82a9.json
+[2025-06-24T23:22:09.087+0000] {logging_mixin.py:188} INFO - Lancement du traitement pour la date : 2025-06-16
+[2025-06-24T23:22:10.986+0000] {logging_mixin.py:188} INFO - 9 verbatims trouvés pour la date : 2025-06-16
+[2025-06-24T23:22:10.987+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 1 :
+Bonjour, le deal avec Leroy Merlin c’était 500 points (500 euros) et vous aviez une remise de 15 euros. Aujourd’hui 500 points c’est 10 euros. J’ai eu du mal a arriver a 488 points et on on me dit non monsieur se ne sera que 10 euros maintenant Alors merci la direction de Leroy Merlin Mais je vais passer à la concurrence. Ce n’est pas pour les 5 euros, mais pour le principe, Et je ne manquerai pas de vous faire la publicité que vous méritez……..???
+[2025-06-24T23:22:14.373+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-24T23:22:14.393+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-24T23:22:14.393+0000] {logging_mixin.py:188} INFO -  Voici l'analyse de l'avis client en respectant les consignes :
+
+{
+  "themes": [
+    {
+      "theme": "Prix et promotions",
+      "note": 2.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 2.0
+    },
+    {
+      "theme": "Programme fidélité",
+      "note": 1.0
+    }
+  ]
+}
+
+Explication :
+
+Thèmes identifiés :
+- Prix et promotions : Le client est mécontent du changement de conditions sur les points de fidélité, passant de 500 points = 15 euros à 488 points = 10 euros. Cela semble être perçu comme une publicité mensongère.
+Note : 2/5 - Le client est insatisfait du changement de conditions tarifaires.
+
+- Qualité de la communication : Le client semble avoir eu du mal à comprendre les conditions et les changements appliqués, ce qui a généré de la confusion.
+Note : 2/5 - La communication n'a pas été suffisamment claire et transparente pour le client.
+
+- Programme fidélité : Le client est très mécontent des changements appliqués au programme de fidélité, qui ne lui permettent plus d'atteindre le seuil de 500 points.
+Note : 1/5 - Le client est très insatisfait des conditions du programme de fidélité.
+[2025-06-24T23:22:14.393+0000] {logging_mixin.py:188} INFO - ❌ Erreur lors de l'analyse du verbatim 37247ac327c2e7a1d006e06e80011e57 : Réponse Claude invalide
+[2025-06-24T23:22:14.393+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 2 :
+Pas moyen d'être livré en Belgique!! Encore une enseigne qui ne s'est pas adaptée . Vive l'Europe.
+[2025-06-24T23:22:15.703+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-24T23:22:15.706+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-24T23:22:15.707+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-24T23:22:15.771+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-24T23:22:16.203+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review 04c552c3ebfa6792c5cfb7c150824270
+[2025-06-24T23:22:16.203+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-24T23:22:16.204+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-24T23:22:16.204+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 3 :
+Article commandé en ligne devait être livré en 4jours par DPD, il ne devait sans doute pas être en stock, on me fait tourner en rond. Plusieurs mails et sms contradictoires par jour de DPD tantôt la livraison est programmée dans la journée tantôt la commande n'a pas pu être livrée, sans plus d'explications.... Messages échangés avec EGK Distribution, autant dire que c'est l'incompréhension. Je ne veux plus de cette article, j'attends mon remboursement intégral sans délai, je ne recommande à personne de passer par Leroy Merlin ni par egk... Commander en ligne Livraison en 4 jours ouvrés dès 5,99 € chez vous ? Mes commandes 05 juin 2025 N°25156L20698-A 30,98 € Matelas, transat, tapis de plage avec dossier inclinable et sac de transport - Bleu - Linxor Matelas, transat, tapis de plage avec dossier inclinable et sac de transport - Bleu - Linxor Trouvé exactement le même article à moins de 16€
+[2025-06-24T23:22:17.853+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-24T23:22:17.855+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-24T23:22:17.856+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 1.0
+    },
+    {
+      "theme": "Prix et promotions",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-24T23:22:17.901+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-24T23:22:18.125+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review 6572843ce5abca5cd4f22c7d9de412d3
+[2025-06-24T23:22:18.125+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-24T23:22:18.126+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-24T23:22:18.126+0000] {logging_mixin.py:188} INFO -  - 3 (note : 2.0)
+[2025-06-24T23:22:18.126+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-24T23:22:18.126+0000] {logging_mixin.py:188} INFO -  - 1 (note : 2.0)
+[2025-06-24T23:22:18.126+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 4 :
+Parquet commandé en ligne. Le parquet reçu n'a pas la même couleur que la photo. Je demande le retour. Je n'ai toujours pas été remboursée. Quand on les appelle on a l'impression que personne n'est au courant de rien, ils ne savent pas que le parquet a été retourné. Je ne sais pas ce qui se passe, mais il y a un véritable problème administratif et informatique chez Leroy Merlin.
+[2025-06-24T23:22:19.492+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-24T23:22:19.495+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-24T23:22:19.495+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Retour et remboursement",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-24T23:22:19.786+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review fa1a14c612585debe06bf93c4b1800f4
+[2025-06-24T23:22:19.786+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-24T23:22:19.786+0000] {logging_mixin.py:188} INFO -  - 3 (note : 1.0)
+[2025-06-24T23:22:19.786+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-24T23:22:19.786+0000] {logging_mixin.py:188} INFO -  - 4 (note : 2.0)
+[2025-06-24T23:22:19.787+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 5 :
+achetés des lames composites sur leroymerlin.fr, je vais au retrait marchandise du magasin d'HAUCONCOURT, et la on me livre des lames en état pitoyable. Une honte. Personne ne fait rien, malgré mes relances. J'éviterai désormais ce magasin alors que j'achetais absolument tout dedans.
+[2025-06-24T23:22:21.027+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-24T23:22:21.028+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-24T23:22:21.028+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    }
+  ]
+}
+[2025-06-24T23:22:21.309+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 8e1ea37c8fee933477c6508b8d503f14
+[2025-06-24T23:22:21.310+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-24T23:22:21.310+0000] {logging_mixin.py:188} INFO -  - 2 (note : 1.0)
+[2025-06-24T23:22:21.310+0000] {logging_mixin.py:188} INFO -  - 4 (note : 1.0)
+[2025-06-24T23:22:21.310+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-24T23:22:21.311+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 6 :
+Bonjour, après avoir répondu à un offre d'emploi sur indeed qui concerne le futur magasin de Troyes, un échange par mail pour un entretien est convenu avec Mr Franckelemon Jordan. Après 30 min d'attente et aucun contact de ça part, j'ai dû me faire à l'idée que ce Rdv ne sera pas effectuer. La moindre des politesses et de tenir informer son Rdv d'un empêchement ou autre... Cette expérience commence bien. J'espère que je serais contacté afin de permettre de vous améliorer. Cordialement
+[2025-06-24T23:22:22.666+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-24T23:22:22.668+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-24T23:22:22.668+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Expérience d'achat en magasin",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-24T23:22:22.715+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Expérience d'achat en magasin
+[2025-06-24T23:22:22.715+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-24T23:22:22.909+0000] {logging_mixin.py:188} INFO - 1 lignes insérées pour review f10ba8da4adadf26fa255fe8c234d7e9
+[2025-06-24T23:22:22.909+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-24T23:22:22.910+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-24T23:22:22.910+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 7 :
+Sur l’année 2024 nous avons restauré intégralement la maison. Pour la partie fenêtres et portes fenêtres nous avons choisi de faire confiance à Leroy Merlin et à ses partenaires poseurs. Après 4/5heures passées dans le magasin à détailler les moindres aspects de la commande, le conseiller nous propose de signer pour 18k€ environ. Le prix nous allait très bien, pas de sujet la dessus. Sauf que lors de la pose, en rentrant chez nous, nous constatons qu’un des seuils de la façade côté piscine n’est pas PMR. C’est absolument pas esthétique et ce n’est pourtant pas ce que lon a commandé : sur 4 portes fenêtres, une différente, pourquoi ? Le conseiller du magasin nous rassure immédiatement, ce n’est pas un problème puisqu’ils vont la remplacer sous quinze jours maximum. Il a parlé d’une chaîne SAV spéciale pour ce genre de cas… On a donc patienté un mois, et toujours rien. On les relance et ils nous disent que la solution du conseiller n’existe pas. Ils nous proposent gentiment un remboursement pour clore les débats, que nous acceptons étant donné qu’il faille bien que la maison se termine… Un mois après, sans prévenir, ils nous livre une porte fenêtre avec seuil pmr…les peintures intérieure étaient finies…impossible de la remplacer…elle est donc stockée chez nous, et on ne pourra jamais rien en faire. Alors nous sommes soit disant partis leurs meilleurs clients 2024 avec 45/50k€ dépensé chez eux, mais pour autant nous ne nous sentons pas si important à leurs yeux.
+[2025-06-24T23:22:24.713+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-24T23:22:24.714+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-24T23:22:24.715+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Suivi de projet / travaux sur mesure",
+      "note": 1.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.5
+    },
+    {
+      "theme": "Retour et remboursement",
+      "note": 2.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 2.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-24T23:22:24.757+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-24T23:22:24.968+0000] {logging_mixin.py:188} INFO - 4 lignes insérées pour review 312a2cfad34a43cd9252ce0233409c0b
+[2025-06-24T23:22:24.969+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-24T23:22:24.969+0000] {logging_mixin.py:188} INFO -  - 8 (note : 1.0)
+[2025-06-24T23:22:24.969+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.5)
+[2025-06-24T23:22:24.969+0000] {logging_mixin.py:188} INFO -  - 3 (note : 2.0)
+[2025-06-24T23:22:24.969+0000] {logging_mixin.py:188} INFO -  - 4 (note : 2.0)
+[2025-06-24T23:22:24.969+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 8 :
+Livraison qui coûte cher. Marchandise livré un peu abimé. Une description des produits flou qui ne donnent pas assez d'information sur ce que l'on achète. (des accesoires qui sont plus ou moins nécessaire au fonctionnement du produit n'était pas vendu avec, j'ai du acheté séparement autrepart) Un service client inexistant. À fuir.
+[2025-06-24T23:22:26.353+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-24T23:22:26.355+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-24T23:22:26.355+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 2.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 2.0
+    },
+    {
+      "theme": "Service client / SAV",
+      "note": 1.0
+    },
+    {
+      "theme": "Qualité de la communication",
+      "note": 2.0
+    }
+  ]
+}
+[2025-06-24T23:22:26.411+0000] {logging_mixin.py:188} INFO - Thème inconnu dans la table topics : Qualité de la communication
+[2025-06-24T23:22:26.671+0000] {logging_mixin.py:188} INFO - 3 lignes insérées pour review 8cff7ea12c26ac0e8cd9482b0c5084b3
+[2025-06-24T23:22:26.672+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-24T23:22:26.672+0000] {logging_mixin.py:188} INFO -  - 2 (note : 2.0)
+[2025-06-24T23:22:26.673+0000] {logging_mixin.py:188} INFO -  - 4 (note : 2.0)
+[2025-06-24T23:22:26.673+0000] {logging_mixin.py:188} INFO -  - 5 (note : 1.0)
+[2025-06-24T23:22:26.673+0000] {logging_mixin.py:188} INFO - 
+🟦 Verbatim 9 :
+Commande effectuée sur le site de Leroy Merlin,le 15 avril, reçu quelques jours après. Commande conforme à la description sur le site. Livraison correcte avec signature.
+[2025-06-24T23:22:27.684+0000] {_client.py:1025} INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+[2025-06-24T23:22:27.686+0000] {logging_mixin.py:188} INFO - 
+📥 Réponse brute de Claude :
+[2025-06-24T23:22:27.686+0000] {logging_mixin.py:188} INFO -  {
+  "themes": [
+    {
+      "theme": "Livraison et retrait",
+      "note": 5.0
+    },
+    {
+      "theme": "Qualité des produits",
+      "note": 5.0
+    }
+  ]
+}
+[2025-06-24T23:22:27.919+0000] {logging_mixin.py:188} INFO - 2 lignes insérées pour review cbef8fe9162608034b84c2b12363dd2f
+[2025-06-24T23:22:27.920+0000] {logging_mixin.py:188} INFO - Thèmes détectés :
+[2025-06-24T23:22:27.920+0000] {logging_mixin.py:188} INFO -  - 2 (note : 5.0)
+[2025-06-24T23:22:27.920+0000] {logging_mixin.py:188} INFO -  - 4 (note : 5.0)
+[2025-06-24T23:22:27.921+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-06-24T23:22:27.921+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-06-24T23:22:27.936+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=trustpilot_pipeline, task_id=analyze_and_insert, run_id=scheduled__2025-06-16T04:00:00+00:00, execution_date=20250616T040000, start_date=20250624T232208, end_date=20250624T232227
+[2025-06-24T23:22:28.013+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-06-24T23:22:28.039+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-06-24T23:22:28.041+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

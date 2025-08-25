@@ -26,7 +26,7 @@ def clean_text(text):
 def clean_csv(input_file, output_file):
     # Charger le CSV
     df = pd.read_csv(input_file, dtype=str)
-    
+    rows_before = len(df)
     # Vérification du nombre de colonnes
     expected_cols = ['review_id', 'rating', 'content', 'author', 'publication_date', 'scrape_date']
     if list(df.columns) != expected_cols:
@@ -42,7 +42,7 @@ def clean_csv(input_file, output_file):
     df = df[df['content'].str.strip() != ""]
 
     #supprimer les lignes en double pour les champs 'content' et 'author' similaire
-    df = df.drop_duplicates(subset=['review_id'], keep='first')
+    df = df.drop_duplicates(subset=['author', 'content'], keep='first')
     
     # Sauvegarder le CSV nettoyé
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
@@ -52,10 +52,12 @@ def clean_csv(input_file, output_file):
         try:
             os.remove(output_file)
         except PermissionError as e:
-            print(f"⚠️ Impossible de supprimer le fichier : {output_file} : {e}")
+            print(f" Impossible de supprimer le fichier : {output_file} : {e}")
             raise
+    rows_after = len(df)
     df.to_csv(output_file, index=False, encoding='utf-8')
     print(f"Fichier nettoyé sauvegardé dans {output_file}")
+    return {"rows_before": rows_before, "rows_after": rows_after, "rows_removed": rows_before - rows_after}
 
 
 def clean_data(input_file=None, output_file=None):
@@ -66,8 +68,8 @@ def clean_data(input_file=None, output_file=None):
     if not os.path.exists(input_file):
         raise FileNotFoundError(f"{input_file} introuvable. Lance d'abord le scraper.")
     clean_csv(input_file, output_file)
-    print(f"📂 INPUT_CSV = {input_file}")
-    print(f"📂 OUTPUT_CSV = {output_file}")
+    print(f"INPUT_CSV = {input_file}")
+    print(f"OUTPUT_CSV = {output_file}")
 
 if __name__ == "__main__":
     clean_data()

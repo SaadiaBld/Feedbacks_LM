@@ -6,7 +6,6 @@ import re
 # -------------------------
 # MÉTRIQUES PRINCIPALES
 # -------------------------
-
 # Total de verbatims analysés
 VERBATIMS_ANALYZED = Counter('verbatims_analyzed_total', 'Total des verbatims analysés')
 
@@ -42,16 +41,18 @@ CLAUDE_SUCCESS_RATIO = Gauge('claude_call_success_ratio', "Ratio de succès des 
 # -------------------------
 
 def monitor_start(port=8000):
+    """ Démarre le serveur HTTP pour exporter les métriques Prometheus.
+    Par défaut, écoute sur le port 8000."""
     try:
         # on teste si le port est déjà utilisé
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             if s.connect_ex(("localhost", port)) != 0:
                 start_http_server(port)
-                print(f"✅ Exporter Prometheus lancé sur http://localhost:{port}/metrics")
+                print(f" Exporter Prometheus lancé sur http://localhost:{port}/metrics")
             else:
-                print(f"ℹ️ Exporter Prometheus déjà en cours sur le port {port}")
+                print(f" Exporter Prometheus déjà en cours sur le port {port}")
     except Exception as e:
-        print(f"⚠️ Impossible de démarrer Prometheus : {e}")
+        print(f" Impossible de démarrer Prometheus : {e}")
 
 
 # -------------------------
@@ -96,9 +97,9 @@ def log_analysis_metrics(verbatim_text: str, duration: float, error=False, empty
     if bq_error:
         BQ_INSERT_ERRORS.inc()
 
-    print(f"➡️ VERBATIMS_ANALYZED avant: {VERBATIMS_ANALYZED._value.get()}")
+    print(f" VERBATIMS_ANALYZED avant: {VERBATIMS_ANALYZED._value.get()}")
     VERBATIMS_ANALYZED.inc()
-    print(f"➡️ VERBATIMS_ANALYZED après: {VERBATIMS_ANALYZED._value.get()}")
+    print(f" VERBATIMS_ANALYZED après: {VERBATIMS_ANALYZED._value.get()}")
 
 
 def update_claude_success_ratio(total_calls: int, total_valid: int):
@@ -116,7 +117,7 @@ def push_metrics_to_gateway(job_name="verbatim_pipeline"):
     """
     try:
         push_to_gateway("http://pushgateway:9091", job=job_name, registry=REGISTRY)
-        print(f"📡 Métriques poussées vers le PushGateway pour le job : {job_name}")
+        print(f" Métriques poussées vers le PushGateway pour le job : {job_name}")
     except Exception as e:
-        print(f"❌ Erreur lors du push Prometheus : {e}")
+        print(f" Erreur lors du push Prometheus : {e}")
 

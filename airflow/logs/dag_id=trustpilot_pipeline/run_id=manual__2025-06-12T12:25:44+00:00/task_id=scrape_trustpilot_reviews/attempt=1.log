@@ -1,0 +1,26 @@
+[2025-06-12T12:25:46.182+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-06-12T12:25:46.212+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews manual__2025-06-12T12:25:44+00:00 [queued]>
+[2025-06-12T12:25:46.222+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews manual__2025-06-12T12:25:44+00:00 [queued]>
+[2025-06-12T12:25:46.223+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-06-12T12:25:46.239+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): scrape_trustpilot_reviews> on 2025-06-12 12:25:44+00:00
+[2025-06-12T12:25:46.245+0000] {standard_task_runner.py:63} INFO - Started process 450 to run task
+[2025-06-12T12:25:46.249+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'trustpilot_pipeline', 'scrape_trustpilot_reviews', 'manual__2025-06-12T12:25:44+00:00', '--job-id', '39', '--raw', '--subdir', 'DAGS_FOLDER/trustpilot_dag.py', '--cfg-path', '/tmp/tmpnw6as3ic']
+[2025-06-12T12:25:46.253+0000] {standard_task_runner.py:91} INFO - Job 39: Subtask scrape_trustpilot_reviews
+[2025-06-12T12:25:46.271+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.11/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-06-12T12:25:46.310+0000] {task_command.py:426} INFO - Running <TaskInstance: trustpilot_pipeline.scrape_trustpilot_reviews manual__2025-06-12T12:25:44+00:00 [running]> on host 95e8ca9b6661
+[2025-06-12T12:25:46.408+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='trustpilot_pipeline' AIRFLOW_CTX_TASK_ID='scrape_trustpilot_reviews' AIRFLOW_CTX_EXECUTION_DATE='2025-06-12T12:25:44+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-12T12:25:44+00:00'
+[2025-06-12T12:25:46.411+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-06-12T12:25:46.425+0000] {logging_mixin.py:188} INFO - 📆 Wrapper Scraper : scrape_date = 2025-06-12
+[2025-06-12T12:25:46.425+0000] {logging_mixin.py:188} INFO - Scraping : https://fr.trustpilot.com/review/www.leroymerlin.fr
+[2025-06-12T12:25:49.917+0000] {logging_mixin.py:188} INFO - Scraping : https://fr.trustpilot.com/review/www.leroymerlin.fr?page=2
+[2025-06-12T12:25:54.756+0000] {logging_mixin.py:188} INFO - Scraping : https://fr.trustpilot.com/review/www.leroymerlin.fr?page=3
+[2025-06-12T12:25:58.970+0000] {logging_mixin.py:188} INFO - Scraping : https://fr.trustpilot.com/review/www.leroymerlin.fr?page=4
+[2025-06-12T12:25:59.243+0000] {logging_mixin.py:188} INFO - Tous les avis restants datent de plus de 7 jours. Fin.
+[2025-06-12T12:25:59.244+0000] {logging_mixin.py:188} INFO - Scraping terminé.
+[2025-06-12T12:25:59.245+0000] {logging_mixin.py:188} INFO - 67 avis collectés.
+[2025-06-12T12:25:59.250+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-06-12T12:25:59.250+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-06-12T12:25:59.261+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=trustpilot_pipeline, task_id=scrape_trustpilot_reviews, run_id=manual__2025-06-12T12:25:44+00:00, execution_date=20250612T122544, start_date=20250612T122546, end_date=20250612T122559
+[2025-06-12T12:25:59.310+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-06-12T12:25:59.337+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-06-12T12:25:59.340+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

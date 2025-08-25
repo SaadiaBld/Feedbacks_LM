@@ -1,4 +1,4 @@
-from .bq_connect import get_verbatims_from_bq
+from .bq_connect import get_verbatims_by_date as get_verbatims_from_bq
 from .claude_interface import classify_with_claude
 
 def run(scrape_date: str):

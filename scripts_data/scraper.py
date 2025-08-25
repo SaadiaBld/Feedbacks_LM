@@ -125,7 +125,7 @@ def scrape_reviews(mode = None, scrape_date=None):
             for review in reviews_list:
                 writer.writerow(review)
 
-# temporairement desactivée pour tester le dag 
+# Fonction principale pour exécuter le scraper
      
 def run_scraper(scrape_date=None):
     if scrape_date is None:
