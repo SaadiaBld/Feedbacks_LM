@@ -7,17 +7,17 @@ import csv, time, random, os
 import pandas as pd
 import hashlib
 
+SCRAPER_MODE = os.getenv("SCRAPER_MODE", "csv")
 
 def generate_review_hash(row):
     """
     Génère un hash unique pour chaque avis basé sur l'auteur et le contenu.
-    Utilisé pour éviter les doublons dans la base de données.
     """
     key = f"{row['author']}|{row['content']}|{row['publication_date']}"
     return hashlib.md5(key.encode('utf-8')).hexdigest()
 
 
-def scrape_reviews(mode = "csv"):
+def scrape_reviews(mode = None, scrape_date=None):
     """
     Scrape les avis Trustpilot de Leroy Merlin datant de moins de 7 jours.
     Modes possibles :
@@ -25,9 +25,12 @@ def scrape_reviews(mode = "csv"):
     - 'json' : retourne une liste de dictionnaires (pour l’API)
     - 'pandas' : retourne un DataFrame (pour un pipeline NLP)
     """
+    mode = mode or SCRAPER_MODE
+    scrape_date = scrape_date or datetime.utcnow().date().isoformat()
+    
     # Date d’aujourd’hui et seuil de 7 jours
     scrape_date = datetime.utcnow().date().isoformat()
-    seven_days_ago = datetime.utcnow().date() - timedelta(days=7)
+    cutoff_date = datetime.utcnow().date() - timedelta(days=7)
 
     HEADERS = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -82,7 +85,7 @@ def scrape_reviews(mode = "csv"):
 
             if not rating or not comment or not publication_date:
                 continue
-            if publication_date < seven_days_ago:
+            if publication_date < cutoff_date:
                 stop_scraping = True
                 break
 
@@ -107,6 +110,7 @@ def scrape_reviews(mode = "csv"):
         time.sleep(random.uniform(2, 5))
 
     print("Scraping terminé.")
+    print(f"{len(reviews_list)} avis collectés.")
 
     # === Sortie selon le mode ===
     if mode == "json":
@@ -114,8 +118,17 @@ def scrape_reviews(mode = "csv"):
     elif mode == "pandas":
         return pd.DataFrame(reviews_list)
     else:  # mode == "csv"
-        with open('data/avis_boutique.csv', mode='w', newline='', encoding='utf-8') as file:
+        output_path = '/opt/airflow/project/data/avis_boutique.csv'
+        with open(output_path, mode='w', newline='', encoding='utf-8') as file:
             writer = csv.DictWriter(file, fieldnames=['review_id', 'rating', 'content', 'author', 'publication_date', 'scrape_date'], quoting=csv.QUOTE_ALL)
             writer.writeheader()
             for review in reviews_list:
                 writer.writerow(review)
+
+# temporairement desactivée pour tester le dag 
+     
+def run_scraper(scrape_date=None):
+    if scrape_date is None:
+        scrape_date = datetime.utcnow().date().isoformat()
+    scrape_reviews(mode=SCRAPER_MODE, scrape_date=scrape_date)
+
