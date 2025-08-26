@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import csv, time, random, os
 import pandas as pd
 import hashlib
+import logging
 
 SCRAPER_MODE = os.getenv("SCRAPER_MODE", "csv")
 BASE_URL = "https://fr.trustpilot.com"
@@ -13,6 +14,8 @@ HEADERS = {
                   "AppleWebKit/537.36 (KHTML, like Gecko) "
                   "Chrome/124.0.0.0 Safari/537.36"
 }
+
+logger = logging.getLogger(__name__)
 
 def generate_review_hash(row):
     key = f"{row['author']}|{row['content']}|{row['publication_date']}"
@@ -25,11 +28,11 @@ def scrape_reviews(mode=None, scrape_date=None):
 
     reviews_list = []
     current_url = START_URL
-    print("▶ Début du scraping...")
+    logger.info("Début du scraping...")
 
     try:
         while current_url:
-            print(f"Scraping : {current_url}")
+            logger.info(f"Scraping : {current_url}")
             response = requests.get(current_url, headers=HEADERS, timeout=10)
             response.raise_for_status()
 
@@ -73,14 +76,14 @@ def scrape_reviews(mode=None, scrape_date=None):
                 reviews_list.append(review_dict)
 
             if stop_scraping:
-                print("⏹️ Fin : les avis restants datent de plus de 7 jours.")
+                logger.info("Fin : les avis restants datent de plus de 7 jours.")
                 break
 
             next_page_tag = soup.find('a', attrs={"aria-label": "Page suivante"})
             current_url = BASE_URL + next_page_tag['href'] if next_page_tag else None
             time.sleep(random.uniform(2, 5))  # ⚠️ Risque sur CF si trop long
 
-        print(f"✅ {len(reviews_list)} avis collectés.")
+        logger.info(f"{len(reviews_list)} avis collectés.")
 
         if mode == "json":
             return reviews_list
@@ -96,10 +99,10 @@ def scrape_reviews(mode=None, scrape_date=None):
                 writer.writeheader()
                 for review in reviews_list:
                     writer.writerow(review)
-            print(f"📄 Fichier sauvegardé dans {output_path}")
+            logger.info(f"Fichier sauvegardé dans {output_path}")
 
     except Exception as e:
-        print(f"❌ Erreur durant le scraping : {e}")
+        logger.error(f"Erreur durant le scraping : {e}", exc_info=True)
         raise
 
 # Exécution directe possible (facilite les tests en local)

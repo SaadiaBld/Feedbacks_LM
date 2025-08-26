@@ -37,7 +37,7 @@ def upload_to_bigquery(csv_path, target_table_id):
     merge_query = f"""
     MERGE `{target_table_id}` T
     USING `{temp_table_id}` S
-    ON T.review_id = S.review_id
+    ON T.author = S.author AND T.content = S.content AND T.publication_date = S.publication_date
     WHEN NOT MATCHED THEN
         INSERT (review_id, rating, content, author, publication_date, scrape_date)
         VALUES (S.review_id, S.rating, S.content, S.author, S.publication_date, S.scrape_date)

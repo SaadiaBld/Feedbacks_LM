@@ -1,11 +1,9 @@
 import pandas as pd
 from google.cloud import bigquery
 import os
-from dotenv import load_dotenv
+import logging
 
-if not os.getenv("K_SERVICE"):
-    load_dotenv(dotenv_path="config/.env")
-
+logger = logging.getLogger(__name__)
 
 def deduplicate_reviews():
     client = bigquery.Client()
@@ -32,7 +30,7 @@ def deduplicate_reviews():
     review_ids = row["ids"]
 
     if nb_to_delete == 0:
-        print("✅ Aucun doublon à supprimer dans la table reviews")
+        logger.info("Aucun doublon à supprimer dans la table reviews")
         return
 
     delete_query = """
@@ -47,7 +45,7 @@ def deduplicate_reviews():
     delete_job = client.query(delete_query, job_config=job_config)
     delete_job.result()
 
-    print(f"🧹 {nb_to_delete} doublons supprimés dans la table reviews")
+    logger.info(f"{nb_to_delete} doublons supprimés dans la table reviews")
 
 
 def insert_clean_reviews_to_bq():
@@ -55,13 +53,13 @@ def insert_clean_reviews_to_bq():
     table_id = "trustpilot-satisfaction.reviews_dataset.reviews"
 
     if not os.path.exists(path):
-        print(f"🚫 Le fichier {path} n'existe pas.")
+        logger.error(f"Le fichier {path} n'existe pas.")
         return
 
     df = pd.read_csv(path)
 
     if df.empty:
-        print("🚫 Le fichier nettoyé est vide. Rien à insérer.")
+        logger.warning("Le fichier nettoyé est vide. Rien à insérer.")
         return
 
     client = bigquery.Client()
@@ -78,9 +76,9 @@ def insert_clean_reviews_to_bq():
 
     try:
         job.result()
-        print(f"✅ {df.shape[0]} lignes insérées dans {table_id}")
+        logger.info(f"{df.shape[0]} lignes insérées dans {table_id}")
     except Exception as e:
-        print(f"❌ Erreur lors de l'insertion dans BigQuery : {e}")
+        logger.error(f"Erreur lors de l'insertion dans BigQuery : {e}", exc_info=True)
 
 
 def main(request=None):

@@ -2,10 +2,13 @@ import os, uuid
 from datetime import datetime
 from typing import List, Dict
 from google.cloud import bigquery
+import logging
 
 # Import interne (doit fonctionner avec ton arborescence cloud_function/)
 from .bq_connect import get_verbatims_by_date as get_verbatims_from_bq
 from api.claude_interface import classify_with_claude
+
+logger = logging.getLogger(__name__)
 
 # === Fonctions de chargement et de traitement ===
 
@@ -25,11 +28,11 @@ def process_verbatims(verbatims: List[Dict], label_to_id: Dict[str, str], scrape
     unknown_themes = set()
     
     for i, v in enumerate(verbatims):
-        print(f"\nVerbatim {i+1} :\n{v['content']}")
+        logger.info(f"Verbatim {i+1} : {v['content']}")
         annotations = classify_with_claude(v['content'])
 
         if not annotations:
-            print("Analyse non exploitable pour ce verbatim.")
+            logger.warning("Analyse non exploitable pour ce verbatim.")
             continue
 
         for entry in annotations:
@@ -38,12 +41,12 @@ def process_verbatims(verbatims: List[Dict], label_to_id: Dict[str, str], scrape
             topic_id = label_to_id.get(theme)
 
             if not topic_id:
-                print(f"Thème inconnu : '{theme}'. Il sera ignoré.")
+                logger.warning(f"Thème inconnu : '{theme}'. Il sera ignoré.")
                 unknown_themes.add(theme)
                 continue
             
             if not isinstance(note, (int, float)) or not (1 <= note <= 5):
-                print(f" Note invalide pour {theme} : {note}. Elle sera ignorée.")
+                logger.warning(f"Note invalide pour {theme} : {note}. Elle sera ignorée.")
                 continue
 
             score_0_1 = round((5 - note) / 4, 2)
@@ -61,7 +64,7 @@ def process_verbatims(verbatims: List[Dict], label_to_id: Dict[str, str], scrape
                 "label_sentiment": label,
                 "score_0_1": score_0_1
             })
-            print(f"Thème : {theme}, Note : {note}")
+            logger.info(f"Thème : {theme}, Note : {note}")
             
     return rows_to_insert, unknown_themes
 
@@ -70,7 +73,7 @@ def process_verbatims(verbatims: List[Dict], label_to_id: Dict[str, str], scrape
 def insert_into_bigquery(data: List[Dict]):
     """Insère les données traitées dans BigQuery."""
     if not data:
-        print("\nAucune donnée valide à insérer. Vérifiez les thèmes inconnus ci-dessous.")
+        logger.warning("Aucune donnée valide à insérer. Vérifiez les thèmes inconnus ci-dessous.")
         return
         
     client = bigquery.Client()
@@ -78,16 +81,16 @@ def insert_into_bigquery(data: List[Dict]):
 
     errors = client.insert_rows_json(table_id, data)
     if not errors:
-        print(f"\n{len(data)} lignes insérées avec succès dans {table_id}.")
+        logger.info(f"{len(data)} lignes insérées avec succès dans {table_id}.")
     else:
-        print(f"\nErreurs d’insertion dans BigQuery : {errors}")
+        logger.error(f"Erreurs d’insertion dans BigQuery : {errors}")
 
 # === Point d'entrée principal ===
 
 def run(scrape_date: str):
     """Orchestre l'analyse et l'insertion."""
     verbatims = get_verbatims_from_bq(scrape_date=scrape_date)
-    print(f"{len(verbatims)} verbatims trouvés à analyser pour la date {scrape_date}.")
+    logger.info(f"{len(verbatims)} verbatims trouvés à analyser pour la date {scrape_date}.")
 
     if not verbatims:
         return
@@ -98,16 +101,16 @@ def run(scrape_date: str):
     insert_into_bigquery(rows_to_insert)
 
     if unknown_themes:
-        print("\n--- RÉSUMÉ DES THÈMES INCONNUS ---")
-        print("Les thèmes suivants ont été détectés par Claude mais n'existent pas dans votre table 'topics':")
+        logger.warning("--- RÉSUMÉ DES THÈMES INCONNUS ---")
+        logger.warning("Les thèmes suivants ont été détectés par Claude mais n'existent pas dans votre table 'topics':")
         for theme in sorted(list(unknown_themes)):
-            print(f"- {theme}")
-        print("\nVeuillez les ajouter à la table `trustpilot-satisfaction.reviews_dataset.topics` pour que les analyses futures soient enregistrées.")
+            logger.warning(f"- {theme}")
+        logger.warning("Veuillez les ajouter à la table `trustpilot-satisfaction.reviews_dataset.topics` pour que les analyses futures soient enregistrées.")
 
-# === Point d’entrée pour Google Cloud Function ===
+# === Point d'entrée pour Google Cloud Function ===
 
 def classify_trigger(event, context):
     """Déclenchement par Cloud Scheduler (via Pub/Sub)"""
     today = datetime.utcnow().date().isoformat()
-    print(f"Lancement de l’analyse Claude pour la date : {today}")
+    logger.info(f"Lancement de l’analyse Claude pour la date : {today}")
     run(scrape_date=today)

@@ -3,5 +3,6 @@ pandas
 beautifulsoup4
 google-cloud-bigquery
 python-dotenv
-anthropic  
+anthropic==0.64.0  
 pyarrow
+google-cloud-secret-manager

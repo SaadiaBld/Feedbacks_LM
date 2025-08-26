@@ -6,7 +6,7 @@ import pendulum, sys, os, logging
 from scripts_data.scraper import scrape_reviews
 from scripts_data.cleaner import clean_data
 from scripts_data.main import main as run_full_scraper_pipeline
-from api.bq_insert_clean_data import insert_clean_reviews_to_bq, deduplicate_reviews
+from api.bq_insert_clean_data import insert_clean_reviews_to_bq
 from dotenv import load_dotenv
 
 # Chargement des variables d'environnement
@@ -91,12 +91,6 @@ with DAG(
     python_callable=insert_clean_reviews_to_bq,
     )
 
-    # Suppression des doublons 
-    dedup_task = PythonOperator(
-    task_id='deduplicate_reviews',
-    python_callable=deduplicate_reviews,
-)
-
     # Analyse / Insertion ou Dummy si process indisponible
     if PROCESS_AVAILABLE:
         analyze_insert_task = PythonOperator(
@@ -108,4 +102,4 @@ with DAG(
         analyze_insert_task = DummyOperator(task_id='skip_analyze_insert_due_to_missing_cred')
 
     # Orchestration
-    scrape_task >> clean_task >> insert_task >> dedup_task >> analyze_insert_task
+    scrape_task >> clean_task >> insert_task >> analyze_insert_task

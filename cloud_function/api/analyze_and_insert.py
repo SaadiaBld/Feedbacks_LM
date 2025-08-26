@@ -3,6 +3,7 @@ import time
 import uuid
 from datetime import datetime
 from dotenv import load_dotenv
+import logging
 
 from .bq_connect import get_verbatims_by_date
 from .claude_interface import classify_with_claude
@@ -10,6 +11,8 @@ from google.cloud import bigquery
 
 # Les variables d'environnement (ex: PROJECT_ID) doivent être définies
 # directement dans la configuration de la Cloud Function.
+
+logger = logging.getLogger(__name__)
 
 def get_project_id():
     project_id = os.getenv("PROJECT_ID")
@@ -37,12 +40,12 @@ def insert_topic_analysis(review_id: str, theme_scores: list[dict], label_to_id:
         topic_id = label_to_id.get(theme)
 
         if not topic_id:
-            print(f"Thème inconnu dans la table topics : {theme}")
+            logger.warning(f"Thème inconnu dans la table topics : {theme}")
             unknown_topics.append(theme)
             continue
 
         if not isinstance(note, (int, float)) or not (1 <= note <= 5):
-            print(f"Note invalide pour {theme} : {note}")
+            logger.warning(f"Note invalide pour {theme} : {note}")
             continue
 
         score_0_1 = round((5 - note) / 4, 2)
@@ -68,15 +71,15 @@ def insert_topic_analysis(review_id: str, theme_scores: list[dict], label_to_id:
         })
 
     if not rows_to_insert:
-        print("⚠️ Aucun thème à insérer")
+        logger.info("Aucun thème à insérer")
         return
 
     errors = client.insert_rows_json("trustpilot-satisfaction.reviews_dataset.topic_analysis", rows_to_insert)
 
     if errors:
-        print(f"❌ Erreurs d'insertion : {errors}")
+        logger.error(f"Erreurs d'insertion : {errors}")
     else:
-        print(f"✅ {len(rows_to_insert)} lignes insérées pour review {review_id}")
+        logger.info(f"{len(rows_to_insert)} lignes insérées pour review {review_id}")
 
     return {
         "insert_errors": bool(errors),
@@ -85,16 +88,16 @@ def insert_topic_analysis(review_id: str, theme_scores: list[dict], label_to_id:
 
 def run_analysis(scrape_date: str):
     verbatims = get_verbatims_by_date(scrape_date)
-    print(f"📊 {len(verbatims)} verbatims récupérés pour {scrape_date}")
+    logger.info(f"{len(verbatims)} verbatims récupérés pour {scrape_date}")
 
     if not verbatims:
-        print("⚠️ Aucun verbatim trouvé pour la date.")
+        logger.info("Aucun verbatim trouvé pour la date.")
         return
 
     label_to_id = load_topic_ids()
 
     for i, v in enumerate(verbatims):
-        print(f"\n🔍 Verbatim {i+1} : {v['content'][:60]}...")
+        logger.info(f"Verbatim {i+1} : {v['content'][:60]}...")
 
         start = time.time()
         try:
@@ -106,16 +109,16 @@ def run_analysis(scrape_date: str):
                     label_to_id=label_to_id
                 )
             else:
-                print("⚠️ Claude n’a rien renvoyé")
+                logger.warning("Claude n’a rien renvoyé")
         except Exception as e:
-            print(f"❌ Erreur lors de l'analyse : {e}")
+            logger.error(f"Erreur lors de l'analyse : {e}", exc_info=True)
 
 def process_and_insert_all(scrape_date: str = None):
     if not scrape_date:
         scrape_date = datetime.utcnow().date().isoformat()
-    print(f"▶ Début du traitement pour {scrape_date}")
+    logger.info(f"Début du traitement pour {scrape_date}")
     run_analysis(scrape_date)
-    print(f"✅ Fin du traitement")
+    logger.info(f"Fin du traitement")
 
 # ✅ Entrée pour Cloud Function
 def main(request=None):

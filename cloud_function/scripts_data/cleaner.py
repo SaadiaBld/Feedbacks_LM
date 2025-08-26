@@ -5,8 +5,7 @@ from datetime import datetime
 from flask import jsonify, Request
 import logging
 
-# === Configuration du logger pour Cloud Logging ===
-logging.basicConfig(level=logging.INFO)
+# === Configuration du logger pour Cloud Functions (stdout uniquement) ===
 logger = logging.getLogger(__name__)
 
 def clean_emojis(text):
@@ -38,7 +37,7 @@ def clean_csv(input_file, output_file):
     df = df[~df['content'].isin(["?", "", None])]
     df = df[~df['content'].isna()]
     df = df[df['content'].str.strip() != ""]
-    df = df.drop_duplicates(subset=['review_id'], keep='first')
+    df = df.drop_duplicates(subset=['author', 'content', 'publication_date'], keep='first')
 
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
@@ -94,3 +93,4 @@ def clean_csv_http(request: Request):
     except Exception as e:
         logger.exception("Erreur pendant le nettoyage du CSV")
         return jsonify({"status": "error", "message": str(e)}), 500
+
