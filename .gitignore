@@ -3,3 +3,8 @@ analyze_new_reviews.py
 gcp-creds.json
 *.env
 archives/
+data/
+logs/
+airflow.db
+__pycache__/
+config/

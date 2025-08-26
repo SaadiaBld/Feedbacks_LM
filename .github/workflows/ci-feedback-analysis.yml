@@ -40,7 +40,7 @@ jobs:
           # s'ils ne sont pas explicitement marqués comme intégration
           PYTEST_RUNNING: "true"
         run: |
-          pytest -v --cov=api --cov=scripts_data --cov-report=xml -m "not integration"
+          python -m pytest -v --cov=api --cov=scripts_data --cov-report=xml -m "not integration"
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
@@ -48,11 +48,20 @@ jobs:
           name: coverage-report
           path: coverage.xml
 
+      - name: Set up GCP Credentials
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "${{ secrets.GCP_CREDENTIALS_JSON }}" > gcp_credentials.json
+          chmod 600 gcp_credentials.json # Set appropriate permissions
+        env:
+          GCP_CREDENTIALS_JSON: ${{ secrets.GCP_CREDENTIALS_JSON }}
+
       - name: Run Integration Tests (on main branch only)
         if: github.ref == 'refs/heads/main'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          PROJECT_ID: ${{ secrets.PROJECT_ID }} # Ajouter le project ID aux secrets
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
           PYTEST_RUNNING: "true"
+          GOOGLE_APPLICATION_CREDENTIALS: gcp_credentials.json # Point to the created file
         run: |
-          pytest -v -m "integration"
+          python -m pytest -v -m "integration"
