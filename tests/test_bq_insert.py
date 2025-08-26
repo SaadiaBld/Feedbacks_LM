@@ -3,6 +3,8 @@ import uuid, pytest, os
 from unittest.mock import patch
 from api.analyze_and_insert import insert_topic_analysis
 
+pytestmark = pytest.mark.integration
+
 @pytest.mark.skipif(not os.getenv("PROJECT_ID"), reason="PROJECT_ID manquant pour ce test")
 @patch("api.analyze_and_insert.bigquery.Client")
 def test_insert_topic_analysis_valid(mock_bq_client_class):

@@ -1,13 +1,12 @@
-import anthropic, os, json, logging
+import anthropic, os, json, logging, sys
 from dotenv import load_dotenv
 from pathlib import Path
 from .prompt_utils import build_prompt, THEMES
 
-# Load .env 
-#env_path = Path(__file__).resolve().parents[1] / ".env" # assurer que le fichier .env est bien trouvé et chargé, quelle que soit la manière dont le script est exécuté (en local, dans Airflow,
-dotenv_path = os.path.join(os.path.dirname(__file__), '..', '..', '.env')
+#dotenv_path = os.path.join(os.path.dirname(__file__), '..', '..', '.env')
+
+dotenv_path = Path(__file__).resolve().parent.parent / ".env"
 if os.getenv("PYTEST_RUNNING"):
-    # En mode test, on ne lève pas d'erreur si le .env n'est pas trouvé
     # Les variables d'environnement seront mockées par pytest
     if os.path.exists(dotenv_path):
         load_dotenv(dotenv_path=dotenv_path)
@@ -27,7 +26,8 @@ logger = logging.getLogger("claude_logger")
 logger.setLevel(logging.INFO)
 logger.propagate = False
 
-if not logger.hasHandlers():
+# Ne pas créer de fichier de log pendant les tests pour éviter les problèmes de permission
+if 'pytest' not in sys.modules:
     handler = logging.FileHandler("claude_errors.log", encoding="utf-8")
     handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
     logger.addHandler(handler)
@@ -46,8 +46,7 @@ def classify_with_claude(verbatim: str) -> list[dict] | None:
 
         content = response.content[0].text.strip()
         
-        # Print brut de la réponse JSON 
-        print("\nRéponse brute de Claude :\n", content)
+        logger.info(f"Réponse brute de Claude : {content}")
 
         validated = validate_claude_response(content)
         if not validated:

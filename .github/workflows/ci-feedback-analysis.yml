@@ -9,58 +9,50 @@ on:
     branches:
       - main
       - ci-cd-tests
-  workflow_dispatch: # Permet de déclencher la chaîne manuellement
-  schedule:
-    - cron: '0 0 * * *' # Déclenche la chaîne tous les jours à minuit UTC
+  workflow_dispatch:
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11'] # Standardiser sur une version
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest pytest-cov # Ajout de pytest-cov pour la couverture
+          # Installer les dépendances de test, y compris airflow pour les tests de DAG
+          pip install pytest pytest-cov pytest-mock apache-airflow
 
-      - name: Run Unit Tests (Prompt Utils)
+      - name: Run Unit Tests & Generate Coverage
         env:
+          # On s'assure que les tests qui dépendent de secrets sont sautés
+          # s'ils ne sont pas explicitement marqués comme intégration
           PYTEST_RUNNING: "true"
         run: |
-          pytest tests/test_prompt_utils.py
+          pytest -v --cov=api --cov=scripts_data --cov-report=xml -m "not integration"
 
-      - name: Run Unit Tests (Claude Interface & Output Validation)
-        env:
-          PYTEST_RUNNING: "true"
-        run: |
-          pytest tests/test_claude_interface.py
-
-      - name: Run Integration Tests (Claude Golden Set)
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }} # Utilise un secret GitHub
-          PYTEST_RUNNING: "true"
-        run: |
-          pytest tests/test_claude_integration.py
-
-      - name: Run Other Unit Tests
-        env:
-          PYTEST_RUNNING: "true"
-        run: |
-          # Exécute les autres tests unitaires, en ignorant les tests d'intégration et les tests de DAG
-          pytest tests/ --ignore=tests/test_claude_integration.py --ignore=tests/test_dag_workflow.py
-
-      - name: Upload test results as artifact
-        if: always()
+      - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
         with:
-          name: test-results
-          path: tests/reports/
+          name: coverage-report
+          path: coverage.xml
+
+      - name: Run Integration Tests (on main branch only)
+        if: github.ref == 'refs/heads/main'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PROJECT_ID: ${{ secrets.PROJECT_ID }} # Ajouter le project ID aux secrets
+          PYTEST_RUNNING: "true"
+        run: |
+          pytest -v -m "integration"

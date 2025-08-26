@@ -1,5 +1,7 @@
 import pytest
 from api.claude_interface import classify_with_claude
+
+pytestmark = pytest.mark.integration
 import os
 
 # --- Golden Set de tests d'intégration ---

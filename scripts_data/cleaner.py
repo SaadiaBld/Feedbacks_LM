@@ -31,29 +31,30 @@ def clean_csv(input_file, output_file):
     expected_cols = ['review_id', 'rating', 'content', 'author', 'publication_date', 'scrape_date']
     if list(df.columns) != expected_cols:
         raise ValueError(f"Le fichier CSV a une structure invalide : {list(df.columns)}. Attendu : {expected_cols}")
-    # Nettoyer les commentaires
-    df['content'] = df['content'].astype(str).apply(clean_text)
-    
-    # Supprimer les lignes où content est vide ou juste un "?"
-    df = df[~df['content'].isin(["?", ""])]
-    
-    # supprimer les lignes où content est NaN ou vide
-    df = df[~df['content'].isna()]
-    df = df[df['content'].str.strip() != ""]
+    # Supprimer les lignes où content est NaN, vide ou juste un "?" AVANT le nettoyage
+    df.dropna(subset=['content'], inplace=True)
+    df = df[df['content'].str.strip().isin(["?", ""]) == False]
+
+    # Nettoyer les commentaires restants
+    df['content'] = df['content'].apply(clean_text)
 
     #supprimer les lignes en double pour les champs 'content' et 'author' similaire
     df = df.drop_duplicates(subset=['author', 'content'], keep='first')
     
     # Sauvegarder le CSV nettoyé
-    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    if isinstance(output_file, (str, os.PathLike)):
+        output_dir = os.path.dirname(output_file)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
 
-    #Supprimer le fichier s’il existe déjà (et potentiellement bloqué en lecture seule)
-    if os.path.exists(output_file):
-        try:
-            os.remove(output_file)
-        except PermissionError as e:
-            print(f" Impossible de supprimer le fichier : {output_file} : {e}")
-            raise
+        #Supprimer le fichier s’il existe déjà (et potentiellement bloqué en lecture seule)
+        if os.path.exists(output_file):
+            try:
+                os.remove(output_file)
+            except PermissionError as e:
+                print(f" Impossible de supprimer le fichier : {output_file} : {e}")
+                raise
+    
     rows_after = len(df)
     df.to_csv(output_file, index=False, encoding='utf-8')
     print(f"Fichier nettoyé sauvegardé dans {output_file}")

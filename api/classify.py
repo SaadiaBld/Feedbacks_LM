@@ -8,10 +8,10 @@ def run(scrape_date: str):
         result = classify_with_claude(v)
 
         if result:
-            print(f"✅ Thèmes détectés : {result['themes']}")
-            print(f"📝 Note de satisfaction sur 5 : {result['note']}")
+            print(f"Thèmes détectés : {result['themes']}")
+            print(f"Note de satisfaction sur 5 : {result['note']}")
         else:
-            print("❌ Analyse non exploitable (voir claude_errors.log)")
+            print("Analyse non exploitable (voir claude_errors.log)")
 
 if __name__ == "__main__":
     run()

@@ -18,10 +18,10 @@ def get_verbatims_by_date(scrape_date: str) -> list[dict]:
         return [{"review_id": row["review_id"], "content": row["content"]} for row in query_job.result()]
 
     except DefaultCredentialsError:
-        print("❌ Erreur : impossible de se connecter à BigQuery. Vérifie ton authentification avec `gcloud auth application-default login`.")
+        print(" Erreur : impossible de se connecter à BigQuery. Vérifie ton authentification avec `gcloud auth application-default login`.")
         return []
 
     except Exception as e:
-        print(f"❌ Erreur lors de la requête BigQuery : {e}")
+        print(f" Erreur lors de la requête BigQuery : {e}")
         return []
 

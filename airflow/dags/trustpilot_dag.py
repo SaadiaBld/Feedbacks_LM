@@ -1,6 +1,6 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.operators.dummy import DummyOperator
+from airflow.operators.empty import EmptyOperator  # Corrigé
 from datetime import datetime, timedelta
 import pendulum, sys, os, logging
 from scripts_data.scraper import scrape_reviews
@@ -59,7 +59,7 @@ with DAG(
     dag_id='trustpilot_pipeline',
     default_args=default_args,
     description='Pipeline : Scraper → Nettoyage → Claude → BQ',
-    schedule_interval= None, #'0 6 * * 1',
+    schedule=None, #'0 6 * * 1',
     start_date=datetime(2025, 6, 1, tzinfo=pendulum.timezone("Europe/Paris")),
     catchup=False,
     tags=['trustpilot', 'nlp', 'bq'],
@@ -96,10 +96,9 @@ with DAG(
         analyze_insert_task = PythonOperator(
             task_id='analyze_and_insert',
             python_callable=wrapper_process_and_insert,
-            provide_context=True,
         )
     else:
-        analyze_insert_task = DummyOperator(task_id='skip_analyze_insert_due_to_missing_cred')
+        analyze_insert_task = EmptyOperator(task_id='skip_analyze_insert_due_to_missing_cred') # Corrigé
 
     # Orchestration
     scrape_task >> clean_task >> insert_task >> analyze_insert_task

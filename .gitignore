@@ -2,3 +2,4 @@
 analyze_new_reviews.py
 gcp-creds.json
 *.env
+archives/

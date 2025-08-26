@@ -32,7 +32,7 @@ def deduplicate_reviews():
     review_ids = row["ids"]
 
     if nb_to_delete == 0:
-        print("✅ Aucun doublon à supprimer dans la table reviews")
+        print("Aucun doublon à supprimer dans la table reviews")
         return
 
     # Étape 2 : Supprimer les doublons trouvés

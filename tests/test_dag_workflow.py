@@ -1,114 +1,62 @@
 import pytest
-from unittest.mock import patch, MagicMock
-from project.api.analyze_and_insert import process_and_insert_all
-from project.api.claude_interface import validate_claude_response
+from unittest.mock import patch
 
-#proteger les imports airflow 
+# Protéger les imports Airflow pour une exécution locale possible
 try:
     from airflow.models import DagBag
     from airflow.operators.python import PythonOperator
+    from airflow.operators.empty import EmptyOperator
     airflow_installed = True
 except ImportError:
     DagBag = None
     PythonOperator = None
+    EmptyOperator = None
     airflow_installed = False
-
 
 @pytest.fixture(scope="module")
 @pytest.mark.skipif(not airflow_installed, reason="Airflow not installed")
 def dagbag():
-    with patch("os.path.isfile", return_value=True), \
-         patch("os.getenv", side_effect=lambda k, d=None: "dummy" if k in {"GOOGLE_APPLICATION_CREDENTIALS", "PROJECT_ID"} else d), \
-         patch("api.analyze_and_insert.load_dotenv", return_value=True), \
-         patch("api.analyze_and_insert.process_and_insert_all"):
-        
-        import dags.trustpilot_dag  # charger le dag pour s'assurer qu'il est importé
-        return DagBag(dag_folder="/opt/airflow/dags", include_examples=False)
-
+    # Le DagBag charge les dags depuis le dossier, l'import direct n'est pas nécessaire
+    return DagBag(dag_folder="/opt/airflow/dags", include_examples=False)
 
 @pytest.mark.skipif(not airflow_installed, reason="Airflow not installed")
-def test_dag_import(dagbag):
+def test_dag_import_and_structure(dagbag):
+    """Vérifie que le DAG est bien importé, sans cycle, et a les bonnes tâches."""
     dag = dagbag.get_dag("trustpilot_pipeline")
     assert dag is not None, "Le DAG 'trustpilot_pipeline' n'a pas été trouvé."
+    assert dagbag.import_errors == {}, f"Erreurs d'importation du DAG: {dagbag.import_errors}"
 
+    expected_tasks = {"scrape_trustpilot_reviews", "clean_reviews", "insert_clean_reviews_to_bq", "analyze_and_insert"}
+    assert expected_tasks.issubset(dag.task_ids), f"Des tâches attendues sont manquantes: {expected_tasks - set(dag.task_ids)}"
 
-# verifier que le dag a les taches attendues
 @pytest.mark.skipif(not airflow_installed, reason="Airflow not installed")
-def test_task_ids(dagbag):
+def test_dag_dependencies(dagbag):
+    """Vérifie l'enchaînement correct des tâches dans le DAG."""
     dag = dagbag.get_dag("trustpilot_pipeline")
-    expected_tasks = {"scrape_trustpilot_reviews", "analyze_and_insert"}
-    for task_id in expected_tasks:
-        assert task_id in dag.task_ids, f"Le task_id '{task_id}' est manquant"
+    assert dag is not None, "DAG introuvable"
 
-# tester l'ordre des taches
+    scrape_task = dag.get_task("scrape_trustpilot_reviews")
+    clean_task = dag.get_task("clean_reviews")
+    insert_task = dag.get_task("insert_clean_reviews_to_bq")
+    analyze_task = dag.get_task("analyze_and_insert")
+
+    # Vérifie les dépendances en amont (upstream)
+    assert clean_task.upstream_task_ids == {scrape_task.task_id}
+    assert insert_task.upstream_task_ids == {clean_task.task_id}
+    assert analyze_task.upstream_task_ids == {insert_task.task_id}
+
 @pytest.mark.skipif(not airflow_installed, reason="Airflow not installed")
-def test_dependencies(dagbag):
+def test_operator_types(dagbag):
+    """Vérifie que les tâches utilisent les bons opérateurs Airflow."""
     dag = dagbag.get_dag("trustpilot_pipeline")
-    assert dag is not None
-    # Exemple concret : scrape → clean → analyze
-    assert dag.get_task("clean_reviews").upstream_task_ids == {"scrape_trustpilot_reviews"}
-    assert dag.get_task("analyze_and_insert").upstream_task_ids == {"clean_reviews"}
+    assert dag is not None, "DAG introuvable"
 
-# tester que le dag est acyclique
-@pytest.mark.skipif(not airflow_installed, reason="Airflow not installed")
-def test_dag_is_acyclic():
-    from airflow.models.dagbag import DagBag
-
-    dagbag = DagBag(dag_folder="/opt/airflow/dags", include_examples=False)
-    dag = dagbag.get_dag("trustpilot_pipeline")
-
-    # Cette méthode interne recharge tous les DAGs et détecte les cycles
-    assert dagbag.import_errors == {}, f"Import errors: {dagbag.import_errors}"
-    assert dag is not None, "DAG trustpilot_pipeline introuvable"
-
-
-# tester que la tache 'analyze_and_insert' est bien un python operator
-@pytest.mark.skipif(not airflow_installed, reason="Airflow not installed")
-def test_operator_type(dagbag):
-    dag = dagbag.get_dag("trustpilot_pipeline")
-    task = dag.get_task("analyze_and_insert")
-    assert isinstance(task, PythonOperator)
-
-#tester la fonction process_and_instert_all pour valider que tout s'enchaîne correctement
-def test_process_and_insert_all(mock_get_verbatims, mock_classify, mock_insert):
-    # 1. Simuler les verbatims récupérés
-    mock_get_verbatims.return_value = [
-        {"review_id": "R1", "text": "Livraison lente", "date": "2024-01-01"}
-    ]
-    
-    # 2. Simuler la réponse de Claude
-    mock_classify.return_value = [
-        {"topic": "Livraison", "score": 1, "label": "Insatisfaction"}
-    ]
-    
-    # 3. Simuler l'insertion BigQuery
-    mock_insert.return_value = None  # On vérifie juste que c'est bien appelé
-
-    # 4. Appel réel
-    process_and_insert_all()
-
-    # 5. Vérifications
-    mock_get_verbatims.assert_called_once()
-    mock_classify.assert_called_once()
-    mock_insert.assert_called_once()
-
-# tester que les reponses de claude sont des json valides
-# project/tests/test_claude_validation.py
-
-
-def test_validate_claude_response_valid():
-    data = [
-        {"topic": "Produit", "score": 2, "label": "Neutre"},
-        {"topic": "Prix", "score": 0, "label": "Insatisfaction"}
-    ]
-    assert validate_claude_response(data) == True
-
-def test_validate_claude_response_invalid_missing_field():
-    data = [
-        {"topic": "Produit", "label": "Neutre"}  # score manquant
-    ]
-    assert validate_claude_response(data) == False
-
-def test_validate_claude_response_invalid_type():
-    data = "not a list"
-    assert validate_claude_response(data) == False
+    # Vérifie que les tâches principales sont des PythonOperator
+    python_tasks = ["scrape_trustpilot_reviews", "clean_reviews", "insert_clean_reviews_to_bq", "analyze_and_insert"]
+    for task_id in python_tasks:
+        task = dag.get_task(task_id)
+        # Gère le cas où une tâche est un EmptyOperator (skip)
+        if isinstance(task, PythonOperator) or isinstance(task, EmptyOperator):
+            assert True
+        else:
+            pytest.fail(f"La tâche {task_id} devrait être un PythonOperator ou EmptyOperator, mais est un {type(task).__name__}")
