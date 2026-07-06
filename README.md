@@ -32,7 +32,7 @@ Le but est aussi d'automatiser la récupération des avis via Google Cloud Platf
 
     Git / GitHub
 
-    Google Cloud Platform (prochainement)
+    Google Cloud Platform
 
 ## Comment utiliser ce projet
 
@@ -63,8 +63,3 @@ Nettoyer les données :
 ```bash
 python cleaner.py
 ```
-
-## 📈 Monitoring
-
-La documentation complète du monitoring est disponible ici :
-➡️ [monitoring/C11_monitoring_model.md](monitoring/C11_monitoring_model.md)
